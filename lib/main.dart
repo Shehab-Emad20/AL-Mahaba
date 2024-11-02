@@ -1,16 +1,18 @@
-import 'package:almahaba/almahaba_home.dart';
+import 'package:almahaba/widgets/views_login_page/login_page.dart';
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(const Almahaba());
+  runApp(const MyApp());
 }
 
-class Almahaba extends StatelessWidget {
-  const Almahaba({super.key});
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
-        debugShowCheckedModeBanner: false, home: AlmahabaHome());
+      debugShowCheckedModeBanner: false,
+      home: LoginPage(),
+    );
   }
 }

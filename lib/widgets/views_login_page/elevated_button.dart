@@ -12,15 +12,15 @@ class ElevateTextdButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Column(
-      mainAxisSize: MainAxisSize.min, // لضبط حجم العمود وفقًا لمحتوياته
+      mainAxisSize: MainAxisSize.min,
       children: [
-        CustomButton(),
-        SizedBox(height: 20), // إضافة مسافة بين الزر والجملة
-        DividerThinkness(),
+        CustomButton(textbutton: 'تسجيل دخول'),
+        SizedBox(height: 20),
+        DividerThinkness(text: 'تسجيل دخول عبر'),
         SizedBox(height: 20),
         CustomIcons(),
         SizedBox(height: 20),
-        CutomeText()
+        CutomeText(),
       ],
     );
   }

@@ -1,5 +1,5 @@
 import 'package:almahaba/utils/constants.dart';
-import 'package:almahaba/widget/views_sing_up/signUp_page.dart';
+import 'package:almahaba/widget/views_sing_up/signup_form.dart';
 import 'package:flutter/material.dart';
 
 class CutomeText extends StatelessWidget {

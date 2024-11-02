@@ -2,8 +2,8 @@ import 'package:almahaba/utils/constants.dart';
 import 'package:almahaba/widgets/login_form.dart';
 import 'package:flutter/material.dart';
 
-class AlmahabaHome extends StatelessWidget {
-  const AlmahabaHome({super.key});
+class LoginPage extends StatelessWidget {
+  const LoginPage({super.key});
 
   @override
   Widget build(BuildContext context) {
