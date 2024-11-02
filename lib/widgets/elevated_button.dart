@@ -1,5 +1,6 @@
 import 'package:almahaba/widgets/custom_Icons.dart';
 import 'package:almahaba/widgets/custom_button.dart';
+import 'package:almahaba/widgets/cutome_text.dart';
 import 'package:almahaba/widgets/divider_thinkness.dart';
 import 'package:flutter/material.dart';
 
@@ -17,7 +18,9 @@ class ElevateTextdButton extends StatelessWidget {
         SizedBox(height: 20), // إضافة مسافة بين الزر والجملة
         DividerThinkness(),
         SizedBox(height: 20),
-        CustomIcons()
+        CustomIcons(),
+        SizedBox(height: 20),
+        CutomeText()
       ],
     );
   }
