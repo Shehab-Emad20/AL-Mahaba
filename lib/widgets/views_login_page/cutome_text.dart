@@ -1,4 +1,5 @@
 import 'package:almahaba/utils/constants.dart';
+import 'package:almahaba/widget/views_sing_up/signUp_page.dart';
 import 'package:flutter/material.dart';
 
 class CutomeText extends StatelessWidget {
@@ -10,20 +11,26 @@ class CutomeText extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.end,
       children: [
         const Text(
-          'إنشاء حساب',
+          'ليس لديك حساب؟ ',
           style: TextStyle(
-              fontSize: 16, color: Colors.blue, fontWeight: FontWeight.bold),
+            fontSize: 16,
+            color: kBlackColor,
+          ),
         ),
         TextButton(
           onPressed: () {
             // هنا يمكنك توجيه المستخدم إلى صفحة إنشاء الحساب
-            // على سبيل المثال: Navigator.push(context, MaterialPageRoute(builder: (context) => SignUpPage()));
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const SignupPage()),
+            );
           },
           child: const Text(
-            'ليس لديك حساب ',
+            'إنشاء حساب',
             style: TextStyle(
               fontSize: 16,
-              color: kBlackColor,
+              color: Colors.blue,
+              fontWeight: FontWeight.bold,
             ),
           ),
         ),
