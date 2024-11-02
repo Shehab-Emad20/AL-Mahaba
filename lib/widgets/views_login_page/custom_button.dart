@@ -1,3 +1,4 @@
+import 'package:almahaba/utils/constants.dart';
 import 'package:flutter/material.dart';
 
 class CustomButton extends StatelessWidget {
@@ -23,7 +24,7 @@ class CustomButton extends StatelessWidget {
       child: Text(
         textbutton,
         style: const TextStyle(
-            fontSize: 20, color: Colors.white, fontWeight: FontWeight.bold),
+            fontSize: 20, color: kwhiteColor, fontWeight: FontWeight.bold),
       ),
     );
   }

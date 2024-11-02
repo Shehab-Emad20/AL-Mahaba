@@ -1,7 +1,7 @@
 import 'package:almahaba/utils/constants.dart';
+import 'package:almahaba/widget/views_sing_up/custom_button_singup.dart';
 import 'package:almahaba/widgets/views_login_page/custom_button.dart';
 import 'package:almahaba/widgets/views_login_page/custom_icons.dart';
-import 'package:almahaba/widgets/views_login_page/cutome_text.dart';
 import 'package:almahaba/widgets/views_login_page/divider_thinkness.dart';
 import 'package:almahaba/widgets/views_login_page/header_text.dart';
 import 'package:almahaba/widgets/views_login_page/input_field.dart';
@@ -44,19 +44,21 @@ class SignupForm extends StatelessWidget {
               ),
               SizedBox(height: 20),
               // Row for first name and last name fields
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Expanded(
-                    child:
-                        InputField(hintText: 'الاسم الأول', icon: Icons.person),
-                  ),
-                  SizedBox(width: 10), // Space between fields
-                  Expanded(
-                    child:
-                        InputField(hintText: 'اسم العائلة', icon: Icons.person),
-                  ),
-                ],
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 24.0),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: InputField(
+                          hintText: 'الاسم الأول', icon: Icons.person),
+                    ),
+                    SizedBox(width: 10), // Space between fields
+                    Expanded(
+                      child: InputField(
+                          hintText: 'اسم العائلة', icon: Icons.person),
+                    ),
+                  ],
+                ),
               ),
               SizedBox(height: 10),
               InputField(hintText: 'البريد الالكتروني', icon: Icons.email),
@@ -74,7 +76,7 @@ class SignupForm extends StatelessWidget {
               CustomIcons(),
               SizedBox(height: 20),
               SizedBox(height: 20),
-              CutomeText(), // Ensure CutomeText has the necessary parameters
+              Custombuttonsingup(),
             ],
           ),
         ),

@@ -6,9 +6,8 @@ class SignupPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text('إنشاء حساب')),
-      body: SingleChildScrollView(child: SignupForm()),
+    return const Scaffold(
+      body: SignupForm(),
     );
   }
 }

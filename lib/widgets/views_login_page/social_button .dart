@@ -1,3 +1,4 @@
+import 'package:almahaba/utils/constants.dart';
 import 'package:flutter/material.dart';
 
 class SocialButton extends StatelessWidget {
@@ -24,11 +25,11 @@ class SocialButton extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
       child: Row(
         children: [
-          Icon(icon, color: Colors.white),
+          Icon(icon, color: kwhiteColor),
           const SizedBox(width: 5),
           Text(
             label,
-            style: const TextStyle(color: Colors.white, fontSize: 14),
+            style: const TextStyle(color: kwhiteColor, fontSize: 14),
           ),
         ],
       ),
