@@ -12,7 +12,7 @@ class AlmahabaHome extends StatelessWidget {
           width: MediaQuery.of(context).size.width,
           height: MediaQuery.of(context).size.height,
           color: Colors.white, // Background color for the whole page
-          child: Center(
+          child: const Center(
             child: LoginForm(),
           ),
         ),

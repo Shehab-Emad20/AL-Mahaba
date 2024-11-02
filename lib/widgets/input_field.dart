@@ -12,27 +12,25 @@ class InputField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: 250,
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(10),
-        border: Border.all(color: Colors.grey, width: 1), // إضافة حدود رمادية
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.withOpacity(0.2), // لون الظل
-            spreadRadius: 2,
-            blurRadius: 5,
-            offset: Offset(0, 3), // موضع الظل
-          ),
-        ],
-      ),
+    return SizedBox(
+      width: 320, // عرض الحقل
       child: TextField(
+        textAlign: TextAlign.right,
+        style: const TextStyle(fontSize: 18),
         decoration: InputDecoration(
           hintText: hintText,
-          border: InputBorder.none,
+          hintStyle: const TextStyle(fontSize: 18, color: Colors.grey),
           prefixIcon: Icon(icon, color: Colors.grey),
-          contentPadding: const EdgeInsets.symmetric(horizontal: 10),
+          contentPadding: const EdgeInsets.symmetric(horizontal: 16),
+          enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(8),
+            borderSide: const BorderSide(color: Colors.grey, width: 1),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(15),
+            borderSide: const BorderSide(
+                color: Colors.blue, width: 2), // لون الحدود عند التركيز
+          ),
         ),
       ),
     );

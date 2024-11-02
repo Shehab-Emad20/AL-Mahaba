@@ -8,15 +8,15 @@ class LoginForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 480,
-      width: 325,
+      height: 550,
+      width: 370,
       decoration: BoxDecoration(
         color: Colors.red,
         borderRadius: BorderRadius.circular(10),
       ),
-      child: Column(
+      child: const Column(
         crossAxisAlignment: CrossAxisAlignment.center,
-        children: const [
+        children: [
           SizedBox(height: 30),
           HeaderText(
             title: 'تسجيل الدخول',
