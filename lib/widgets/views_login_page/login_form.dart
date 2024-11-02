@@ -1,8 +1,8 @@
 import 'package:almahaba/utils/constants.dart';
-import 'package:almahaba/widgets/elevated_button.dart';
-import 'package:almahaba/widgets/header_text.dart';
-import 'package:almahaba/widgets/input_field.dart';
-import 'package:almahaba/widgets/text_widget.dart';
+import 'package:almahaba/widgets/views_login_page/elevated_button.dart';
+import 'package:almahaba/widgets/views_login_page/header_text.dart';
+import 'package:almahaba/widgets/views_login_page/input_field.dart';
+import 'package:almahaba/widgets/views_login_page/text_widget.dart';
 import 'package:flutter/material.dart';
 
 class LoginForm extends StatelessWidget {
