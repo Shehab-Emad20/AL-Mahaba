@@ -10,7 +10,7 @@ class AlmahabaHome extends StatelessWidget {
     return Scaffold(
       backgroundColor: kScaffoldColor,
       body: SingleChildScrollView(
-        child: Container(
+        child: SizedBox(
           width: MediaQuery.of(context).size.width,
           height: MediaQuery.of(context).size.height,
           child: const Center(

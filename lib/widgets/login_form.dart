@@ -1,6 +1,8 @@
 import 'package:almahaba/utils/constants.dart';
+import 'package:almahaba/widgets/elevated_button.dart';
 import 'package:almahaba/widgets/header_text.dart';
 import 'package:almahaba/widgets/input_field.dart';
+import 'package:almahaba/widgets/text_widget.dart';
 import 'package:flutter/material.dart';
 
 class LoginForm extends StatelessWidget {
@@ -12,7 +14,7 @@ class LoginForm extends StatelessWidget {
       height: 580,
       width: 370,
       decoration: BoxDecoration(
-        color: Colors.red,
+        color: Colors.white,
         borderRadius: BorderRadius.circular(10),
       ),
       child: const Column(
@@ -22,7 +24,7 @@ class LoginForm extends StatelessWidget {
           HeaderText(
             title: 'تسجيل الدخول',
             fontSize: 35,
-            color: Colors.black,
+            color: kBlackColor,
             fontWeight: FontWeight.bold,
           ),
           SizedBox(height: 10),
@@ -41,6 +43,10 @@ class LoginForm extends StatelessWidget {
             hintText: 'كلمة المرور',
             icon: Icons.lock,
           ),
+          SizedBox(height: 20),
+          TextWidget(),
+          SizedBox(height: 20), // مساحة بين الزر وحقول الإدخال
+          ElevateTextdButton(),
         ],
       ),
     );

@@ -14,23 +14,28 @@ class InputField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: 320, // عرض الحقل
+      width: 320, // Width of the input field
       child: TextField(
         textAlign: TextAlign.right,
         style: const TextStyle(fontSize: 18),
         decoration: InputDecoration(
           hintText: hintText,
-          hintStyle: const TextStyle(fontSize: 18, color: Colors.grey),
+          hintStyle: const TextStyle(
+            fontSize: 18,
+            color: kPrimaryColor, // Set the color properly here
+          ),
           prefixIcon: Icon(icon, color: kPrimaryColor),
           contentPadding: const EdgeInsets.symmetric(horizontal: 16),
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(8),
-            borderSide: const BorderSide(color: kPrimaryColor, width: 1),
+            borderSide: const BorderSide(
+                color: kPrimaryColor, width: 1), // No need for const here
           ),
           focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(15),
             borderSide: const BorderSide(
-                color: Colors.blue, width: 2), // لون الحدود عند التركيز
+                color: Colors.blue,
+                width: 2), // Color of the border when focused
           ),
         ),
       ),
