@@ -6,7 +6,9 @@ import 'package:almahaba/widgets/views_login_page/text_widget.dart';
 import 'package:flutter/material.dart';
 
 class LoginForm extends StatelessWidget {
-  const LoginForm({super.key});
+  const LoginForm({
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
