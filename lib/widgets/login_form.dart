@@ -1,3 +1,4 @@
+import 'package:almahaba/utils/constants.dart';
 import 'package:almahaba/widgets/header_text.dart';
 import 'package:almahaba/widgets/input_field.dart';
 import 'package:flutter/material.dart';
@@ -8,7 +9,7 @@ class LoginForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 550,
+      height: 580,
       width: 370,
       decoration: BoxDecoration(
         color: Colors.red,
@@ -28,7 +29,7 @@ class LoginForm extends StatelessWidget {
           HeaderText(
             title: 'سجل دخولك لاستكساف خدمات جديده',
             fontSize: 15,
-            color: Colors.grey,
+            color: kPrimaryColor,
           ),
           SizedBox(height: 20),
           InputField(

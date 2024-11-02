@@ -1,3 +1,4 @@
+import 'package:almahaba/utils/constants.dart';
 import 'package:almahaba/widgets/login_form.dart';
 import 'package:flutter/material.dart';
 
@@ -7,11 +8,11 @@ class AlmahabaHome extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: kScaffoldColor,
       body: SingleChildScrollView(
         child: Container(
           width: MediaQuery.of(context).size.width,
           height: MediaQuery.of(context).size.height,
-          color: Colors.white, // Background color for the whole page
           child: const Center(
             child: LoginForm(),
           ),

@@ -1,3 +1,4 @@
+import 'package:almahaba/utils/constants.dart';
 import 'package:flutter/material.dart';
 
 class InputField extends StatelessWidget {
@@ -20,11 +21,11 @@ class InputField extends StatelessWidget {
         decoration: InputDecoration(
           hintText: hintText,
           hintStyle: const TextStyle(fontSize: 18, color: Colors.grey),
-          prefixIcon: Icon(icon, color: Colors.grey),
+          prefixIcon: Icon(icon, color: kPrimaryColor),
           contentPadding: const EdgeInsets.symmetric(horizontal: 16),
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(8),
-            borderSide: const BorderSide(color: Colors.grey, width: 1),
+            borderSide: const BorderSide(color: kPrimaryColor, width: 1),
           ),
           focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(15),
