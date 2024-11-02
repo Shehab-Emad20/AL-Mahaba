@@ -23,7 +23,6 @@ class HeaderText extends StatelessWidget {
         color: color,
         fontWeight: fontWeight,
       ),
-      textAlign: TextAlign.center,
     );
   }
 }
