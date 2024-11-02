@@ -12,42 +12,37 @@ class LoginForm extends StatelessWidget {
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.of(context).size;
 
-    return Center(
-      child: Container(
-        height: screenSize.height * 0.7, // Responsive height
-        width: screenSize.width * 0.9, // Responsive width
-        decoration: BoxDecoration(
-          color: kwhiteColor,
-          borderRadius: BorderRadius.circular(10),
-        ),
-        child: const SingleChildScrollView(
-          child: Padding(
-            padding: EdgeInsets.all(16),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                SizedBox(height: 30),
-                HeaderText(
-                    title: 'تسجيل الدخول',
-                    fontSize: 35,
-                    color: kBlackColor,
-                    fontWeight: FontWeight.bold),
-                SizedBox(height: 10),
-                HeaderText(
-                    title: 'سجل دخولك لاستكساف خدمات جديده',
-                    fontSize: 15,
-                    color: kPrimaryColor),
-                SizedBox(height: 20),
-                InputField(hintText: 'البريد الالكتروني', icon: Icons.email),
-                SizedBox(height: 10),
-                InputField(hintText: 'كلمة المرور', icon: Icons.lock),
-                SizedBox(height: 20),
-                TextWidget(),
-                SizedBox(height: 20),
-                ElevateTextdButton(),
-              ],
-            ),
-          ),
+    return Container(
+      height: screenSize.height * 0.7, // Responsive height
+      width: screenSize.width * 0.9, // Responsive width
+      decoration: BoxDecoration(
+        color: kwhiteColor,
+        borderRadius: BorderRadius.circular(10),
+      ),
+      child: const SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            SizedBox(height: 30),
+            HeaderText(
+                title: 'تسجيل الدخول',
+                fontSize: 35,
+                color: kBlackColor,
+                fontWeight: FontWeight.bold),
+            SizedBox(height: 10),
+            HeaderText(
+                title: 'سجل دخولك لاستكساف خدمات جديده',
+                fontSize: 15,
+                color: kPrimaryColor),
+            SizedBox(height: 20),
+            InputField(hintText: 'البريد الالكتروني', icon: Icons.email),
+            SizedBox(height: 10),
+            InputField(hintText: 'كلمة المرور', icon: Icons.lock),
+            SizedBox(height: 20),
+            TextWidget(),
+            SizedBox(height: 20),
+            ElevateTextdButton(),
+          ],
         ),
       ),
     );
