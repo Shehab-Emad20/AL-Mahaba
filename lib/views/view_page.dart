@@ -1,10 +1,25 @@
+import 'package:almahaba/views/responsive_image.dart';
 import 'package:flutter/material.dart';
+import 'title_text.dart';
+import 'subtitle_text.dart';
 
 class ViewPage extends StatelessWidget {
   const ViewPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    final screenWidth = MediaQuery.of(context).size.width;
+
+    return Center(
+      child: Column(
+        mainAxisSize: MainAxisSize.max,
+        children: [
+          ResponsiveImage(screenWidth: screenWidth),
+          const SizedBox(height: 20),
+          TitleText(screenWidth: screenWidth),
+          SubtitleText(screenWidth: screenWidth),
+        ],
+      ),
+    );
   }
 }
