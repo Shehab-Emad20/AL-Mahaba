@@ -6,27 +6,39 @@ class CustomIcons extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        SocialButton(
-            icon: Icons.g_mobiledata,
+    return Padding(
+      padding: const EdgeInsets.symmetric(
+          horizontal: 16.0), // حواف لجعل الأزرار في المنتصف
+      child: Row(
+        mainAxisAlignment:
+            MainAxisAlignment.spaceEvenly, // توزيع الأزرار بشكل متساوٍ
+        children: [
+          SocialButton(
+            icon: Icons.g_mobiledata, // أيقونة جوجل
             label: 'Google',
-            color: Colors.red,
-            onPressed: () {}),
-        const SizedBox(width: 10),
-        SocialButton(
-            icon: Icons.facebook,
+            color: Colors.red, // اللون الرسمي لجوجل
+            onPressed: () {
+              // print('Google button pressed');
+            },
+          ),
+          SocialButton(
+            icon: Icons.facebook, // أيقونة فيسبوك
             label: 'Facebook',
-            color: Colors.blue,
-            onPressed: () {}),
-        const SizedBox(width: 10),
-        SocialButton(
-            icon: Icons.apple,
+            color: Colors.blue, // اللون الرسمي لفيسبوك
+            onPressed: () {
+              //print('Facebook button pressed');
+            },
+          ),
+          SocialButton(
+            icon: Icons.apple, // أيقونة آبل
             label: 'Apple',
-            color: Colors.black,
-            onPressed: () {}),
-      ],
+            color: Colors.black, // اللون الرسمي لآبل
+            onPressed: () {
+              //  print('Apple button pressed');
+            },
+          ),
+        ],
+      ),
     );
   }
 }

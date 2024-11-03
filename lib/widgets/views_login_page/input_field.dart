@@ -13,23 +13,32 @@ class InputField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: 320,
+    final screenSize = MediaQuery.of(context).size;
+
+    return Container(
+      margin: EdgeInsets.symmetric(
+          vertical: screenSize.height * 0.01), // تباعد عمودي
       child: TextField(
         textAlign: TextAlign.right,
-        style: const TextStyle(fontSize: 18),
+        style: TextStyle(fontSize: screenSize.width * 0.045), // حجم خط ديناميكي
         decoration: InputDecoration(
           hintText: hintText,
-          hintStyle: const TextStyle(fontSize: 18, color: kPrimaryColor),
+          hintStyle: TextStyle(
+            fontSize: screenSize.width * 0.045,
+            color: kPrimaryColor.withOpacity(0.8), // ضبط الشفافية
+          ),
           prefixIcon: Icon(icon, color: kPrimaryColor),
-          contentPadding: const EdgeInsets.symmetric(horizontal: 16),
+          contentPadding: const EdgeInsets.symmetric(
+              horizontal: 20, vertical: 15), // زيادة padding
           enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(8),
-            borderSide: const BorderSide(color: kPrimaryColor),
+            borderRadius: BorderRadius.circular(10), // جعل الحدود أكثر سلاسة
+            borderSide: const BorderSide(
+                color: kPrimaryColor, width: 1.5), // عرض الحدود
           ),
           focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(8),
-            borderSide: const BorderSide(color: kPrimaryColor),
+            borderRadius:
+                BorderRadius.circular(10), // جعل الحدود أكثر سلاسة عند التركيز
+            borderSide: const BorderSide(color: kPrimaryColor, width: 2),
           ),
         ),
       ),

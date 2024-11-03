@@ -1,3 +1,4 @@
+// ... rest of the imports
 import 'package:almahaba/utils/constants.dart';
 import 'package:almahaba/widget/views_sing_up/custom_button_singup.dart';
 import 'package:almahaba/widgets/views_login_page/custom_button.dart';
@@ -16,67 +17,72 @@ class SignupForm extends StatelessWidget {
 
     return Center(
       child: Container(
-        height: screenSize.height * 0.75, // Make height responsive
-        width: screenSize.width * 0.9, // Make width responsive
+        padding: EdgeInsets.all(
+            screenSize.width * 0.04), // Padding around the container
+        height: screenSize.height * 0.75,
+        width: screenSize.width * 0.9,
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(10),
         ),
-        child: const SingleChildScrollView(
-          // Added scroll view for responsiveness
+        child: SingleChildScrollView(
           child: Column(
-            mainAxisAlignment:
-                MainAxisAlignment.start, // Align items at the top
+            mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              SizedBox(height: 30),
+              SizedBox(height: screenSize.height * 0.04),
               HeaderText(
                 title: "إنشاء حساب",
-                fontSize: 35,
+                fontSize: screenSize.width * 0.08,
                 color: kBlackColor,
                 fontWeight: FontWeight.bold,
               ),
-              SizedBox(height: 10),
+              SizedBox(height: screenSize.height * 0.01),
               HeaderText(
-                title: "قم بإنشاء حساب لاستكشاف الخدمات الجديده",
-                fontSize: 15,
+                title: "قم بإنشاء حساب لاستكشاف الخدمات الجديدة",
+                fontSize: screenSize.width * 0.03,
                 color: kPrimaryColor,
               ),
-              SizedBox(height: 20),
+
+              SizedBox(height: screenSize.height * 0.02),
               // Row for first name and last name fields
               Padding(
-                padding: EdgeInsets.symmetric(horizontal: 24.0),
+                padding:
+                    EdgeInsets.symmetric(horizontal: screenSize.width * 0.01),
                 child: Row(
                   children: [
-                    Expanded(
+                    const Expanded(
                       child: InputField(
-                          hintText: 'الاسم الأول', icon: Icons.person),
+                        hintText: 'الاسم الأول',
+                        icon: Icons.person,
+                      ),
                     ),
-                    SizedBox(width: 10), // Space between fields
-                    Expanded(
+                    SizedBox(
+                        width: screenSize.width * 0.03), // Space between fields
+                    const Expanded(
                       child: InputField(
-                          hintText: 'اسم العائلة', icon: Icons.person),
+                        hintText: 'اسم العائلة',
+                        icon: Icons.person,
+                      ),
                     ),
                   ],
                 ),
               ),
-              SizedBox(height: 10),
-              InputField(hintText: 'البريد الالكتروني', icon: Icons.email),
-              SizedBox(height: 10),
-              InputField(hintText: 'كلمة المرور', icon: Icons.lock),
-              SizedBox(height: 10),
-              InputField(hintText: 'تأكيد كلمة المرور', icon: Icons.lock),
-              SizedBox(height: 20),
-              CustomButton(textbutton: 'إنشاء حساب'),
-              SizedBox(height: 20),
-              DividerThinkness(
-                text: 'أو التسجبل باستخدام ',
-              ),
-              SizedBox(height: 20),
-              CustomIcons(),
-              SizedBox(height: 20),
-              SizedBox(height: 20),
-              Custombuttonsingup(),
+              SizedBox(height: screenSize.height * 0.01),
+              const InputField(
+                  hintText: 'البريد الالكتروني', icon: Icons.email),
+              SizedBox(height: screenSize.height * 0.01),
+              const InputField(hintText: 'كلمة المرور', icon: Icons.lock),
+              SizedBox(height: screenSize.height * 0.01),
+              const InputField(hintText: 'تأكيد كلمة المرور', icon: Icons.lock),
+              SizedBox(height: screenSize.height * 0.02),
+              const CustomButton(textbutton: 'إنشاء حساب'),
+              SizedBox(height: screenSize.height * 0.02),
+              const DividerThinkness(text: 'أو التسجيل باستخدام '),
+              SizedBox(height: screenSize.height * 0.02),
+              const CustomIcons(),
+              SizedBox(height: screenSize.height * 0.02),
+              const Custombuttonsingup(),
             ],
           ),
         ),

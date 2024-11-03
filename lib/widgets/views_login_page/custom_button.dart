@@ -2,28 +2,41 @@ import 'package:almahaba/utils/constants.dart';
 import 'package:flutter/material.dart';
 
 class CustomButton extends StatelessWidget {
+  final String textbutton;
+
   const CustomButton({
     super.key,
     required this.textbutton,
   });
-  final String textbutton;
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(
-      onPressed: () {
-        // إضافة وظيفة تسجيل الدخول أو أي إجراء آخر هنا
-      },
-      style: ElevatedButton.styleFrom(
-        backgroundColor: const Color(0xFFd0352c),
-        padding: const EdgeInsets.symmetric(horizontal: 120, vertical: 10),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(10),
+    final screenSize = MediaQuery.of(context).size;
+
+    return SizedBox(
+      width: screenSize.width * 0.8, // ضبط العرض بناءً على حجم الشاشة
+      child: ElevatedButton(
+        onPressed: () {
+          // إضافة وظيفة تسجيل الدخول أو أي إجراء آخر هنا
+        },
+        style: ElevatedButton.styleFrom(
+          backgroundColor: const Color(0xFFd0352c),
+          padding: EdgeInsets.symmetric(
+            vertical: screenSize.height * 0.02, // ارتفاع ديناميكي
+          ),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10),
+          ),
+          elevation: 4, // إضافة بعض الظل لتوضيح شكل الزر
         ),
-      ),
-      child: Text(
-        textbutton,
-        style: const TextStyle(color: kwhiteColor, fontWeight: FontWeight.bold),
+        child: Text(
+          textbutton,
+          style: TextStyle(
+            color: kwhiteColor,
+            fontWeight: FontWeight.bold,
+            fontSize: screenSize.width * 0.045, // حجم الخط استجابةً لحجم الشاشة
+          ),
+        ),
       ),
     );
   }
