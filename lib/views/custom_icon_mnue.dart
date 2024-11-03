@@ -6,9 +6,9 @@ class CustomIconMenu extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return IconButton(
-      icon: Padding(
-        padding: const EdgeInsets.only(right: 16.0),
-        child: const Icon(
+      icon: const Padding(
+        padding: EdgeInsets.only(right: 16.0),
+        child: Icon(
           Icons.menu,
           color: Colors.red,
         ),

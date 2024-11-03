@@ -7,9 +7,9 @@ class BodyPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: const CustomAppBar(),
-      endDrawer: const DrawerWidget(), // استخدام الـ Drawer Widget
+    return const Scaffold(
+      appBar: CustomAppBar(),
+      endDrawer: DrawerWidget(), // استخدام الـ Drawer Widget
     );
   }
 }
