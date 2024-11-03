@@ -1,6 +1,6 @@
 import 'package:almahaba/views/custom_icon_mnue.dart';
-import 'package:almahaba/views/custom_title_and_image.dart';
 import 'package:flutter/material.dart';
+import 'custom_title_and_image.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   const CustomAppBar({super.key});
@@ -8,10 +8,8 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      title: CustomTitleAndImage(),
-      actions: [
-        CustomIconMnue(),
-      ],
+      title: const CustomTitleAndImage(),
+      actions: const [CustomIconMenu()],
     );
   }
 
