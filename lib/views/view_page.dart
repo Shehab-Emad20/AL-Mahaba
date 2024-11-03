@@ -1,4 +1,5 @@
 import 'package:almahaba/views/responsive_image.dart';
+import 'package:almahaba/views/title_page.dart';
 import 'package:flutter/material.dart';
 import 'title_text.dart';
 import 'subtitle_text.dart';
@@ -18,6 +19,8 @@ class ViewPage extends StatelessWidget {
           const SizedBox(height: 20),
           TitleText(screenWidth: screenWidth),
           SubtitleText(screenWidth: screenWidth),
+          const SizedBox(height: 20), // مسافة إضافية بين النصوص
+          TitlePage(screenWidth: screenWidth),
         ],
       ),
     );
