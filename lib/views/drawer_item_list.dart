@@ -20,9 +20,19 @@ class DrawerItemList extends StatelessWidget {
   }
 
   Widget _buildDrawerItem(BuildContext context, String item) {
-    return ListTile(
-      title: Text(item),
-      onTap: () => NavigationHandler.handleNavigation(context, item),
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 8.0), // إضافة padding
+      child: ListTile(
+        title: Text(
+          item,
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize:
+                MediaQuery.of(context).size.width * 0.037, // حجم النص متجاوب
+          ),
+        ),
+        onTap: () => NavigationHandler.handleNavigation(context, item),
+      ),
     );
   }
 }

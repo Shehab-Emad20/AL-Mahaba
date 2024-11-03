@@ -1,8 +1,8 @@
 import 'package:almahaba/utils/constants.dart';
+import 'package:almahaba/views/custom_app_bar.dart';
 import 'package:almahaba/views/drawer_widget.dart';
 import 'package:almahaba/views/view_page.dart';
 import 'package:flutter/material.dart';
-import 'custom_app_bar.dart'; // تأكد من استيراد ملف CustomAppBar
 
 class BodyPage extends StatelessWidget {
   const BodyPage({super.key});
@@ -12,8 +12,7 @@ class BodyPage extends StatelessWidget {
     return const Scaffold(
       backgroundColor: kScaffoldColor,
       appBar: CustomAppBar(),
-      endDrawer: DrawerWidget(), // استخدام الـ Drawer Widget
-
+      endDrawer: DrawerWidget(),
       body: ViewPage(),
     );
   }

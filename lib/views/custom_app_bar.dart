@@ -8,11 +8,13 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
+      // لون الخلفية للشريط
       title: const CustomTitleAndImage(),
       actions: const [CustomIconMenu()],
     );
   }
 
   @override
-  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
+  Size get preferredSize =>
+      const Size.fromHeight(70); // تغيير ارتفاع الشريط إذا لزم الأمر
 }
