@@ -1,3 +1,5 @@
+import 'package:almahaba/utils/constants.dart';
+import 'package:almahaba/widgets/body_form.dart';
 import 'package:flutter/material.dart';
 
 class CustomForm extends StatelessWidget {
@@ -5,9 +7,9 @@ class CustomForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text("Custom Form")),
-      body: Center(child: Text("This is the Custom Form page")),
+    return const Scaffold(
+      backgroundColor: kScaffoldColor,
+      body: BodyForm(),
     );
   }
 }
