@@ -1,4 +1,5 @@
 import 'package:almahaba/utils/constants.dart';
+import 'package:almahaba/widgets/custom_form.dart';
 import 'package:flutter/material.dart';
 
 class CustomButton extends StatelessWidget {
@@ -17,7 +18,10 @@ class CustomButton extends StatelessWidget {
       width: screenSize.width * 0.8, // ضبط العرض بناءً على حجم الشاشة
       child: ElevatedButton(
         onPressed: () {
-          // إضافة وظيفة تسجيل الدخول أو أي إجراء آخر هنا
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => const CustomForm()),
+          );
         },
         style: ElevatedButton.styleFrom(
           backgroundColor: const Color(0xFFd0352c),
