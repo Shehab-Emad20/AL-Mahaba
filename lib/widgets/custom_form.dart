@@ -9,7 +9,7 @@ class CustomForm extends StatelessWidget {
   Widget build(BuildContext context) {
     return const Scaffold(
       backgroundColor: kScaffoldColor,
-      body: BodyForm(),
+      body: SingleChildScrollView(child: BodyForm()),
     );
   }
 }

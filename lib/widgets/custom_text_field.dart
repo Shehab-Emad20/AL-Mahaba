@@ -5,9 +5,11 @@ class CustomTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final screenSize = MediaQuery.of(context).size;
+
     return Container(
-      width: 170,
-      height: 50,
+      width: screenSize.width * 0.8, // استخدام عرض ديناميكي
+      height: screenSize.height * 0.06, // ارتفاع ديناميكي
       decoration: BoxDecoration(
         border: Border.all(color: Colors.grey, width: 2),
         borderRadius: BorderRadius.circular(6),
@@ -18,7 +20,7 @@ class CustomTextField extends StatelessWidget {
           hintText: 'عنوان التحرك',
           hintStyle: TextStyle(color: Colors.grey),
           contentPadding: EdgeInsets.symmetric(horizontal: 10),
-          border: InputBorder.none, // إزالة الخط السفلي الافتراضي
+          border: InputBorder.none,
         ),
       ),
     );
