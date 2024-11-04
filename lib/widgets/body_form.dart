@@ -1,6 +1,7 @@
 import 'package:almahaba/widgets/date_text_field.dart';
 import 'package:almahaba/widgets/governorate_drop_down.dart';
 import 'package:almahaba/widgets/label_with_aterisk.dart';
+import 'package:almahaba/widgets/notes_text_field.dart';
 import 'package:almahaba/widgets/red_banner_widget.dart';
 import 'package:almahaba/widgets/time_text_field.dart';
 import 'package:almahaba/widgets/top_text_widget.dart';
@@ -13,11 +14,11 @@ class BodyForm extends StatelessWidget {
   Widget build(BuildContext context) {
     return const Column(
       children: [
-        SizedBox(height: 50),
+        SizedBox(height: 35),
         TopTextWidget(),
-        SizedBox(height: 20),
+        SizedBox(height: 10),
         RedBannerWidget(),
-        SizedBox(height: 20),
+        SizedBox(height: 10),
         LabelWithAsterisk(text: 'من', simble: '*'),
         SizedBox(height: 10),
         GovernorateDropdown(),
@@ -28,7 +29,10 @@ class BodyForm extends StatelessWidget {
         GovernorateDropdown(),
         SizedBox(height: 10),
         DateTextField(),
-        TimeTextField()
+        SizedBox(height: 10),
+        TimeTextField(),
+        SizedBox(height: 10),
+        NotesTextField()
       ],
     );
   }

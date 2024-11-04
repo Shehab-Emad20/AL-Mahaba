@@ -14,8 +14,8 @@ class _TimeTextFieldState extends State<TimeTextField> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 170,
       height: 50,
+      width: 350,
       decoration: BoxDecoration(
         border: Border.all(color: Colors.grey, width: 2),
         borderRadius: BorderRadius.circular(6),
