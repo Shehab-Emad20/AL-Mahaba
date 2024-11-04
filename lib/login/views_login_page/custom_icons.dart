@@ -1,4 +1,4 @@
-import 'package:almahaba/widgets/views_login_page/social_button%20.dart';
+import 'package:almahaba/login/views_login_page/social_button%20.dart';
 import 'package:flutter/material.dart';
 
 class CustomIcons extends StatelessWidget {

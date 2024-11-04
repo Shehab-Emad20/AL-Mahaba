@@ -1,9 +1,10 @@
-import 'package:almahaba/utils/constants.dart';
-import 'package:almahaba/widget/views_sing_up/signup_form.dart';
+import 'package:almahaba/login/views_login_page/login_form.dart';
 import 'package:flutter/material.dart';
 
-class CutomeText extends StatelessWidget {
-  const CutomeText({super.key});
+class Custombuttonsingup extends StatelessWidget {
+  const Custombuttonsingup({
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -11,22 +12,21 @@ class CutomeText extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.end,
       children: [
         const Text(
-          'ليس لديك حساب؟ ',
+          'لديك حساب بالفعل؟',
           style: TextStyle(
-            fontSize: 16,
-            color: kBlackColor,
+            fontSize: 20,
           ),
         ),
         TextButton(
           onPressed: () {
             // هنا يمكنك توجيه المستخدم إلى صفحة إنشاء الحساب
-            Navigator.push(
+            Navigator.pop(
               context,
-              MaterialPageRoute(builder: (context) => const SignupPage()),
+              MaterialPageRoute(builder: (context) => const LoginForm()),
             );
           },
           child: const Text(
-            'إنشاء حساب',
+            "قم بستجيل دخول",
             style: TextStyle(
               fontSize: 16,
               color: Colors.blue,

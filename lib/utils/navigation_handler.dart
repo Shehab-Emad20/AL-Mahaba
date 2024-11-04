@@ -1,6 +1,6 @@
+import 'package:almahaba/login/views_login_page/login_page.dart';
+import 'package:almahaba/singup/views_sing_up/signup_form.dart';
 import 'package:flutter/material.dart';
-import 'package:almahaba/widgets/views_login_page/login_page.dart';
-import 'package:almahaba/widget/views_sing_up/signup_form.dart';
 
 class NavigationHandler {
   static void handleNavigation(BuildContext context, String item) {

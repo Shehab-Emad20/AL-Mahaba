@@ -1,7 +1,7 @@
-import 'package:almahaba/widgets/views_login_page/custom_button.dart';
-import 'package:almahaba/widgets/views_login_page/custom_icons.dart';
-import 'package:almahaba/widgets/views_login_page/cutome_text.dart';
-import 'package:almahaba/widgets/views_login_page/divider_thinkness.dart';
+import 'package:almahaba/login/views_login_page/custom_button.dart';
+import 'package:almahaba/login/views_login_page/custom_icons.dart';
+import 'package:almahaba/login/views_login_page/cutome_text.dart';
+import 'package:almahaba/login/views_login_page/divider_thinkness.dart';
 import 'package:flutter/material.dart';
 
 class ElevateTextdButton extends StatelessWidget {

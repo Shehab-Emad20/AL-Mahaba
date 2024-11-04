@@ -1,11 +1,10 @@
-// ... rest of the imports
+import 'package:almahaba/login/views_login_page/custom_button.dart';
+import 'package:almahaba/login/views_login_page/custom_icons.dart';
+import 'package:almahaba/login/views_login_page/divider_thinkness.dart';
+import 'package:almahaba/login/views_login_page/header_text.dart';
+import 'package:almahaba/login/views_login_page/input_field.dart';
+import 'package:almahaba/singup/views_sing_up/custom_button_singup.dart';
 import 'package:almahaba/utils/constants.dart';
-import 'package:almahaba/widget/views_sing_up/custom_button_singup.dart';
-import 'package:almahaba/widgets/views_login_page/custom_button.dart';
-import 'package:almahaba/widgets/views_login_page/custom_icons.dart';
-import 'package:almahaba/widgets/views_login_page/divider_thinkness.dart';
-import 'package:almahaba/widgets/views_login_page/header_text.dart';
-import 'package:almahaba/widgets/views_login_page/input_field.dart';
 import 'package:flutter/material.dart';
 
 class SignupForm extends StatelessWidget {
