@@ -7,7 +7,7 @@ class FixedDropdown extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 10),
-      width: 160,
+      width: 170,
       height: 50,
       decoration: BoxDecoration(
         color: Colors.white,

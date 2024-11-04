@@ -55,7 +55,7 @@ class _GovernorateDropdownState extends State<GovernorateDropdown> {
           },
         ),
         const SizedBox(height: 20),
-        LocationRow(),
+        const LocationRow(),
       ],
     );
   }

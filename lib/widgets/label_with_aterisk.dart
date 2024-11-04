@@ -1,27 +1,29 @@
 import 'package:flutter/material.dart';
 
 class LabelWithAsterisk extends StatelessWidget {
-  const LabelWithAsterisk({super.key});
-
+  const LabelWithAsterisk(
+      {super.key, required this.text, required this.simble});
+  final String text;
+  final String simble;
   @override
   Widget build(BuildContext context) {
-    return const Padding(
-      padding: EdgeInsets.only(right: 20.0),
+    return Padding(
+      padding: const EdgeInsets.only(right: 20.0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
           Text(
-            '*',
-            style: TextStyle(
+            simble,
+            style: const TextStyle(
               color: Colors.red,
               fontSize: 16,
               fontWeight: FontWeight.bold,
             ),
           ),
-          SizedBox(width: 5),
+          const SizedBox(width: 5),
           Text(
-            'من',
-            style: TextStyle(
+            text,
+            style: const TextStyle(
               color: Colors.black,
               fontSize: 16,
               fontWeight: FontWeight.bold,
