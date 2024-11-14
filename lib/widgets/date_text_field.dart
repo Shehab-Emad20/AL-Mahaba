@@ -8,20 +8,21 @@ class DateTextField extends StatefulWidget {
 }
 
 class _DateTextFieldState extends State<DateTextField> {
-  final TextEditingController _controller =
-      TextEditingController(); // إنشاء ال Controller
+  final TextEditingController _controller = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
+    final screenSize = MediaQuery.of(context).size;
+
     return Container(
-      height: 50,
-      width: 350,
+      height: screenSize.height * 0.06, // Use relative height
+      width: screenSize.width * 0.8, // Use relative width
       decoration: BoxDecoration(
         border: Border.all(color: Colors.grey, width: 2),
         borderRadius: BorderRadius.circular(6),
       ),
       child: TextField(
-        controller: _controller, // تعيين ال Controller
+        controller: _controller,
         textAlign: TextAlign.right,
         decoration: const InputDecoration(
           hintText: 'تاريخ',
@@ -30,8 +31,7 @@ class _DateTextFieldState extends State<DateTextField> {
           border: InputBorder.none,
         ),
         onTap: () async {
-          FocusScope.of(context)
-              .requestFocus(FocusNode()); // إخفاء لوحة المفاتيح
+          FocusScope.of(context).requestFocus(FocusNode());
           final DateTime? pickedDate = await showDatePicker(
             context: context,
             initialDate: DateTime.now(),
@@ -39,10 +39,8 @@ class _DateTextFieldState extends State<DateTextField> {
             lastDate: DateTime(2101),
           );
           if (pickedDate != null) {
-            // تحديث النص في الحقل بالتاريخ المحدد
             setState(() {
-              _controller.text = "${pickedDate.toLocal()}"
-                  .split(' ')[0]; // صيغة التاريخ (YYYY-MM-DD)
+              _controller.text = "${pickedDate.toLocal()}".split(' ')[0];
             });
           }
         },

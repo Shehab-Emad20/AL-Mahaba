@@ -13,32 +13,27 @@ class CustomButton2 extends StatelessWidget {
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.of(context).size;
 
-    return SizedBox(
-      width: screenSize.width * 0.8, // ضبط العرض بناءً على حجم الشاشة
-      child: ElevatedButton(
-        onPressed: () {
-          // أضف أي دالة أو إجراء هنا
-        },
-        style: ElevatedButton.styleFrom(
-          backgroundColor: const Color(0xFF2196F3), // اللون الأزرق
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Center(
+        child: Container(
           padding: EdgeInsets.symmetric(
-            vertical: screenSize.height * 0.02, // ارتفاع ديناميكي
+            vertical: screenSize.height * 0.02,
+            horizontal: screenSize.width * 0.04,
           ),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(10),
+          decoration: BoxDecoration(
+            color: Colors.red, // لون الخلفية الحمراء
+            borderRadius:
+                BorderRadius.circular(10), // حواف دائرية بمقدار 10 بكسل
           ),
-          elevation: 4, // إضافة بعض الظل لتوضيح شكل الزر
-        ),
-        child: Center(
-          // استخدام Center لتوسيع الزر بالكامل
           child: Text(
             textbutton,
             style: TextStyle(
               color: kwhiteColor,
               fontWeight: FontWeight.bold,
-              fontSize:
-                  screenSize.width * 0.045, // حجم الخط استجابةً لحجم الشاشة
+              fontSize: screenSize.width * 0.045,
             ),
+            textAlign: TextAlign.center,
           ),
         ),
       ),

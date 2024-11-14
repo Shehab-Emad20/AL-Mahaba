@@ -6,18 +6,19 @@ class NotesTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 350, // ضبط العرض حسب الحاجة
+      width: 350, // ضبط العرض الثابت
       decoration: BoxDecoration(
         border: Border.all(color: Colors.grey, width: 2),
         borderRadius: BorderRadius.circular(6),
       ),
       child: const TextField(
-        maxLines: 4, // السماح بإدخال نص متعدد الأسطر
+        maxLines: 3, // تقليل الأسطر لتصغير الارتفاع
         textAlign: TextAlign.right,
         decoration: InputDecoration(
           hintText: 'ملاحظات',
           hintStyle: TextStyle(color: Colors.grey),
-          contentPadding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+          contentPadding: EdgeInsets.symmetric(
+              horizontal: 8, vertical: 8), // تعديل المسافات لتصغير الحجم
           border: InputBorder.none,
         ),
       ),

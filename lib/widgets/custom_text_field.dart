@@ -8,7 +8,7 @@ class CustomTextField extends StatelessWidget {
     final screenSize = MediaQuery.of(context).size;
 
     return Container(
-      width: screenSize.width * 0.8, // استخدام عرض ديناميكي
+      width: screenSize.width * 0.5, // استخدام عرض ديناميكي
       height: screenSize.height * 0.06, // ارتفاع ديناميكي
       decoration: BoxDecoration(
         border: Border.all(color: Colors.grey, width: 2),

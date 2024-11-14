@@ -1,4 +1,6 @@
 import 'package:almahaba/widgets/custom_button.dart';
+import 'package:almahaba/widgets/custom_button2.dart';
+import 'package:almahaba/widgets/custom_text.dart';
 import 'package:almahaba/widgets/date_text_field.dart';
 import 'package:almahaba/widgets/governorate_drop_down.dart';
 import 'package:almahaba/widgets/label_with_aterisk.dart';
@@ -14,33 +16,43 @@ class BodyForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Column(
-      children: [
-        SizedBox(height: 35),
-        TopTextWidget(),
-        SizedBox(height: 10),
-        RedBannerWidget(),
-        SizedBox(height: 10),
-        LabelWithAsterisk(text: 'من', simble: '*'),
-        SizedBox(height: 10),
-        GovernorateDropdown(),
-        SizedBox(height: 10),
-        SizedBox(height: 10),
-        LabelWithAsterisk(text: 'الى', simble: '*'),
-        SizedBox(height: 10),
-        GovernorateDropdown(),
-        SizedBox(height: 10),
-        DateTextField(),
-        SizedBox(height: 10),
-        TimeTextField(),
-        SizedBox(height: 10),
-        NotesTextField(),
-        TripOptions(),
-        CustomButton2(
-          textbutton:
-              'سيتواصل معك خدمة العملاء في أقرب وقت لتحديد التكلفة بعد ارسال طلب الرحله ',
-        )
-      ],
+    final screenSize = MediaQuery.of(context).size;
+
+    return SingleChildScrollView(
+      // Add scrolling support
+      child: Column(
+        children: [
+          SizedBox(
+              height: screenSize.height *
+                  0.05), // Adjust height relative to screen size
+          const TopTextWidget(),
+          SizedBox(height: screenSize.height * 0.01),
+          const RedBannerWidget(),
+          SizedBox(height: screenSize.height * 0.01),
+          LabelWithAsterisk(text: 'من', simble: '*'),
+          SizedBox(height: screenSize.height * 0.01),
+          GovernorateDropdown(),
+          SizedBox(height: screenSize.height * 0.01),
+          LabelWithAsterisk(text: 'الى', simble: '*'),
+          SizedBox(height: screenSize.height * 0.01),
+          GovernorateDropdown(),
+          SizedBox(height: screenSize.height * 0.01),
+          DateTextField(),
+          SizedBox(height: screenSize.height * 0.01),
+          TimeTextField(),
+          SizedBox(height: screenSize.height * 0.01),
+          NotesTextField(),
+          const TripOptions(),
+          CustomButton2(
+            textbutton:
+                'سيتواصل معك خدمة العملاء في أقرب وقت لتحديد التكلفة بعد ارسال طلب الرحله',
+          ),
+          CustomText(),
+          CustomButtontrip(
+            textbutton: ' إرسال طلب الرحله',
+          )
+        ],
+      ),
     );
   }
 }

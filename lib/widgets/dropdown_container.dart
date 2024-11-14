@@ -16,9 +16,11 @@ class DropdownContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final screenSize = MediaQuery.of(context).size;
+
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 10),
-      width: 350,
+      width: screenSize.width * 0.8, // Use relative width
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(6),
