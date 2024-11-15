@@ -1,4 +1,5 @@
 import 'package:almahaba/login/views_login_page/login_page.dart';
+import 'package:almahaba/servies/body_sevices.dart';
 import 'package:almahaba/singup/views_sing_up/signup_form.dart';
 import 'package:flutter/material.dart';
 
@@ -19,7 +20,8 @@ class NavigationHandler {
         // الانتقال إلى الصفحة الرئيسية
         break;
       case 'خدماتنا':
-        // الانتقال إلى صفحة خدماتنا
+        Navigator.push(
+            context, MaterialPageRoute(builder: (_) => const BodySevices()));
         break;
       case 'طلبات':
         // الانتقال إلى صفحة الطلبات
