@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class AuthService {
@@ -13,7 +15,7 @@ class AuthService {
       );
       return response; // تأكد من أن هذه القيمة ترجع بشكل صحيح
     } catch (e) {
-      print('Sign in error: $e');
+      log('Sign in error: $e');
       return null;
     }
   }
@@ -32,7 +34,7 @@ class AuthService {
       );
       return response;
     } catch (e) {
-      print('Sign up error: $e');
+      log('Sign up error: $e');
       return null;
     }
   }

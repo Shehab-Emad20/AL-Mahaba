@@ -29,26 +29,26 @@ class BodyForm extends StatelessWidget {
           SizedBox(height: screenSize.height * 0.01),
           const RedBannerWidget(),
           SizedBox(height: screenSize.height * 0.01),
-          LabelWithAsterisk(text: 'من', simble: '*'),
+          const LabelWithAsterisk(text: 'من', simble: '*'),
           SizedBox(height: screenSize.height * 0.01),
-          GovernorateDropdown(),
+          const GovernorateDropdown(),
           SizedBox(height: screenSize.height * 0.01),
-          LabelWithAsterisk(text: 'الى', simble: '*'),
+          const LabelWithAsterisk(text: 'الى', simble: '*'),
           SizedBox(height: screenSize.height * 0.01),
-          GovernorateDropdown(),
+          const GovernorateDropdown(),
           SizedBox(height: screenSize.height * 0.01),
-          DateTextField(),
+          const DateTextField(),
           SizedBox(height: screenSize.height * 0.01),
-          TimeTextField(),
+          const TimeTextField(),
           SizedBox(height: screenSize.height * 0.01),
-          NotesTextField(),
+          const NotesTextField(),
           const TripOptions(),
-          CustomButton2(
+          const CustomButton2(
             textbutton:
                 'سيتواصل معك خدمة العملاء في أقرب وقت لتحديد التكلفة بعد ارسال طلب الرحله',
           ),
-          CustomText(),
-          CustomButtontrip(
+          const CustomText(),
+          const CustomButtontrip(
             textbutton: ' إرسال طلب الرحله',
           )
         ],

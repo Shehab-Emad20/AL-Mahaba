@@ -1,7 +1,8 @@
+import 'package:almahaba/utils/constants.dart';
 import 'package:flutter/material.dart';
 
-class text2 extends StatelessWidget {
-  const text2({
+class Text2 extends StatelessWidget {
+  const Text2({
     super.key,
     required this.fontSize,
   });
@@ -16,7 +17,7 @@ class text2 extends StatelessWidget {
           'شركة المحبة للنقل تقدم مجموعة متنوعة من خيارات',
           style: TextStyle(
             fontSize: fontSize,
-            color: Colors.black,
+            color: kPrimaryColor,
           ),
           textAlign: TextAlign.center,
         ),
@@ -24,7 +25,7 @@ class text2 extends StatelessWidget {
           'المركبات لتلبية احتياجات النقل المختلفة للعملاء',
           style: TextStyle(
             fontSize: fontSize,
-            color: Colors.black,
+            color: kPrimaryColor,
           ),
           textAlign: TextAlign.center,
         ),

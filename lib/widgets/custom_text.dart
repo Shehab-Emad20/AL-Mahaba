@@ -5,7 +5,7 @@ class CustomText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text(
+    return const Text(
       'يتم أضافة 50 ج لكل ساعه أنتظار إضافيه أو تأخير',
       style: TextStyle(color: Colors.red),
     );

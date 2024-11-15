@@ -33,9 +33,9 @@ class CustomTextServices extends StatelessWidget {
       padding: EdgeInsets.only(top: paddingTop),
       child: Column(
         children: [
-          text1(fontSize: fontSize), // استدعاء النص الأول
+          Text1(fontSize: fontSize), // استدعاء النص الأول
           const SizedBox(height: 15), // إضافة مسافة بين النصين
-          text2(fontSize: fontSize), // استدعاء النص الثاني
+          Text2(fontSize: fontSize), // استدعاء النص الثاني
         ],
       ),
     );

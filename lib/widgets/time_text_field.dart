@@ -23,10 +23,10 @@ class _TimeTextFieldState extends State<TimeTextField> {
       child: TextField(
         controller: _controller, // تعيين ال Controller
         textAlign: TextAlign.right,
-        decoration: InputDecoration(
+        decoration: const InputDecoration(
           hintText: 'وقت',
-          hintStyle: const TextStyle(color: Colors.grey),
-          contentPadding: const EdgeInsets.symmetric(horizontal: 10),
+          hintStyle: TextStyle(color: Colors.grey),
+          contentPadding: EdgeInsets.symmetric(horizontal: 10),
           border: InputBorder.none,
         ),
         onTap: () async {

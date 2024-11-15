@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:almahaba/login/views_login_page/login_page.dart';
 import 'package:almahaba/servies/body_sevices.dart';
 import 'package:almahaba/singup/views_sing_up/signup_form.dart';
@@ -27,7 +29,7 @@ class NavigationHandler {
         // الانتقال إلى صفحة الطلبات
         break;
       default:
-        print('العنصر غير معروف: $item');
+        log('العنصر غير معروف: $item');
         break;
     }
   }
