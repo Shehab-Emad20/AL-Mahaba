@@ -8,6 +8,7 @@ class CustomButton extends StatelessWidget {
   const CustomButton({
     super.key,
     required this.textbutton,
+    Future<void> Function()? onPressed,
   });
 
   @override
