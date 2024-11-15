@@ -18,8 +18,8 @@ class SignupForm extends StatelessWidget {
       child: Container(
         padding: EdgeInsets.all(
             screenSize.width * 0.04), // Padding around the container
-        height: screenSize.height * 0.76,
-        width: screenSize.width * 0.96,
+        height: screenSize.height * 0.75,
+        width: screenSize.width * 0.93,
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(10),

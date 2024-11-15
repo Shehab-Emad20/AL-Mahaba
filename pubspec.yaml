@@ -33,10 +33,10 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_bloc: ^8.1.6
+  salomon_bottom_bar: ^3.3.2
   supabase_flutter: ^2.8.0
 
 dev_dependencies:
-
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
   # activated in the `analysis_options.yaml` file located at the root of your

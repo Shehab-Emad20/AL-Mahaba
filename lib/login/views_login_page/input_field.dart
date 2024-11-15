@@ -4,19 +4,11 @@ import '../../utils/constants.dart';
 class InputField extends StatelessWidget {
   final String hintText;
   final IconData icon;
-  final TextInputType keyboardType;
-  final bool isPassword;
-  final String? Function(String?)? validator;
-  final void Function(String?)? onSaved;
 
   const InputField({
     super.key,
     required this.hintText,
     required this.icon,
-    this.keyboardType = TextInputType.text,
-    this.isPassword = false,
-    this.validator,
-    this.onSaved,
   });
 
   @override
@@ -26,13 +18,9 @@ class InputField extends StatelessWidget {
     return Container(
       margin: EdgeInsets.symmetric(
           vertical: screenSize.height * 0.01), // تباعد عمودي
-      child: TextFormField(
+      child: TextField(
         textAlign: TextAlign.right,
         style: TextStyle(fontSize: screenSize.width * 0.045), // حجم خط ديناميكي
-        keyboardType: keyboardType,
-        obscureText: isPassword, // لإخفاء النص في حالة كلمة المرور
-        validator: validator,
-        onSaved: onSaved,
         decoration: InputDecoration(
           hintText: hintText,
           hintStyle: TextStyle(
