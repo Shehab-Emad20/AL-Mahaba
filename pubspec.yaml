@@ -32,9 +32,6 @@ dependencies:
   device_preview: ^1.2.0
   flutter:
     sdk: flutter
-  flutter_bloc: ^8.1.6
-  salomon_bottom_bar: ^3.3.2
-  supabase_flutter: ^2.8.0
 
 dev_dependencies:
   # The "flutter_lints" package below contains a set of recommended lints to
