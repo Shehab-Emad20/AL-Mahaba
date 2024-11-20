@@ -1,7 +1,7 @@
-import 'package:almahaba/models/forgot_password_models.dart';
+import 'package:almahaba/models/send_email.dart';
 import 'package:dio/dio.dart';
 
-class APIService {
+class APIServicesendemail {
   static const String port = "8000";
   final Dio dio = Dio();
 

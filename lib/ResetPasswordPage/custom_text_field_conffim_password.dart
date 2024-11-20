@@ -1,18 +1,16 @@
 import 'package:almahaba/utils/constants.dart';
 import 'package:flutter/material.dart';
 
-class InputField extends StatelessWidget {
-  final String hintText;
-  final IconData icon;
-  final TextEditingController? controller;
+class CustomTextFieldConffimPassword extends StatelessWidget {
+  final TextEditingController controller;
   final bool obscureText;
+  final String hint;
 
-  const InputField({
+  const CustomTextFieldConffimPassword({
     super.key,
-    required this.hintText,
-    required this.icon,
-    this.controller,
-    this.obscureText = false,
+    required this.controller,
+    required this.obscureText,
+    this.hint = '', // Optional hint text
   });
 
   @override
@@ -22,15 +20,14 @@ class InputField extends StatelessWidget {
       obscureText: obscureText,
       textAlign: TextAlign.right,
       decoration: InputDecoration(
-        hintText: hintText,
-        prefixIcon: Icon(icon, color: kPrimaryColor),
+        hintText: hint,
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),
-          borderSide: const BorderSide(color: kPrimaryColor, width: 1.5),
+          borderSide: const BorderSide(color: Colors.grey, width: 1.5),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),
-          borderSide: const BorderSide(color: kPrimaryColor, width: 2),
+          borderSide: const BorderSide(color: kPrimaryColor, width: 1.5),
         ),
       ),
     );

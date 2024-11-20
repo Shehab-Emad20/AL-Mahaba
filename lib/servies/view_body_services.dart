@@ -35,13 +35,13 @@ class ViewBodyServices extends StatelessWidget {
 
     return Stack(
       children: [
-        Column(
+        const Column(
           crossAxisAlignment: CrossAxisAlignment.center,
-          children: const [
+          children: [
             CustomTextServices(), // النص أولاً
           ],
         ),
-        Positioned(
+        const Positioned(
           top: 50, // إزاحة الصورة لأسفل بمقدار 50
           right: 0,
           left: 0,

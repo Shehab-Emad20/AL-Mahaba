@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:almahaba/models/login_models.dart';
 
-class APIService {
+class APIServiceLogin {
   static const String port = "8000"; // المنفذ
   final Dio dio = Dio();
 

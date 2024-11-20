@@ -1,7 +1,7 @@
 import 'package:almahaba/models/sing_up_modrls.dart';
 import 'package:dio/dio.dart';
 
-class APIService {
+class APIServiceSignup {
   static const String port = "8000";
   final Dio dio = Dio();
 
