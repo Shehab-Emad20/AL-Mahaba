@@ -1,6 +1,6 @@
 import 'dart:developer';
 import 'package:almahaba/login/login_form.dart';
-import 'package:almahaba/servies/body_sevices.dart';
+import 'package:almahaba/servies/view_body_services.dart';
 import 'package:almahaba/singup/sign_up.dart';
 import 'package:flutter/material.dart';
 
@@ -15,14 +15,14 @@ class NavigationHandler {
         break;
       case 'إنشاء حساب':
         Navigator.push(
-            context, MaterialPageRoute(builder: (_) => SignupPage()));
+            context, MaterialPageRoute(builder: (_) => const SignupPage()));
         break;
       case 'الرئيسية':
         // الانتقال إلى الصفحة الرئيسية
         break;
       case 'خدماتنا':
-        Navigator.push(
-            context, MaterialPageRoute(builder: (_) => CarDetailsScreen()));
+        Navigator.push(context,
+            MaterialPageRoute(builder: (_) => const ViewBodyServices()));
         break;
       case 'طلبات':
         // الانتقال إلى صفحة الطلبات

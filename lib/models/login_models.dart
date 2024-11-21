@@ -18,3 +18,24 @@ class LoginResponeModel {
     };
   }
 }
+
+class LoginRequestModel {
+  final String email; // Example, change based on your API response
+  final String password;
+
+  LoginRequestModel({required this.email, required this.password});
+
+  factory LoginRequestModel.fromJson(Map<String, dynamic> json) {
+    return LoginRequestModel(
+      email: json['email'],
+      password: json['password'],
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'email': email,
+      'password': password,
+    };
+  }
+}

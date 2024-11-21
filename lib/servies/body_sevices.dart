@@ -3,6 +3,8 @@ import 'package:almahaba/api/api_image_models.dart';
 import 'package:flutter/material.dart';
 
 class CarDetailsScreen extends StatefulWidget {
+  const CarDetailsScreen({super.key});
+
   @override
   _CarDetailsScreenState createState() => _CarDetailsScreenState();
 }
@@ -41,10 +43,10 @@ class _CarDetailsScreenState extends State<CarDetailsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text('Car Image'),
+          title: const Text('Car Image'),
         ),
         body: isLoading
-            ? Center(
+            ? const Center(
                 child: CircularProgressIndicator(),
               )
             : ListView.builder(

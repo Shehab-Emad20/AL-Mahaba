@@ -6,17 +6,20 @@ class CustomTextFieldSingUp extends StatelessWidget {
   final bool obscureText;
   final IconData icon;
   final String hint;
-
+  final text;
   const CustomTextFieldSingUp({
     super.key,
     required this.controller,
     required this.obscureText,
     required this.icon,
-    this.hint = '', // نص تلميح اختياري
+    this.hint = '',
+    this.text,
+    // نص تلميح اختياري
   });
 
   @override
   Widget build(BuildContext context) {
+    controller.text = text;
     return TextField(
       controller: controller,
       obscureText: obscureText,

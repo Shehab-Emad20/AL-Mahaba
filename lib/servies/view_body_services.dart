@@ -1,5 +1,5 @@
+import 'package:almahaba/servies/listViwe_page_cars.dart';
 import 'package:flutter/material.dart';
-import 'package:almahaba/servies/custom_container_car.dart';
 import 'package:almahaba/servies/custom_image.dart';
 import 'package:almahaba/servies/custom_text_srvices.dart';
 
@@ -33,46 +33,26 @@ class ViewBodyServices extends StatelessWidget {
       },
     ];
 
-    return Stack(
-      children: [
-        const Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            CustomTextServices(), // النص أولاً
-          ],
-        ),
-        const Positioned(
-          top: 50, // إزاحة الصورة لأسفل بمقدار 50
-          right: 0,
-          left: 0,
-          child: CustomImage(), // الصورة
-        ),
-        // قائمة العناصر في الـ ListView.builder أسفل الصورة
-        Positioned(
-          top: 300, // المسافة لتجنب التداخل مع الصورة والنص
-          left: 0,
-          right: 0,
-          bottom: 0, // يسمح بتعبئة المساحة المتبقية
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0),
-            child: ListView.builder(
-              itemCount: items.length, // عدد العناصر في القائمة
-              itemBuilder: (context, index) {
-                final item = items[index];
-                return Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 8.0),
-                  child: CustomContainer(
-                    title: item['title'],
-                    subtitle: item['subtitle'],
-                    iconLeft: item['iconLeft'],
-                    iconRight: item['iconRight'],
-                  ),
-                );
-              },
-            ),
+    return Scaffold(
+      body: Stack(
+        children: [
+          const Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              CustomTextServices(), // النص أولاً
+            ],
           ),
-        ),
-      ],
+          const Positioned(
+            top: 50, // إزاحة الصورة لأسفل بمقدار 50
+            right: 0,
+            left: 0,
+            child: CustomImage(), // الصورة
+          ),
+
+          // قائمة العناصر في الـ ListView.builder أسفل الصورة
+          // ListViwePageCars(items: items),
+        ],
+      ),
     );
   }
 }

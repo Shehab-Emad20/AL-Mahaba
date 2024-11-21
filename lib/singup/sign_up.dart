@@ -167,20 +167,20 @@ class _SignupPageState extends State<SignupPage> {
                   children: [
                     Expanded(
                       child: CustomTextFieldSingUp(
-                        controller: _firstNameController,
-                        obscureText: false,
-                        icon: Icons.person,
-                        hint: 'اسمك الأول',
-                      ),
+                          controller: _firstNameController,
+                          obscureText: false,
+                          icon: Icons.person,
+                          hint: 'اسمك الأول',
+                          text: 'ِشهاب'),
                     ),
                     const SizedBox(width: 10), // إضافة مسافة بين الحقول
                     Expanded(
                       child: CustomTextFieldSingUp(
-                        controller: _lastNameController,
-                        obscureText: false,
-                        icon: Icons.person,
-                        hint: 'اسم عائلة',
-                      ),
+                          controller: _lastNameController,
+                          obscureText: false,
+                          icon: Icons.person,
+                          hint: 'اسم عائلة',
+                          text: 'عماد'),
                     ),
                   ],
                 ),
@@ -190,23 +190,24 @@ class _SignupPageState extends State<SignupPage> {
                   obscureText: false,
                   icon: Icons.email,
                   hint: 'بريدك الإلكتروني',
+                  text: 'shehbzanti25@gmail.com',
                 ),
                 const SizedBox(height: 10),
 
                 // حقل كلمة المرور باستخدام CustomTextFieldlogin
                 CustomTextFieldSingUp(
-                  controller: _passwordController,
-                  obscureText: true,
-                  icon: Icons.lock,
-                  hint: 'كلمة المرور',
-                ),
+                    controller: _passwordController,
+                    obscureText: true,
+                    icon: Icons.lock,
+                    hint: 'كلمة المرور',
+                    text: 'shehab2014'),
                 const SizedBox(height: 10),
                 CustomTextFieldSingUp(
-                  controller: _confirmPasswordController,
-                  obscureText: true,
-                  icon: Icons.lock,
-                  hint: 'تاكيد كلمة المرور',
-                ),
+                    controller: _confirmPasswordController,
+                    obscureText: true,
+                    icon: Icons.lock,
+                    hint: 'تاكيد كلمة المرور',
+                    text: "shehab2014"),
                 const SizedBox(height: 20),
 
                 CutomButtonSinupLogin(

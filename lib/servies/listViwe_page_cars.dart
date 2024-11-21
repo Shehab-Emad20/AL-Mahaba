@@ -5,6 +5,7 @@ class CustomContainer extends StatelessWidget {
   final String subtitle;
   final IconData iconLeft;
   final IconData iconRight;
+  final VoidCallback onTap; // حدث الضغط للتنقل
 
   const CustomContainer({
     super.key,
@@ -12,11 +13,13 @@ class CustomContainer extends StatelessWidget {
     required this.subtitle,
     required this.iconLeft,
     required this.iconRight,
+    required this.onTap, // إضافة خاصية onTap
   });
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
+      onTap: onTap, // استدعاء التنقل عند الضغط
       child: Container(
         padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
@@ -25,22 +28,18 @@ class CustomContainer extends StatelessWidget {
         ),
         child: Row(
           children: [
-            // سهم (Arrow) في الجهة اليسرى
             Icon(
-              iconLeft, // أيقونة ديناميكية على اليسار
+              iconLeft,
               size: 30,
               color: Colors.black,
             ),
-
-            // النص في المنتصف
             Expanded(
               child: Column(
-                crossAxisAlignment:
-                    CrossAxisAlignment.end, // محاذاة النصوص لليمين
+                crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
                   Text(
                     title,
-                    textAlign: TextAlign.right, // محاذاة النص لليمين
+                    textAlign: TextAlign.right,
                     style: const TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
@@ -49,7 +48,7 @@ class CustomContainer extends StatelessWidget {
                   ),
                   Text(
                     subtitle,
-                    textAlign: TextAlign.right, // محاذاة النص لليمين
+                    textAlign: TextAlign.right,
                     style: const TextStyle(
                       fontSize: 14,
                       color: Colors.black54,
@@ -58,10 +57,8 @@ class CustomContainer extends StatelessWidget {
                 ],
               ),
             ),
-
-            // أيقونة في الجهة اليمنى
             Icon(
-              iconRight, // أيقونة ديناميكية على اليمين
+              iconRight,
               size: 30,
               color: Colors.black,
             ),

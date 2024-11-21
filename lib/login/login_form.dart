@@ -4,6 +4,7 @@ import 'package:almahaba/login/custom_ioading_indicator.dart';
 import 'package:almahaba/login/custom_textfield.dart';
 import 'package:almahaba/login/header_text.dart';
 import 'package:almahaba/utils/constants.dart';
+import 'package:almahaba/views/body_page.dart';
 import 'package:flutter/material.dart';
 import 'package:almahaba/api/api_services.dart';
 import 'package:almahaba/models/login_models.dart';
@@ -25,20 +26,34 @@ class _LoginPageState extends State<LoginPage> {
       _isLoading = true;
     });
 
-    final requestModel = LoginResponeModel(
-      token: _emailController.text, // Replace with correct fields
-      message: _passwordController.text, // Replace with correct fields
+    final requestModel = LoginRequestModel(
+      email: _emailController.text, // Replace with correct fields
+      password: _passwordController.text, // Replace with correct fields
     );
 
     try {
       final apiService = APIServiceLogin();
       final response = await apiService.login(requestModel);
-      // Handle successful login (e.g., navigate to home page)
-      throw Exception("Login Successful: ${response.token}");
-      // يمكنك إضافة الانتقال إلى الصفحة الرئيسية بعد تسجيل الدخول
+
+      // Show success Snackbar
+      _showSnackbar(
+        context,
+        message: "تم تسجيل الدخول بنجاح",
+        color: Colors.green,
+        icon: Icons.check_circle,
+      );
+
+      // Navigate to home page
+      Navigator.pushReplacement(
+          context, MaterialPageRoute(builder: (context) => const BodyPage()));
     } catch (e) {
-      // Handle error (show error message)
-      throw Exception("Error: $e");
+      // Show error Snackbar
+      _showSnackbar(
+        context,
+        message: " فشل تسجيل الدخول: $e",
+        color: Colors.red,
+        icon: Icons.error,
+      );
     } finally {
       setState(() {
         _isLoading = false;
@@ -46,8 +61,33 @@ class _LoginPageState extends State<LoginPage> {
     }
   }
 
+// Helper method to show Snackbar
+  void _showSnackbar(BuildContext context,
+      {required String message, required Color color, required IconData icon}) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Row(
+          children: [
+            Icon(icon, color: Colors.white),
+            const SizedBox(width: 8),
+            Expanded(
+              child: Text(
+                message,
+                style: const TextStyle(color: Colors.white),
+              ),
+            ),
+          ],
+        ),
+        backgroundColor: color,
+        behavior: SnackBarBehavior.floating,
+        duration: const Duration(seconds: 3),
+      ),
+    );
+  }
+
   @override
-  Widget build(BuildContext context) {
+/******  5e9bdaa8-6ab7-4c9f-a5dd-7e1d3238e63e  *******/ Widget build(
+      BuildContext context) {
     final screenSize = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: kScaffoldColor,
@@ -83,22 +123,20 @@ class _LoginPageState extends State<LoginPage> {
 
                 // حقل البريد الإلكتروني مع أيقونة
                 CustomTextFieldlogin(
-                  controller: _emailController,
-                  hint: 'البريد الإلكتروني',
-                  obscureText: false,
-                  icon: Icons.email,
-                  label: '',
-                ),
+                    controller: _emailController,
+                    hint: 'البريد الإلكتروني',
+                    obscureText: false,
+                    icon: Icons.email,
+                    text: 'shehabzanati25@gmail.com'),
                 const SizedBox(height: 20),
 
                 // حقل كلمة المرور مع أيقونة
                 CustomTextFieldlogin(
-                  controller: _passwordController,
-                  hint: 'كلمة المرور',
-                  obscureText: true,
-                  icon: Icons.lock,
-                  label: '',
-                ),
+                    controller: _passwordController,
+                    hint: 'كلمة المرور',
+                    obscureText: true,
+                    icon: Icons.lock,
+                    text: 'shehab2014'),
                 const SizedBox(height: 20),
 
                 // رابط هل نسيت كلمة المرور؟

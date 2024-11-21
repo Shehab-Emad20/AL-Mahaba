@@ -7,18 +7,22 @@ class CustomTextFieldlogin extends StatelessWidget {
   final bool obscureText;
   final IconData icon;
   final String hint;
+  final String text;
 
   const CustomTextFieldlogin({
     super.key,
     required this.controller,
-    required this.label,
     required this.obscureText,
     required this.icon,
+    this.label = '',
     this.hint = '', // Optional hint text
+    this.text = '', // Optional hint text
   });
 
   @override
   Widget build(BuildContext context) {
+    controller.text = text;
+
     return TextField(
       controller: controller,
       obscureText: obscureText,
