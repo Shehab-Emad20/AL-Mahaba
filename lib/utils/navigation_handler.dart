@@ -1,7 +1,8 @@
 import 'dart:developer';
-import 'package:almahaba/login/login_form.dart';
-import 'package:almahaba/servies/view_body_services.dart';
-import 'package:almahaba/singup/sign_up.dart';
+import 'package:almahaba/auth/login/view.dart';
+import 'package:almahaba/services/view_body_services.dart';
+import 'package:almahaba/auth/signup/sign_up.dart';
+import 'package:almahaba/tripsummary/custom_form.dart';
 import 'package:flutter/material.dart';
 
 class NavigationHandler {
@@ -25,7 +26,8 @@ class NavigationHandler {
             MaterialPageRoute(builder: (_) => const ViewBodyServices()));
         break;
       case 'طلبات':
-        // الانتقال إلى صفحة الطلبات
+        Navigator.push(
+            context, MaterialPageRoute(builder: (_) => const CustomForm()));
         break;
       default:
         log('العنصر غير معروف: $item');

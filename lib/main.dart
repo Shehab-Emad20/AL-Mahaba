@@ -1,4 +1,4 @@
-import 'package:almahaba/screen/splash_screen.dart';
+import 'package:almahaba/widgets/splash_screen/index.dart';
 import 'package:device_preview/device_preview.dart';
 import 'package:flutter/material.dart';
 

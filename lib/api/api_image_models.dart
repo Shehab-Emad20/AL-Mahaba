@@ -19,7 +19,6 @@ class ImageService {
 
       // التحقق من حالة الاستجابة سواء كانت 200 أو 201
       if (response.statusCode == 200 || response.statusCode == 201) {
-        log(response.data);
         final success = response.data['success'];
         // التحقق من أن success إما Boolean أو String أو int
         if (success) {
@@ -33,9 +32,8 @@ class ImageService {
           throw Exception('Failed to load cars');
         }
       } else {
-        print(
-            '[WARNING] Failed to fetch car details. Status code: ${response.statusCode}');
-        print('[DEBUG] Response data: ${response.data}');
+        log('[WARNING] Failed to fetch car details. Status code: ${response.statusCode}');
+        log('[DEBUG] Response data: ${response.data}');
         throw Exception('Failed to load cars');
       }
     } on DioException catch (e) {
