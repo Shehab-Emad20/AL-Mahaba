@@ -1,4 +1,4 @@
-import 'package:almahaba/auth/signup/sign_up.dart';
+import 'package:almahaba/auth/signup/view.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 

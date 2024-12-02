@@ -33,7 +33,7 @@ class _LoginPageState extends State<LoginPage> {
 
     try {
       final apiService = APIServiceLogin();
-      final response = await apiService.login(requestModel);
+      await apiService.login(requestModel);
 
       // Show success Snackbar
       _showSnackbar(

@@ -1,8 +1,8 @@
 import 'dart:developer';
 import 'package:almahaba/auth/login/view.dart';
-import 'package:almahaba/services/view_body_services.dart';
-import 'package:almahaba/auth/signup/sign_up.dart';
-import 'package:almahaba/tripsummary/custom_form.dart';
+import 'package:almahaba/services/view.dart';
+import 'package:almahaba/auth/signup/view.dart';
+import 'package:almahaba/tripsummary/widgets/view.dart';
 import 'package:flutter/material.dart';
 
 class NavigationHandler {
@@ -19,7 +19,6 @@ class NavigationHandler {
             context, MaterialPageRoute(builder: (_) => const SignupPage()));
         break;
       case 'الرئيسية':
-        // الانتقال إلى الصفحة الرئيسية
         break;
       case 'خدماتنا':
         Navigator.push(context,

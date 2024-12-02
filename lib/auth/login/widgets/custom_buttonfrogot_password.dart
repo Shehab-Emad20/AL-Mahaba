@@ -1,4 +1,4 @@
-import 'package:almahaba/auth/emails/send_email.dart';
+import 'package:almahaba/auth/emails/view.dart';
 import 'package:almahaba/utils/constants.dart';
 
 import 'package:flutter/material.dart';
