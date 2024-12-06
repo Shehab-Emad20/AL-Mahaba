@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class NotesTextField extends StatelessWidget {
   final String? initialNotes; // خاصية لتمرير النص الأولي
   final TextEditingController? controller; // خاصية للتحكم في محتوى الحقل
-  final onChanged;
+  final void Function(String)? onChanged; // خاصية لمعالجة التغيير في النص
 
   const NotesTextField({
     super.key,
@@ -21,8 +21,8 @@ class NotesTextField extends StatelessWidget {
         borderRadius: BorderRadius.circular(6),
       ),
       child: TextField(
-        controller: controller ?? TextEditingController(text: initialNotes),
-        maxLines: 3, // تقليل الأسطر لتصغير الارتفاع
+        controller: controller ,
+        maxLines: 3, // السماح بثلاثة أسطر
         textAlign: TextAlign.right,
         decoration: InputDecoration(
           hintText: 'ملاحظات',
@@ -31,7 +31,7 @@ class NotesTextField extends StatelessWidget {
               horizontal: 8, vertical: 8), // تعديل المسافات لتصغير الحجم
           border: InputBorder.none,
         ),
-        onChanged: onChanged,
+        onChanged: onChanged, // استدعاء التغيير عند تعديل النص
       ),
     );
   }

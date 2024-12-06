@@ -15,7 +15,8 @@ class CustomButtonAdd extends StatelessWidget {
               Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(
-                    builder: (context) => FormPage()), // استخدم الصفحة المناسبة
+                    builder: (context) =>
+                        const FormPage()), // استخدم الصفحة المناسبة
               );
             },
             style: ElevatedButton.styleFrom(

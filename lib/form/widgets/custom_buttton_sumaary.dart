@@ -18,7 +18,7 @@ class CustomButttonSumaary extends StatelessWidget {
               borderRadius: BorderRadius.circular(10), // حواف دائرية
             ),
             padding:
-                EdgeInsets.symmetric(vertical: 15), // تعديل الحشو الداخلي للزر
+                const EdgeInsets.symmetric(vertical: 15), // تعديل الحشو الداخلي للزر
           ),
           child: const Text(
             "التالي",

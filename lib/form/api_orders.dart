@@ -4,37 +4,26 @@ import 'package:dio/dio.dart';
 class ApiService {
   final Dio _dio = Dio();
 
-  // إرسال طلب جديد إلى API
-  Future<void> submitOrder(Orders orderDetails) async {
+  Future<void> createTrip(Trip trip, String token) async {
     try {
-      Response response = await _dio.post(
-        'http://localhost:8000/api/order', // تأكد من استخدام العنوان الصحيح
-        data: {
-          'from': {
-            'governorate': orderDetails.data!.from!.governorate,
-            'region': orderDetails.data!.from!.region,
-            'explain': orderDetails.data!.from!.explain,
+      final response = await _dio.post(
+        'http://localhost:8000/api/order',
+        data: trip.toJson(),
+        options: Options(
+          headers: {
+            'Content-Type': 'application/json', // Content type header
+            'token': token, // Add the Authorization header with the token
           },
-          'to': {
-            'governorate': orderDetails.data!.from!.governorate,
-            'region': orderDetails.data!.from!.region,
-            'explain': orderDetails.data!.from!.explain,
-          },
-          'date': orderDetails.data!.date!,
-          'time': orderDetails.data!.time!,
-          'notes': orderDetails.data!.notes!,
-          'car': orderDetails.data!.car!, // إضافة الحقل car
-        },
+        ),
       );
-
+      print(response);
       if (response.statusCode == 200 || response.statusCode == 201) {
-        print('Order submitted successfully');
+        print('Trip created successfully: ${response.data}');
       } else {
-        throw Exception(
-            'Failed to submit order with status code: ${response.statusCode}');
+        print('Error: ${response.statusCode}, ${response.data}');
       }
     } catch (e) {
-      throw Exception('Error occurred while submitting order: $e');
+      print('Error occurred: $e');
     }
   }
 }

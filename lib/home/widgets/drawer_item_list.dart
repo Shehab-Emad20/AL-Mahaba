@@ -11,6 +11,7 @@ class DrawerItemList extends StatelessWidget {
       'إنشاء حساب',
       'الرئيسية',
       'خدماتنا',
+      "طلباتي",
       'طلبات'
     ];
 

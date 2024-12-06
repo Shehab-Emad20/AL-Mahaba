@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 class CarSelection extends StatefulWidget {
-  final Function(String) onCarSelected; // تعريف onCarSelected كدالة تستقبل قيمة من نوع String
+  final Function(String)
+      onCarSelected; // Definition of onCarSelected to receive a String value
 
   const CarSelection({super.key, required this.onCarSelected});
 
@@ -10,13 +11,16 @@ class CarSelection extends StatefulWidget {
 }
 
 class _CarSelectionState extends State<CarSelection> {
-  String? selectedCar; // السيارة المحددة تبدأ بدون اختيار افتراضي
+  String? selectedCar; // The selected car starts without a default choice
 
   final List<Map<String, String>> cars = [
-    // "سيدان" العنصر الأول
-    {'name': 'ميكروباص', 'image': 'assets/images/hiace-bus-white.jpg'},
-    {'name': '7 راكب', 'image': 'assets/images/seven.jpg'},
-    {'name': 'سيدان', 'image': 'assets/images/sedan.jpg'},
+    {
+      'name': 'ميكروباص',
+      'value': 'sedan',
+      'image': 'assets/images/hiace-bus-white.jpg'
+    },
+    {'name': '7 راكب', 'value': 'car7', 'image': 'assets/images/seven.jpg'},
+    {'name': 'سيدان', 'value': 'bus', 'image': 'assets/images/sedan.jpg'},
   ];
 
   @override
@@ -29,16 +33,17 @@ class _CarSelectionState extends State<CarSelection> {
           return GestureDetector(
             onTap: () {
               setState(() {
-                selectedCar = car['name'];
+                selectedCar =
+                    car['value']; // Change to 'value' for consistent selection
               });
-              widget.onCarSelected(car['name']!); // استدعاء onCarSelected وتمرير السيارة المحددة
+              widget.onCarSelected(car['value']!); // Pass the value, not name
             },
             child: Container(
               width: 100,
               height: 150,
               decoration: BoxDecoration(
                 border: Border.all(
-                  color: selectedCar == car['name'] ? Colors.red : Colors.grey,
+                  color: selectedCar == car['value'] ? Colors.red : Colors.grey,
                   width: 2,
                 ),
                 borderRadius: BorderRadius.circular(12),
@@ -56,9 +61,9 @@ class _CarSelectionState extends State<CarSelection> {
                 children: [
                   Image.asset(
                     car['image']!,
-                    width: 80, // حجم الصورة
-                    height: 80, // حجم الصورة
-                    fit: BoxFit.contain, // لعرض الصورة بالكامل
+                    width: 80,
+                    height: 80,
+                    fit: BoxFit.contain,
                   ),
                   const SizedBox(height: 10),
                   Text(

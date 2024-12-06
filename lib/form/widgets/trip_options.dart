@@ -3,7 +3,12 @@ import 'package:almahaba/form/widgets/time_text_field.dart';
 import 'package:flutter/material.dart';
 
 class TripOptions extends StatefulWidget {
-  const TripOptions({super.key});
+  final ValueChanged<String?>? onChanged;
+
+  const TripOptions({
+    super.key,
+    this.onChanged,
+  });
 
   @override
   _TripOptionsState createState() => _TripOptionsState();
@@ -12,10 +17,10 @@ class TripOptions extends StatefulWidget {
 class _TripOptionsState extends State<TripOptions> {
   String? _selectedOption;
 
-  final List<String> options = [
-    'ذهاب فقط',
-    'ذهاب وعودة في نفس اليوم',
-    'ذهاب وعودة في يوم آخر',
+  final List<Map<String, String>> options = [
+    {'value': 'go', 'label': 'ذهاب فقط'},
+    {'value': 'goandretunatday', 'label': 'ذهاب وعودة في نفس اليوم'},
+    {'value': 'goandreturn', 'label': 'ذهاب وعودة في يوم آخر'},
   ];
 
   @override
@@ -24,37 +29,40 @@ class _TripOptionsState extends State<TripOptions> {
       crossAxisAlignment: CrossAxisAlignment.end,
       children: [
         // خيارات الرحلة
-        ...options.map((String option) {
+        ...options.map((Map<String, String> option) {
           return Padding(
             padding: const EdgeInsets.only(bottom: 8.0),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                Text(option),
+                Text(option['label']!),
                 Radio<String>(
-                  value: option,
+                  value: option['value']!,
                   groupValue: _selectedOption,
                   onChanged: (String? value) {
                     setState(() {
                       _selectedOption = value;
                     });
+                    if (widget.onChanged != null) {
+                      widget.onChanged!(value);
+                    }
                   },
                 ),
               ],
             ),
           );
-        }).toList(),
+        }),
 
         // إظهار الحقول إذا تم اختيار "ذهاب وعودة في يوم آخر"
-        if (_selectedOption == 'ذهاب وعودة في يوم آخر') ...[
+        if (_selectedOption == 'goandreturn') ...[
           const SizedBox(height: 8),
-          Center(
+          const Center(
             child: DateTextField(
               onChanged: null,
             ), // حقل التاريخ في المركز
           ),
           const SizedBox(height: 8),
-          Center(
+          const Center(
             child: TimeTextField(), // حقل الوقت في المركز
           ),
         ],

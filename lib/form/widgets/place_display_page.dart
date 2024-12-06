@@ -3,16 +3,16 @@ import 'package:flutter/material.dart';
 class PlaceDisplayPage extends StatelessWidget {
   final String place;
 
-  const PlaceDisplayPage({Key? key, required this.place}) : super(key: key);
+  const PlaceDisplayPage({super.key, required this.place});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('المكان المختار')),
+      appBar: AppBar(title: const Text('المكان المختار')),
       body: Center(
         child: Text(
           'المكان المختار هو: $place',
-          style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+          style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
         ),
       ),
     );

@@ -63,7 +63,7 @@ class _GovernorateDropdownState extends State<GovernorateDropdown> {
           onChanged: (String? newValue) {
             setState(() {
               selectedRegion = newValue; // تحديث المحافظة المختارة
-              selectedGovernorate = null; // إعادة تعيين المنطقة
+              selectedGovernorate = newValue; // إعادة تعيين المنطقة
             });
 
             if (newValue != null && governorates.containsKey(newValue)) {
@@ -82,6 +82,7 @@ class _GovernorateDropdownState extends State<GovernorateDropdown> {
             items: governorates[selectedRegion]!,
             hintText: 'اختر المكان',
             selectedValue: selectedGovernorate ?? '',
+
             onChanged: (String? newValue) {
               if (newValue != null && governorates[selectedRegion]!.contains(newValue)) {
                 setState(() {
