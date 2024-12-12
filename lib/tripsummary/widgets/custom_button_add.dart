@@ -12,8 +12,7 @@ class CustomButtonAdd extends StatelessWidget {
           padding: const EdgeInsets.only(right: 16),
           child: ElevatedButton(
             onPressed: () {
-              Navigator.pushReplacement(
-                context,
+              Navigator.of(context).push(
                 MaterialPageRoute(
                     builder: (context) =>
                         const FormPage()), // استخدم الصفحة المناسبة

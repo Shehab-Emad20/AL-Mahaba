@@ -1,3 +1,4 @@
+import 'package:almahaba/utils/end_points.dart';
 import 'package:dio/dio.dart';
 
 class APIServiceResetPassword {
@@ -7,7 +8,7 @@ class APIServiceResetPassword {
   Future<ResetPasswordResponseModel> resetPassword(
       String email, String newPassword) async {
     String url =
-        "http://localhost:$port/api/restpass"; // استخدام IP المحاكي بدلاً من localhost
+        "${EndPoints.BASE_URL}/restpass"; // استخدام IP المحاكي بدلاً من 192.168.1.2
 
     try {
       final response = await dio.post(

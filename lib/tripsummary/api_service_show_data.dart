@@ -1,3 +1,6 @@
+import 'package:almahaba/utils/cashe_helper.dart';
+import 'package:almahaba/utils/constants.dart';
+import 'package:almahaba/utils/end_points.dart';
 import 'package:dio/dio.dart';
 
 class ApiServiceShowData {
@@ -5,13 +8,21 @@ class ApiServiceShowData {
 
   ApiServiceShowData()
       : _dio = Dio(BaseOptions(
-          baseUrl: 'http://localhost:8000/api/',
+          baseUrl: '${EndPoints.BASE_URL}/',
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            // 'token': KToken
+            // 'token':
+            //     'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NTM1N2UwNzA1NTI4MmRmZTlhYzIxNyIsImlhdCI6MTczMzk5MDQ2NCwiZXhwIjoxNzY1Njk5MjY0fQ.TvM9iaSfDMWiFZS1Zfk8kZ4Cd_yEE4Dg4KzHm26PhBw'
+          },
         ));
 
   Future<Map<String, dynamic>> fetchOrders() async {
     try {
-      Response response = await _dio.get('/orders');
+      Response response = await _dio.get('orders');
 
+      print('@@@@@@ ${response.data}');
       if (response.statusCode == 200 || response.statusCode == 201) {
         return response.data;
       } else {

@@ -1,3 +1,4 @@
+import 'package:almahaba/utils/end_points.dart';
 import 'package:dio/dio.dart';
 import 'package:almahaba/auth/checkpage/checkcode._models.dart'; // تأكد من أنك تعرف ال model المناسب
 
@@ -7,7 +8,7 @@ class APIServicecheckcode {
   Future<VerificationResponseModel> verifyCode(
       String email, String code) async {
     String url =
-        "http://localhost:$port/api/checkcode"; // تأكد من أن هذه هي URL الفعلي لل API الخاص بك
+        "${EndPoints.BASE_URL}/checkcode"; // تأكد من أن هذه هي URL الفعلي لل API الخاص بك
 
     try {
       final response = await dio.post(

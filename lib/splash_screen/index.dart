@@ -1,5 +1,7 @@
 import 'package:almahaba/splash_screen/body_splach.dart';
 import 'package:almahaba/home/body_page.dart';
+import 'package:almahaba/utils/cashe_helper.dart';
+import 'package:almahaba/utils/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -38,6 +40,8 @@ class _SplashScreenState extends State<SplashScreen>
     // Start the animation
     _controller.forward();
 
+    String? token = CacheHelper.getString('token');
+    KToken = token;
     // Navigate to LoginPage after a delay
     Future.delayed(const Duration(seconds: 4), () {
       Navigator.pushReplacement(

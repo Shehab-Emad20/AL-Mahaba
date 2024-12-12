@@ -45,7 +45,9 @@ class _LoginPageState extends State<LoginPage> {
 
       // Navigate to home page
       Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (context) => const BodyPage()));
+        context,
+        MaterialPageRoute(builder: (context) => const BodyPage()),
+      );
     } catch (e) {
       // Show error Snackbar
       _showSnackbar(

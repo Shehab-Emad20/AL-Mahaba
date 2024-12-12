@@ -1,17 +1,18 @@
+import 'package:almahaba/utils/end_points.dart';
 import 'package:dio/dio.dart';
 import 'package:almahaba/data%20from/models_data.dart';
 
 class ApiServicedataform {
   final Dio _dio = Dio(
     BaseOptions(
-      baseUrl: 'http://localhost:8000', // عدّل إلى IP الخادم
+      baseUrl: '${EndPoints.BASE_URL}', // عدّل إلى IP الخادم
     ),
   );
 
   Future<void> createOrder(User user) async {
     try {
       final response = await _dio.post(
-        '/api/order', // استخدم Endpoint بدون Base URL
+        '/order', // استخدم Endpoint بدون Base URL
         data: user.toJson(),
         options: Options(
           headers: {

@@ -1,4 +1,5 @@
 import 'package:almahaba/auth/signup/sing_up_modrls.dart';
+import 'package:almahaba/utils/end_points.dart';
 import 'package:dio/dio.dart';
 
 class APIServiceSignup {
@@ -6,7 +7,7 @@ class APIServiceSignup {
   final Dio dio = Dio();
 
   Future<SignupResponseModel> signup(Map<String, dynamic> requestModel) async {
-    String url = "http://localhost:$port/api/signup";
+    String url = "${EndPoints.BASE_URL}/signup";
 
     try {
       final response = await dio.post(

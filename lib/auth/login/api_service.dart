@@ -1,4 +1,7 @@
 import 'package:almahaba/tripsummary/view.dart';
+import 'package:almahaba/utils/cashe_helper.dart';
+import 'package:almahaba/utils/constants.dart';
+import 'package:almahaba/utils/end_points.dart';
 import 'package:dio/dio.dart';
 import 'package:almahaba/auth/login/model.dart';
 
@@ -7,7 +10,7 @@ class APIServiceLogin {
   final Dio dio = Dio();
 
   Future<LoginResponeModel> login(LoginRequestModel requestModel) async {
-    String url = "http://localhost:$port/api/login";
+    String url = "${EndPoints.BASE_URL}/login";
 
     try {
       final response = await dio.post(
@@ -26,7 +29,9 @@ class APIServiceLogin {
       if (response.statusCode == 200 ||
           response.statusCode == 201 ||
           response.statusCode == 400) {
-            ApiManager.token = response.data['token'];
+        await CacheHelper.saveString('token', response.data['token']);
+
+        KToken = response.data['token'];
         // تحليل JSON وإرجاع النموذج
         return LoginResponeModel.fromJson(response.data);
       } else {

@@ -1,5 +1,6 @@
 import 'package:almahaba/services/Page_images/image_models.dart';
 import 'package:almahaba/services/Page_images/api_image_models.dart';
+import 'package:almahaba/utils/end_points.dart';
 import 'package:flutter/material.dart';
 
 class CarDetailsScreen extends StatefulWidget {
@@ -22,7 +23,7 @@ class _CarDetailsScreenState extends State<CarDetailsScreen> {
   void initState() {
     super.initState();
     imageService = ImageService(
-        baseUrl: 'http://localhost:8000'); // baseUrl لم يعد ضرورياً
+        baseUrl: '${EndPoints.BASE_URL}'); // baseUrl لم يعد ضرورياً
     fetchCar();
   }
 
@@ -56,7 +57,7 @@ class _CarDetailsScreenState extends State<CarDetailsScreen> {
                   return Card(
                     child: ListTile(
                       leading: Image.network(
-                        'http://localhost:8000/${car!.image}',
+                        '${EndPoints.BASE_URL}/${car!.image}',
                         width: 100,
                         height: 100,
                         fit: BoxFit.cover,

@@ -32,15 +32,11 @@ class NavigationHandler {
             context,
             MaterialPageRoute(
                 builder: (_) =>
-                  const  ViewBody())); // Corrected the spelling of `ViewBody`
+                    const ViewBody())); // Corrected the spelling of `ViewBody`
         break;
       case 'طلبات':
         Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (_) => const CustomForm(
-                      ShowOrder: [], // Ensure `ShowOrder` is a valid parameter
-                    )));
+            context, MaterialPageRoute(builder: (_) => const CustomForm()));
         break;
       default:
         log('Unknown item: $item');

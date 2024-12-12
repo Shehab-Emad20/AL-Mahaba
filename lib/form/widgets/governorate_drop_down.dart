@@ -6,7 +6,8 @@ class GovernorateDropdown extends StatefulWidget {
   final String? selectedGovernorate; // المحافظة المحددة حاليًا
   final String? selectedRegion; // المنطقة المحددة حاليًا
   final ValueChanged<String?>? onChangeRegion; // دالة لاستدعاء تغيير المنطقة
-  final ValueChanged<String?>? onChangeGovernorate; // دالة لاستدعاء تغيير المحافظة
+  final ValueChanged<String?>?
+      onChangeGovernorate; // دالة لاستدعاء تغيير المحافظة
 
   const GovernorateDropdown({
     super.key,
@@ -59,11 +60,13 @@ class _GovernorateDropdownState extends State<GovernorateDropdown> {
         DropdownContainer(
           items: governorates.keys.toList(), // أسماء المحافظات
           hintText: 'اختر المحافظة', // النص الإرشادي
-          selectedValue: selectedRegion ?? '', // القيمة المختارة حاليًا، وإذا كانت null تعرض نصًا فارغًا
+          selectedValue: selectedRegion ??
+              '', // القيمة المختارة حاليًا، وإذا كانت null تعرض نصًا فارغًا
           onChanged: (String? newValue) {
             setState(() {
               selectedRegion = newValue; // تحديث المحافظة المختارة
               selectedGovernorate = newValue; // إعادة تعيين المنطقة
+              print('@@@@@@@@@@2  ${newValue}      ${selectedRegion}');
             });
 
             if (newValue != null && governorates.containsKey(newValue)) {
@@ -82,9 +85,9 @@ class _GovernorateDropdownState extends State<GovernorateDropdown> {
             items: governorates[selectedRegion]!,
             hintText: 'اختر المكان',
             selectedValue: selectedGovernorate ?? '',
-
             onChanged: (String? newValue) {
-              if (newValue != null && governorates[selectedRegion]!.contains(newValue)) {
+              if (newValue != null &&
+                  governorates[selectedRegion]!.contains(newValue)) {
                 setState(() {
                   selectedGovernorate = newValue; // تحديث المنطقة المختارة
                 });

@@ -8,8 +8,9 @@ import 'package:almahaba/tripsummary/widgets/custom_button_add.dart';
 import 'package:flutter/material.dart';
 
 class CustomForm extends StatelessWidget {
-  final List<OrderModel> ShowOrder;
-  const CustomForm({super.key, required this.ShowOrder});
+  const CustomForm({
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -23,9 +24,7 @@ class CustomForm extends StatelessWidget {
           const SizedBox(height: 16), // مسافة بين العناصر
           const CustomButtonAdd(),
           const AvailableTripsContainer(), // الزر الخاص بك
-          TripSummary(
-            ShowOrder: ShowOrder,
-          ),
+          TripSummary(),
         ],
       ),
     );

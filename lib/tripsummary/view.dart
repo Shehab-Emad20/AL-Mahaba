@@ -4,9 +4,7 @@ import 'package:almahaba/tripsummary/api_service_show_data.dart';
 import 'package:almahaba/tripsummary/models_show_order.dart';
 
 class TripSummary extends StatefulWidget {
-  List<OrderModel> ShowOrder;
-
-  TripSummary({required this.ShowOrder});
+  TripSummary({super.key});
 
   @override
   _TripSummaryState createState() => _TripSummaryState();
@@ -15,6 +13,7 @@ class TripSummary extends StatefulWidget {
 class _TripSummaryState extends State<TripSummary> {
   OrderModel? orderData;
   final ApiServiceShowData _apiService = ApiServiceShowData();
+  List<OrderModel> ShowOrder = [];
 
   @override
   void initState() {
@@ -22,36 +21,26 @@ class _TripSummaryState extends State<TripSummary> {
     fetchOrder();
   }
 
- Future<void> fetchOrder() async {
-  try {
-    final data = await _apiService.fetchOrders();
-    if (data['success'] && data['data'] != null && data['data'].isNotEmpty) {
-      setState(() {
-        widget.ShowOrder = (data['data'] as List)
-            .map((order) => OrderModel.fromJson(order))
-            .toList();
-      });
-    } else {
-      setState(() {
-        widget.ShowOrder = [];
-      });
-      print('No data or unsuccessful response');
+  Future<void> fetchOrder() async {
+    try {
+      final data = await _apiService.fetchOrders();
+    } catch (e) {
+      print('Error: $e');
     }
-  } catch (e) {
-    print('Error fetching order: $e');
-    setState(() {
-      widget.ShowOrder = [];
-    });
   }
-}
 
   @override
   Widget build(BuildContext context) {
     return orderData == null
         ? Center(
-            child: Text(
-              'لا توجد بيانات للعرض',
-              style: TextStyle(fontSize: 18, color: Colors.grey[700]),
+            child: InkWell(
+              onTap: () {
+                fetchOrder();
+              },
+              child: Text(
+                'لا توجد بيانات للعرض',
+                style: TextStyle(fontSize: 18, color: Colors.grey[700]),
+              ),
             ),
           )
         : Padding(
@@ -63,17 +52,8 @@ class _TripSummaryState extends State<TripSummary> {
               ),
               child: Directionality(
                 textDirection: TextDirection.rtl,
-                child: OrdersList(orderData: widget.ShowOrder),
+                child: OrdersList(orderData: ShowOrder),
               ),
             ));
   }
-}
-class ApiManager{
-  static const String baseUrl = 'http://127.0.0.1:8000';
-  static String token = ''; 
-  /*
-  responsive , 
-  state management ,
-  
-  */
 }

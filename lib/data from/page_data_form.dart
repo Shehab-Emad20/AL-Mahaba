@@ -1,19 +1,16 @@
 import 'package:almahaba/tripsummary/view.dart';
+import 'package:almahaba/tripsummary/widgets/available_tips_container.dart';
 import 'package:almahaba/tripsummary/widgets/custom_form.dart';
+
 import 'package:flutter/material.dart';
 import 'package:almahaba/form/api_orders.dart';
 import 'package:almahaba/form/models_oreder.dart';
 
-class UserFormPage extends StatefulWidget {
-  final Map<String, Object?> orderDetails;
+class UserFormPage extends StatelessWidget {
+  UserFormPage({super.key, required this.orderDetails});
 
-  const UserFormPage({super.key, required this.orderDetails});
+  final Map<String, dynamic> orderDetails;
 
-  @override
-  _UserFormPageState createState() => _UserFormPageState();
-}
-
-class _UserFormPageState extends State<UserFormPage> {
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _ageController = TextEditingController();
   final TextEditingController _phoneController = TextEditingController();
@@ -21,7 +18,7 @@ class _UserFormPageState extends State<UserFormPage> {
 
   final ApiService _apiService = ApiService();
 
-  void _submitForm() async {
+  void _submitForm(BuildContext context) async {
     final name = _nameController.text.trim();
     final age = _ageController.text.trim();
     final phone = _phoneController.text.trim();
@@ -39,39 +36,11 @@ class _UserFormPageState extends State<UserFormPage> {
 
     final user = User(name: name, phone: phone, whats: whats, age: age);
 
-    final orderDetails = widget.orderDetails;
+    var a = orderDetails;
+    a.addAll({'user': user.toJson()});
 
-    final trip = Trip(
-      from: Location(
-        governorate: (orderDetails['from']
-                as Map<String, dynamic>?)?['governorate'] as String? ??
-            'Default Governorate',
-        region: (orderDetails['from'] as Map<String, dynamic>?)?['region']
-                as String? ??
-            'Default Region',
-        explain: 'From location explanation',
-      ),
-      to: Location(
-        governorate: (orderDetails['to']
-                as Map<String, dynamic>?)?['governorate'] as String? ??
-            'Default Governorate',
-        region: (orderDetails['to'] as Map<String, dynamic>?)?['region']
-                as String? ??
-            'Default Region',
-        explain: 'To location explanation',
-      ),
-      date: DateTime.tryParse(orderDetails['date'] as String? ?? '') ??
-          DateTime.now(),
-      time: orderDetails['time'] as String? ?? 'Default Time',
-      notes: orderDetails['notes'] as String? ?? 'Default Notes',
-      type: orderDetails['type'] as String? ?? 'Default Type',
-      car: orderDetails['car'] as String? ?? 'Default Car',
-      user: user,
-    );
-
-    print(trip.toJson());
     try {
-      await _apiService.createTrip(trip, ApiManager.token);
+      await _apiService.createTrip(a);
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text('تم إرسال الرحلة بنجاح!'),
@@ -79,18 +48,8 @@ class _UserFormPageState extends State<UserFormPage> {
         ),
       );
 
-      // إغلاق الصفحة الحالية بعد الانتقال إلى الصفحة الجديدة
-      Navigator.pop(context); // يرجعك للصفحة السابقة
-      // أو استخدم Navigator.push إذا كنت تريد الانتقال إلى صفحة جديدة
-      Navigator.push(
-          context,
-          MaterialPageRoute(
-              builder: (context) => CustomForm(
-                    ShowOrder: [],
-                  )));
-
-      // إغلاق الصفحة الحالية بعد الانتقال إلى الصفحة الجديدة
-      Navigator.pop(context);
+      Navigator.of(context).pushReplacement(
+          MaterialPageRoute(builder: (context) => CustomForm()));
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
@@ -135,7 +94,9 @@ class _UserFormPageState extends State<UserFormPage> {
               ),
               const SizedBox(height: 16),
               ElevatedButton(
-                onPressed: _submitForm,
+                onPressed: () {
+                  _submitForm(context);
+                },
                 child: const Text('إرسال'),
               ),
             ],

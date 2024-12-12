@@ -1,20 +1,39 @@
+import 'package:almahaba/utils/cashe_helper.dart';
 import 'package:almahaba/utils/navigation_handler.dart';
 import 'package:flutter/material.dart';
 
-class DrawerItemList extends StatelessWidget {
+class DrawerItemList extends StatefulWidget {
   const DrawerItemList({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    final items = [
-      'تسجيل الدخول',
-      'إنشاء حساب',
-      'الرئيسية',
-      'خدماتنا',
-      "طلباتي",
-      'طلبات'
-    ];
+  State<DrawerItemList> createState() => _DrawerItemListState();
+}
 
+class _DrawerItemListState extends State<DrawerItemList> {
+  String? token;
+  @override
+  void initState() {
+    super.initState();
+
+    token = CacheHelper.getString('token');
+
+    if (token == null) {
+      items = [
+        'تسجيل الدخول',
+        'إنشاء حساب',
+        'الرئيسية',
+        'خدماتنا',
+        "طلباتي",
+        'طلبات'
+      ];
+    } else {
+      items = ['الرئيسية', 'خدماتنا', "طلباتي", 'طلبات'];
+    }
+  }
+
+  late List<String> items;
+  @override
+  Widget build(BuildContext context) {
     return Column(
       children: items.map((item) => _buildDrawerItem(context, item)).toList(),
     );

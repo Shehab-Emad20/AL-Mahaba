@@ -1,4 +1,5 @@
 import 'package:almahaba/auth/emails/send_email.dart';
+import 'package:almahaba/utils/end_points.dart';
 import 'package:dio/dio.dart';
 
 class APIServicesendemail {
@@ -6,7 +7,7 @@ class APIServicesendemail {
   final Dio dio = Dio();
 
   Future<ForgotPasswordResponseModel> forgotPassword(String email) async {
-    String url = "http://localhost:$port/api/forgetpass";
+    String url = "${EndPoints.BASE_URL}/forgetpass";
 
     try {
       final response = await dio.post(
