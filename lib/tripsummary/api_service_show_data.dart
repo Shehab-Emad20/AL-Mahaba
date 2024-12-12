@@ -1,3 +1,4 @@
+import 'package:almahaba/tripsummary/models/orders_model.dart';
 import 'package:almahaba/utils/cashe_helper.dart';
 import 'package:almahaba/utils/constants.dart';
 import 'package:almahaba/utils/end_points.dart';
@@ -18,13 +19,17 @@ class ApiServiceShowData {
           },
         ));
 
-  Future<Map<String, dynamic>> fetchOrders() async {
+  Future<List<MyOrderModel>> fetchOrders() async {
     try {
       Response response = await _dio.get('orders');
 
       print('@@@@@@ ${response.data}');
       if (response.statusCode == 200 || response.statusCode == 201) {
-        return response.data;
+        List<MyOrderModel> orderModel = [];
+        for (var item in response.data['data']) {
+          orderModel.add(MyOrderModel.fromJson(item));
+        }
+        return orderModel;
       } else {
         throw Exception('Failed to load data');
       }

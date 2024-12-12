@@ -1,7 +1,7 @@
+import 'package:almahaba/tripsummary/api_service_show_data.dart';
+import 'package:almahaba/tripsummary/models/orders_model.dart';
 import 'package:almahaba/tripsummary/widgets/orders_list.dart';
 import 'package:flutter/material.dart';
-import 'package:almahaba/tripsummary/api_service_show_data.dart';
-import 'package:almahaba/tripsummary/models_show_order.dart';
 
 class TripSummary extends StatefulWidget {
   TripSummary({super.key});
@@ -11,9 +11,7 @@ class TripSummary extends StatefulWidget {
 }
 
 class _TripSummaryState extends State<TripSummary> {
-  OrderModel? orderData;
   final ApiServiceShowData _apiService = ApiServiceShowData();
-  List<OrderModel> ShowOrder = [];
 
   @override
   void initState() {
@@ -21,9 +19,13 @@ class _TripSummaryState extends State<TripSummary> {
     fetchOrder();
   }
 
+  List<MyOrderModel> ordersModelList = [];
   Future<void> fetchOrder() async {
     try {
-      final data = await _apiService.fetchOrders();
+      var data = await _apiService.fetchOrders();
+      setState(() {
+        ordersModelList = data;
+      });
     } catch (e) {
       print('Error: $e');
     }
@@ -31,7 +33,7 @@ class _TripSummaryState extends State<TripSummary> {
 
   @override
   Widget build(BuildContext context) {
-    return orderData == null
+    return ordersModelList.isEmpty
         ? Center(
             child: InkWell(
               onTap: () {
@@ -52,7 +54,11 @@ class _TripSummaryState extends State<TripSummary> {
               ),
               child: Directionality(
                 textDirection: TextDirection.rtl,
-                child: OrdersList(orderData: ShowOrder),
+                child: RefreshIndicator(
+                    onRefresh: () async {
+                      fetchOrder();
+                    },
+                    child: OrdersList(orderData: ordersModelList)),
               ),
             ));
   }

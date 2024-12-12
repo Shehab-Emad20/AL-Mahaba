@@ -1,24 +1,27 @@
+import 'package:almahaba/tripsummary/models/orders_model.dart';
 import 'package:almahaba/tripsummary/models_show_order.dart';
 import 'package:flutter/material.dart';
 
 class OrdersList extends StatelessWidget {
-  final List<OrderModel> orderData;
+  final List<MyOrderModel> orderData;
   const OrdersList({super.key, required this.orderData});
 
   @override
   Widget build(BuildContext context) {
     print(orderData);
-    return ListView.builder(
-      itemCount: orderData.length,
-      itemBuilder: (context, index) {
-        return OrderWidget(orderData: orderData[index]);
-      },
+    return Expanded(
+      child: ListView.builder(
+        itemCount: orderData.length,
+        itemBuilder: (context, index) {
+          return OrderWidget(orderData: orderData[index]);
+        },
+      ),
     );
   }
 }
 
 class OrderWidget extends StatelessWidget {
-  final OrderModel orderData;
+  final MyOrderModel orderData;
   const OrderWidget({super.key, required this.orderData});
   @override
   Widget build(BuildContext context) {

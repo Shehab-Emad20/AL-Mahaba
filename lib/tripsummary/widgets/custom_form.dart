@@ -24,7 +24,7 @@ class CustomForm extends StatelessWidget {
           const SizedBox(height: 16), // مسافة بين العناصر
           const CustomButtonAdd(),
           const AvailableTripsContainer(), // الزر الخاص بك
-          TripSummary(),
+          Expanded(child: TripSummary()),
         ],
       ),
     );
