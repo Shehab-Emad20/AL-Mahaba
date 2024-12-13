@@ -1,4 +1,5 @@
 import 'package:almahaba/form/api_orders.dart';
+import 'package:almahaba/form/widgets/move_address_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:almahaba/form/widgets/car_selection.dart';
 import 'package:almahaba/form/widgets/custom_buttton_sumaary.dart';
@@ -106,6 +107,8 @@ class _FormPageState extends State<FormPage> {
             child: Column(
               children: [
                 const LabelWithAsterisk(text: 'من', simble: '*'),
+                const SizedBox(height: 8),
+
                 GovernorateDropdown(
                   selectedGovernorate: _fromGovernorate,
                   selectedRegion: _fromRegion,
@@ -116,8 +119,15 @@ class _FormPageState extends State<FormPage> {
                     setState(() => _fromGovernorate = governorate ?? '');
                   },
                 ),
-                const SizedBox(height: 16),
+                const SizedBox(height: 8),
+
+                const MoveAddressTextField(
+                  hintText: "أكتب عنوان التحرك",
+                ),
+                const SizedBox(height: 8),
                 const LabelWithAsterisk(text: 'إلى', simble: '*'),
+                const SizedBox(height: 8),
+
                 GovernorateDropdown(
                   selectedGovernorate: _toGovernorate,
                   selectedRegion: _toRegion,
@@ -128,12 +138,19 @@ class _FormPageState extends State<FormPage> {
                     setState(() => _toGovernorate = governorate ?? '');
                   },
                 ),
-                const SizedBox(height: 16),
+                const SizedBox(height: 8),
+
+                const MoveAddressTextField(
+                  hintText: "أكتب عنوان الوصول",
+                ),
+                const SizedBox(height: 8),
                 const LabelWithAsterisk(text: 'التاريخ', simble: '*'),
+                const SizedBox(height: 8),
+
                 DateTextField(
                   onChanged: (date) => setState(() => _selectedDate = date),
                 ),
-                const SizedBox(height: 16),
+                const SizedBox(height: 8),
                 const LabelWithAsterisk(
                   text: 'الوقت',
                   simble: '*',
@@ -141,7 +158,7 @@ class _FormPageState extends State<FormPage> {
                 TimeTextField(
                   onChanged: (time) => setState(() => _selectedTime = time),
                 ),
-                const SizedBox(height: 16),
+                const SizedBox(height: 8),
                 const LabelWithAsterisk(
                     text: 'ملاحظات',
                     simble: '*'), // Pass the controller to the widget
@@ -149,7 +166,7 @@ class _FormPageState extends State<FormPage> {
                   onChanged: (notes) => setState(() => _notes = notes),
                   controller: _notesController,
                 ),
-                const SizedBox(height: 16),
+                const SizedBox(height: 8),
                 TripOptions(onChanged: (option) {
                   setState(() => _tripType = option);
                 }),
@@ -158,7 +175,10 @@ class _FormPageState extends State<FormPage> {
                     setState(() => _car = selectedCar);
                   },
                 ),
-                CustomButttonSumaary(onPressed: _createOrder),
+                CustomButttonSumaary(
+                  onPressed: _createOrder,
+                  buttonText: 'التالي',
+                ),
               ],
             ),
           ),

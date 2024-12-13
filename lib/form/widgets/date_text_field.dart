@@ -42,8 +42,14 @@ class _DateTextFieldState extends State<DateTextField> {
         decoration: const InputDecoration(
           hintText: 'تاريخ',
           hintStyle: TextStyle(color: Colors.grey),
-          contentPadding: EdgeInsets.symmetric(horizontal: 10),
+          contentPadding: EdgeInsets.symmetric(
+              horizontal: 10, vertical: 12), // تعديل المحاذاة الرأسية
           border: InputBorder.none,
+          prefixIcon: Icon(
+            Icons.calendar_today, // أيقونة التاريخ
+            color: Colors.grey, // اللون الخاص بالأيقونة
+            size: 20, // حجم الأيقونة
+          ),
         ),
         onTap: () async {
           FocusScope.of(context)

@@ -20,6 +20,7 @@ class _TripSummaryState extends State<TripSummary> {
   }
 
   List<MyOrderModel> ordersModelList = [];
+
   Future<void> fetchOrder() async {
     try {
       var data = await _apiService.fetchOrders();
@@ -46,7 +47,8 @@ class _TripSummaryState extends State<TripSummary> {
             ),
           )
         : Padding(
-            padding: const EdgeInsets.all(16.0),
+            padding: const EdgeInsets.all(
+                16.0), // This will apply padding outside the Container
             child: Container(
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(12),
@@ -54,12 +56,19 @@ class _TripSummaryState extends State<TripSummary> {
               ),
               child: Directionality(
                 textDirection: TextDirection.rtl,
-                child: RefreshIndicator(
+                child: Padding(
+                  // Add separate padding here for the inner content
+                  padding: const EdgeInsets.only(
+                      bottom: 16.0), // Padding below the list
+                  child: RefreshIndicator(
                     onRefresh: () async {
                       fetchOrder();
                     },
-                    child: OrdersList(orderData: ordersModelList)),
+                    child: OrdersList(orderData: ordersModelList),
+                  ),
+                ),
               ),
-            ));
+            ),
+          );
   }
 }

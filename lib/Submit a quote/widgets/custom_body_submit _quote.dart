@@ -40,6 +40,7 @@ class CustomBodySubmitQuote extends StatelessWidget {
           CustomNumberTextField(
             hintText: "السعر",
           ),
+          
         ],
       ),
     );

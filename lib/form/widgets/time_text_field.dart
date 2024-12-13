@@ -24,7 +24,7 @@ class _TimeTextFieldState extends State<TimeTextField> {
   Widget build(BuildContext context) {
     return Container(
       height: 50,
-      width: 300,
+      width: 310,
       decoration: BoxDecoration(
         border: Border.all(color: Colors.grey, width: 2),
         borderRadius: BorderRadius.circular(6),
@@ -33,10 +33,16 @@ class _TimeTextFieldState extends State<TimeTextField> {
         controller: _controller,
         textAlign: TextAlign.right,
         decoration: const InputDecoration(
-          hintText: 'وقت',
+          hintText: 'وقت', // النص الإرشادي
           hintStyle: TextStyle(color: Colors.grey),
-          contentPadding: EdgeInsets.symmetric(horizontal: 10),
+          contentPadding: EdgeInsets.symmetric(
+              horizontal: 10, vertical: 12), // المحاذاة الرأسية
           border: InputBorder.none,
+          prefixIcon: Icon(
+            Icons.access_time, // أيقونة الوقت
+            color: Colors.grey, // اللون الخاص بالأيقونة
+            size: 20, // حجم الأيقونة
+          ),
         ),
         onTap: () async {
           FocusScope.of(context)
@@ -48,7 +54,8 @@ class _TimeTextFieldState extends State<TimeTextField> {
           if (pickedTime != null) {
             // تحديث النص في الحقل بالوقت المحدد
             setState(() {
-              final time = pickedTime.format(context); // صيغة الوقت (HH:MM AM/PM)
+              final time =
+                  pickedTime.format(context); // صيغة الوقت (HH:MM AM/PM)
               _controller.text = time;
               if (widget.onChanged != null) {
                 widget.onChanged!(time);
@@ -60,4 +67,3 @@ class _TimeTextFieldState extends State<TimeTextField> {
     );
   }
 }
-

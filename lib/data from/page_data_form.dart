@@ -1,3 +1,9 @@
+import 'package:almahaba/data%20from/widgets/age_textfeild.dart';
+import 'package:almahaba/data%20from/widgets/nema_textfeild.dart';
+import 'package:almahaba/data%20from/widgets/phone_text_feild.dart';
+import 'package:almahaba/data%20from/widgets/whats_app_text_feild.dart';
+import 'package:almahaba/form/widgets/custom_buttton_sumaary.dart';
+import 'package:almahaba/form/widgets/label_with_aterisk.dart';
 import 'package:almahaba/tripsummary/view.dart';
 import 'package:almahaba/tripsummary/widgets/available_tips_container.dart';
 import 'package:almahaba/tripsummary/widgets/custom_form.dart';
@@ -71,33 +77,44 @@ class UserFormPage extends StatelessWidget {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              TextField(
+              const LabelWithAsterisk(text: 'الاسم', simble: '*'),
+              const SizedBox(height: 8),
+              NemaTextfeild(
                 controller: _nameController,
-                decoration: const InputDecoration(labelText: 'الاسم'),
+                labelText: 'أكتب أسمك',
+                onChanged: (value) {
+                  // Handle change
+                },
               ),
               const SizedBox(height: 16),
-              TextField(
+              const LabelWithAsterisk(text: 'العمر', simble: '*'),
+              const SizedBox(height: 16),
+              AgeTextfeild(
                 controller: _ageController,
-                decoration: const InputDecoration(labelText: 'العمر'),
+                onChanged: (value) {
+                  // Handle change
+                },
               ),
               const SizedBox(height: 16),
-              TextField(
-                controller: _phoneController,
-                decoration: const InputDecoration(labelText: 'رقم الهاتف'),
-                keyboardType: TextInputType.phone,
-              ),
+              const LabelWithAsterisk(text: 'رقم الهاتف', simble: '*'),
               const SizedBox(height: 16),
-              TextField(
+              PhoneTextfeild(
                 controller: _whatsController,
-                decoration: const InputDecoration(labelText: 'رقم الواتس'),
-                keyboardType: TextInputType.phone,
+                onChanged: (value) {},
               ),
               const SizedBox(height: 16),
-              ElevatedButton(
+              const LabelWithAsterisk(text: 'رقم الواتس', simble: '*'),
+              const SizedBox(height: 16),
+              WhatsAppTextfeild(
+                controller: _whatsController,
+                onChanged: (value) {},
+              ),
+              const SizedBox(height: 16),
+              CustomButttonSumaary(
                 onPressed: () {
                   _submitForm(context);
                 },
-                child: const Text('إرسال'),
+                buttonText: 'أرسال',
               ),
             ],
           ),

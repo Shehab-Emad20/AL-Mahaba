@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 
 class CustomButttonSumaary extends StatelessWidget {
-  const CustomButttonSumaary({super.key, required this.onPressed});
+  const CustomButttonSumaary({super.key, required this.onPressed, required this.buttonText});
   final VoidCallback onPressed;
+  final String buttonText; // Add a new field for the button text
 
   @override
   Widget build(BuildContext context) {
@@ -20,9 +21,9 @@ class CustomButttonSumaary extends StatelessWidget {
             padding:
                 const EdgeInsets.symmetric(vertical: 15), // تعديل الحشو الداخلي للزر
           ),
-          child: const Text(
-            "التالي",
-            style: TextStyle(fontSize: 18, color: Colors.white),
+          child:  Text(
+         buttonText ,
+            style: const TextStyle(fontSize: 18, color: Colors.white),
           ),
         ),
       ),

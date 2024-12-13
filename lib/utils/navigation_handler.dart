@@ -2,6 +2,7 @@ import 'dart:developer';
 import 'package:almahaba/Submit%20a%20quote/view.dart';
 import 'package:almahaba/auth/login/view.dart';
 import 'package:almahaba/auth/signup/view.dart';
+import 'package:almahaba/orders/view.dart';
 import 'package:almahaba/services/view.dart';
 import 'package:almahaba/tripsummary/widgets/custom_form.dart';
 import 'package:flutter/material.dart';
@@ -32,7 +33,7 @@ class NavigationHandler {
             context,
             MaterialPageRoute(
                 builder: (_) =>
-                    const ViewBody())); // Corrected the spelling of `ViewBody`
+                    const ViewOrder())); // Corrected the spelling of `ViewBody`
         break;
       case 'طلبات':
         Navigator.push(

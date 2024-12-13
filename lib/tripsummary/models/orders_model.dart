@@ -10,7 +10,7 @@ class MyOrderModel {
   String? returnDate;
   String? returntime;
   String? car;
-  List<String>? replays;
+  // List<String>? replays;
   int? iV;
 
   MyOrderModel(
@@ -25,7 +25,7 @@ class MyOrderModel {
       this.returnDate,
       this.returntime,
       this.car,
-      this.replays,
+      // this.replays,
       this.iV});
 
   MyOrderModel.fromJson(Map<String, dynamic> json) {
@@ -40,12 +40,12 @@ class MyOrderModel {
     returnDate = json['returnDate'];
     returntime = json['returntime'];
     car = json['car'];
-    if (json['replays'] != null) {
-      replays = <String>[];
-      json['replays'].forEach((v) {
-        replays!.add(v);
-      });
-    }
+    // if (json['replays'] != null) {
+    //   replays = <String>[];
+    //   json['replays'].forEach((v) {
+    //     replays!.add(v);
+    //   });
+    // }
     iV = json['__v'];
   }
 }
