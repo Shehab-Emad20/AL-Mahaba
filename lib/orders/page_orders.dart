@@ -1,7 +1,26 @@
+import 'package:almahaba/RepliesPage/view.dart';
 import 'package:flutter/material.dart';
 
 class PageOrders extends StatelessWidget {
   const PageOrders({super.key}); // Constructor
+
+  // Function to simulate navigating to a replies page (you can replace this with your actual page)
+  void navigateToRepliesPage(BuildContext context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => const RepliesPage()),
+    );
+  }
+
+  // Function for the delete action (you can replace this with actual delete logic)
+  void deleteOrder(BuildContext context) {
+    // Your delete logic here (e.g., call a delete API or show a confirmation dialog)
+    print("Order deleted");
+    // Optionally, you can show a confirmation or snackbar
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(content: Text("تم مسح الطلب")),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -69,6 +88,49 @@ class PageOrders extends StatelessWidget {
                 Text(
                   'غير محدد',
                   style: TextStyle(fontSize: 14),
+                ),
+              ],
+            ),
+
+            // Row with "ردود" (Replies) and "مسح" (Delete) buttons
+            const SizedBox(height: 16), // Add space between content and buttons
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                // "مسح" Button (Delete action) placed first
+                OutlinedButton(
+                  onPressed: () {
+                    deleteOrder(context); // Delete the order
+                  },
+                  style: OutlinedButton.styleFrom(
+                    backgroundColor: Colors.red, // Button color
+                    side:
+                        const BorderSide(color: Colors.red), // Red border color
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8), // Rounded corners
+                    ),
+                  ),
+                  child: const Text(
+                    'مسح',
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ),
+
+                // "ردود" Button (Navigate to replies page) placed second
+                ElevatedButton(
+                  onPressed: () {
+                    navigateToRepliesPage(context);
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.blue, // Button color
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8), // Rounded corners
+                    ),
+                  ),
+                  child: const Text(
+                    '(0)ردود',
+                    style: TextStyle(color: Colors.white),
+                  ),
                 ),
               ],
             ),
