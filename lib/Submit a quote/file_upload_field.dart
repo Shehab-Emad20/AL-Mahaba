@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:almahaba/utils/responsive_helper.dart';
 
 class FileUploadField extends StatelessWidget {
   const FileUploadField({super.key});
@@ -6,15 +7,17 @@ class FileUploadField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding:
-          const EdgeInsets.all(8.0), // لتوحيد الهوامش مع CustomDriverTextField
+      padding: ResponsiveHelper.getPadding(context),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const SizedBox(height: 8.0),
           Container(
-            padding: const EdgeInsets.symmetric(
-                horizontal: 10.0, vertical: 8.0), // لتوحيد الحجم مع حقل النص
+            width: ResponsiveHelper.getWidth(context),
+            padding: EdgeInsets.symmetric(
+              horizontal: ResponsiveHelper.isMobilePhone(context) ? 8.0 : 12.0,
+              vertical: ResponsiveHelper.isMobilePhone(context) ? 6.0 : 8.0,
+            ),
             decoration: BoxDecoration(
               border: Border.all(color: Colors.grey, width: 1.0),
               borderRadius: BorderRadius.circular(5.0),
@@ -22,32 +25,31 @@ class FileUploadField extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Text(
+                Text(
                   'No file chosen',
                   style: TextStyle(
                     color: Colors.grey,
-                    fontSize:
-                        14.0, // نفس الحجم المستخدم في CustomDriverTextField
+                    fontSize: ResponsiveHelper.getFontSize(context),
                   ),
                 ),
                 ElevatedButton(
                   onPressed: () {
-                    // هنا يمكن إضافة الكود لفتح نافذة لاختيار الملف
                     print("Choose Files button clicked");
                   },
                   style: ElevatedButton.styleFrom(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 10.0, vertical: 5.0),
+                    padding: EdgeInsets.symmetric(
+                      horizontal: ResponsiveHelper.isMobilePhone(context) ? 8.0 : 12.0,
+                      vertical: ResponsiveHelper.isMobilePhone(context) ? 4.0 : 6.0,
+                    ),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(5.0),
                     ),
                   ),
-                  child: const Text(
+                  child: Text(
                     'Choose Files',
                     style: TextStyle(
                       color: Colors.black,
-                      fontSize:
-                          14.0, // نفس الحجم المستخدم في CustomDriverTextField
+                      fontSize: ResponsiveHelper.getFontSize(context),
                     ),
                   ),
                 ),

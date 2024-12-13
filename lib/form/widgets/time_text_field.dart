@@ -2,12 +2,16 @@ import 'package:flutter/material.dart';
 
 class TimeTextField extends StatefulWidget {
   final String? initialTime;
-  final ValueChanged<String>? onChanged; // خاصية لتمرير الوقت الأولي
+  final ValueChanged<String>? onChanged;
 
-  const TimeTextField({super.key, this.initialTime, this.onChanged});
+  const TimeTextField({
+    Key? key,
+    this.initialTime,
+    this.onChanged,
+  }) : super(key: key);
 
   @override
-  _TimeTextFieldState createState() => _TimeTextFieldState();
+  State<TimeTextField> createState() => _TimeTextFieldState();
 }
 
 class _TimeTextFieldState extends State<TimeTextField> {
@@ -16,32 +20,48 @@ class _TimeTextFieldState extends State<TimeTextField> {
   @override
   void initState() {
     super.initState();
-    // تهيئة ال Controller بالنص المبدئي إذا كان موجودًا
     _controller = TextEditingController(text: widget.initialTime ?? '');
   }
 
   @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final screenSize = MediaQuery.of(context).size;
+    final isDesktop = screenSize.width > 900;
+    final isTablet = screenSize.width > 600 && screenSize.width <= 900;
+    final containerWidth = isDesktop ? 600.0 : (isTablet ? screenSize.width * 0.8 : screenSize.width * 0.9);
+
     return Container(
       height: 50,
-      width: 310,
+      width: containerWidth,
       decoration: BoxDecoration(
         border: Border.all(color: Colors.grey, width: 2),
         borderRadius: BorderRadius.circular(6),
+        color: Colors.white,
       ),
       child: TextField(
         controller: _controller,
         textAlign: TextAlign.right,
         decoration: const InputDecoration(
-          hintText: 'وقت', // النص الإرشادي
-          hintStyle: TextStyle(color: Colors.grey),
+          hintText: 'وقت',
+          hintStyle: TextStyle(
+            color: Colors.grey,
+            fontWeight: FontWeight.bold,
+          ),
           contentPadding: EdgeInsets.symmetric(
-              horizontal: 10, vertical: 12), // المحاذاة الرأسية
+            horizontal: 16,
+            vertical: 12,
+          ),
           border: InputBorder.none,
           prefixIcon: Icon(
-            Icons.access_time, // أيقونة الوقت
-            color: Colors.grey, // اللون الخاص بالأيقونة
-            size: 20, // حجم الأيقونة
+            Icons.access_time,
+            color: Colors.grey,
+            size: 20,
           ),
         ),
         onTap: () async {

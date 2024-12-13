@@ -1,11 +1,11 @@
-import 'package:almahaba/form/api_orders.dart';
-import 'package:almahaba/form/widgets/move_address_text_field.dart';
 import 'package:flutter/material.dart';
+import 'package:almahaba/form/api_orders.dart';
 import 'package:almahaba/form/widgets/car_selection.dart';
 import 'package:almahaba/form/widgets/custom_buttton_sumaary.dart';
 import 'package:almahaba/form/widgets/date_text_field.dart';
 import 'package:almahaba/form/widgets/governorate_drop_down.dart';
 import 'package:almahaba/form/widgets/label_with_aterisk.dart';
+import 'package:almahaba/form/widgets/move_address_text_field.dart';
 import 'package:almahaba/form/widgets/notes_text_field.dart';
 import 'package:almahaba/form/widgets/time_text_field.dart';
 import 'package:almahaba/form/widgets/trip_options.dart';
@@ -96,90 +96,95 @@ class _FormPageState extends State<FormPage> {
 
   @override
   Widget build(BuildContext context) {
+    final screenSize = MediaQuery.of(context).size;
+    final isDesktop = screenSize.width > 900;
+    final isTablet = screenSize.width > 600 && screenSize.width <= 900;
+    final padding = isDesktop ? 32.0 : (isTablet ? 24.0 : 16.0);
+    final maxWidth =
+        isDesktop ? 800.0 : (isTablet ? 600.0 : screenSize.width * 0.95);
+
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.only(top: 8),
-          child: SingleChildScrollView(
-            padding:
-                const EdgeInsets.symmetric(vertical: 16.0, horizontal: 8.0),
-            child: Column(
-              children: [
-                const LabelWithAsterisk(text: 'من', simble: '*'),
-                const SizedBox(height: 8),
-
-                GovernorateDropdown(
-                  selectedGovernorate: _fromGovernorate,
-                  selectedRegion: _fromRegion,
-                  onChangeRegion: (region) {
-                    setState(() => _fromRegion = region ?? '');
-                  },
-                  onChangeGovernorate: (governorate) {
-                    setState(() => _fromGovernorate = governorate ?? '');
-                  },
-                ),
-                const SizedBox(height: 8),
-
-                const MoveAddressTextField(
-                  hintText: "أكتب عنوان التحرك",
-                ),
-                const SizedBox(height: 8),
-                const LabelWithAsterisk(text: 'إلى', simble: '*'),
-                const SizedBox(height: 8),
-
-                GovernorateDropdown(
-                  selectedGovernorate: _toGovernorate,
-                  selectedRegion: _toRegion,
-                  onChangeRegion: (region) {
-                    setState(() => _toRegion = region ?? '');
-                  },
-                  onChangeGovernorate: (governorate) {
-                    setState(() => _toGovernorate = governorate ?? '');
-                  },
-                ),
-                const SizedBox(height: 8),
-
-                const MoveAddressTextField(
-                  hintText: "أكتب عنوان الوصول",
-                ),
-                const SizedBox(height: 8),
-                const LabelWithAsterisk(text: 'التاريخ', simble: '*'),
-                const SizedBox(height: 8),
-
-                DateTextField(
-                  onChanged: (date) => setState(() => _selectedDate = date),
-                ),
-                const SizedBox(height: 8),
-                const LabelWithAsterisk(
-                  text: 'الوقت',
-                  simble: '*',
-                ),
-                TimeTextField(
-                  onChanged: (time) => setState(() => _selectedTime = time),
-                ),
-                const SizedBox(height: 8),
-                const LabelWithAsterisk(
-                    text: 'ملاحظات',
-                    simble: '*'), // Pass the controller to the widget
-                NotesTextField(
-                  onChanged: (notes) => setState(() => _notes = notes),
-                  controller: _notesController,
-                ),
-                const SizedBox(height: 8),
-                TripOptions(onChanged: (option) {
-                  setState(() => _tripType = option);
-                }),
-                CarSelection(
-                  onCarSelected: (selectedCar) {
-                    setState(() => _car = selectedCar);
-                  },
-                ),
-                CustomButttonSumaary(
-                  onPressed: _createOrder,
-                  buttonText: 'التالي',
-                ),
-              ],
+        child: Center(
+          child: Container(
+            constraints: BoxConstraints(maxWidth: maxWidth),
+            padding: EdgeInsets.symmetric(horizontal: padding),
+            child: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  const SizedBox(height: 16),
+                  const LabelWithAsterisk(text: 'من', simble: '*'),
+                  const SizedBox(height: 8),
+                  GovernorateDropdown(
+                    selectedGovernorate: _fromGovernorate,
+                    selectedRegion: _fromRegion,
+                    onChangeRegion: (region) {
+                      setState(() => _fromRegion = region ?? '');
+                    },
+                    onChangeGovernorate: (governorate) {
+                      setState(() => _fromGovernorate = governorate ?? '');
+                    },
+                  ),
+                  const SizedBox(height: 8),
+                  const MoveAddressTextField(
+                    hintText: "أكتب عنوان التحرك",
+                  ),
+                  const SizedBox(height: 16),
+                  const LabelWithAsterisk(text: 'إلى', simble: '*'),
+                  const SizedBox(height: 8),
+                  GovernorateDropdown(
+                    selectedGovernorate: _toGovernorate,
+                    selectedRegion: _toRegion,
+                    onChangeRegion: (region) {
+                      setState(() => _toRegion = region ?? '');
+                    },
+                    onChangeGovernorate: (governorate) {
+                      setState(() => _toGovernorate = governorate ?? '');
+                    },
+                  ),
+                  const SizedBox(height: 8),
+                  const MoveAddressTextField(
+                    hintText: "أكتب عنوان الوصول",
+                  ),
+                  const SizedBox(height: 16),
+                  const LabelWithAsterisk(text: 'التاريخ', simble: '*'),
+                  const SizedBox(height: 8),
+                  DateTextField(
+                    onChanged: (date) => setState(() => _selectedDate = date),
+                  ),
+                  const SizedBox(height: 16),
+                  const LabelWithAsterisk(text: 'الوقت', simble: '*'),
+                  const SizedBox(height: 8),
+                  TimeTextField(
+                    onChanged: (time) => setState(() => _selectedTime = time),
+                  ),
+                  const SizedBox(height: 16),
+                  const LabelWithAsterisk(text: 'ملاحظات', simble: '*'),
+                  const SizedBox(height: 8),
+                  NotesTextField(
+                    onChanged: (notes) => setState(() => _notes = notes),
+                    controller: _notesController,
+                  ),
+                  const SizedBox(height: 16),
+                  TripOptions(onChanged: (option) {
+                    setState(() => _tripType = option);
+                  }),
+                  const SizedBox(height: 16),
+                  CarSelection(
+                    onCarSelected: (selectedCar) {
+                      setState(() => _car = selectedCar);
+                    },
+                  ),
+                  const SizedBox(height: 24),
+                  CustomButttonSumaary(
+                    onPressed: _createOrder,
+                    buttonText: 'التالي',
+                  ),
+                  const SizedBox(height: 24),
+                ],
+              ),
             ),
           ),
         ),

@@ -27,22 +27,39 @@ class _MoveAddressTextFieldState extends State<MoveAddressTextField> {
   }
 
   @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final screenSize = MediaQuery.of(context).size;
+    final isDesktop = screenSize.width > 900;
+    final isTablet = screenSize.width > 600 && screenSize.width <= 900;
+    final containerWidth = isDesktop ? 600.0 : (isTablet ? screenSize.width * 0.8 : screenSize.width * 0.9);
+
     return Container(
       height: 50,
-      width: 310,
+      width: containerWidth,
       decoration: BoxDecoration(
         border: Border.all(color: Colors.grey, width: 2),
         borderRadius: BorderRadius.circular(6),
+        color: Colors.white,
       ),
       child: TextField(
         controller: _controller,
         textAlign: TextAlign.right,
         decoration: InputDecoration(
           hintText: widget.hintText, // النص الإرشادي المتغير
-          hintStyle: const TextStyle(color: Colors.grey),
+          hintStyle: const TextStyle(
+            color: Colors.grey,
+            fontWeight: FontWeight.bold,
+          ),
           contentPadding: const EdgeInsets.symmetric(
-              horizontal: 10, vertical: 12), // المحاذاة الرأسية
+            horizontal: 16,
+            vertical: 12,
+          ),
           border: InputBorder.none,
         ),
         onChanged: widget.onChanged,

@@ -1,5 +1,4 @@
 import 'package:almahaba/Submit%20a%20quote/view.dart';
-import 'package:almahaba/home/widgets/view_page.dart';
 import 'package:flutter/material.dart';
 
 class CustomButtonAddDrive extends StatelessWidget {
@@ -16,7 +15,7 @@ class CustomButtonAddDrive extends StatelessWidget {
               Navigator.of(context).push(
                 MaterialPageRoute(
                     builder: (context) =>
-                        const ViewBody()), // استخدم الصفحة المناسبة
+                        const SubmitQuoteView()), // استخدم الصفحة المناسبة
               );
             },
             style: ElevatedButton.styleFrom(

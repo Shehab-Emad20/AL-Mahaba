@@ -1,13 +1,15 @@
-import 'package:almahaba/Submit%20a%20quote/widgets/custom_body_submit%20_quote.dart';
 import 'package:flutter/material.dart';
+import 'package:almahaba/Submit%20a%20quote/widgets/custom_body_submit_quote.dart';
 
-class ViewBody extends StatelessWidget {
-  const ViewBody({super.key});
+class SubmitQuoteView extends StatelessWidget {
+  const SubmitQuoteView({super.key});
 
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
-      body: CustomBodySubmitQuote(),
+      body: SafeArea(
+        child: CustomBodySubmitQuote(),
+      ),
     );
   }
 }

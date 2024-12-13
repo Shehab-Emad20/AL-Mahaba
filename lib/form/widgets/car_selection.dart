@@ -1,17 +1,16 @@
 import 'package:flutter/material.dart';
 
 class CarSelection extends StatefulWidget {
-  final Function(String)
-      onCarSelected; // Definition of onCarSelected to receive a String value
+  final Function(String) onCarSelected;
 
-  const CarSelection({super.key, required this.onCarSelected});
+  const CarSelection({Key? key, required this.onCarSelected}) : super(key: key);
 
   @override
-  _CarSelectionState createState() => _CarSelectionState();
+  State<CarSelection> createState() => _CarSelectionState();
 }
 
 class _CarSelectionState extends State<CarSelection> {
-  String? selectedCar; // The selected car starts without a default choice
+  String? selectedCar;
 
   final List<Map<String, String>> cars = [
     {
@@ -25,22 +24,34 @@ class _CarSelectionState extends State<CarSelection> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(16.0),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+    final screenSize = MediaQuery.of(context).size;
+    final isDesktop = screenSize.width > 900;
+    final isTablet = screenSize.width > 600 && screenSize.width <= 900;
+    
+    final cardWidth = isDesktop ? 120.0 : (isTablet ? 100.0 : 90.0);
+    final cardHeight = isDesktop ? 180.0 : (isTablet ? 150.0 : 130.0);
+    final imageSize = isDesktop ? 100.0 : (isTablet ? 80.0 : 70.0);
+    final fontSize = isDesktop ? 18.0 : (isTablet ? 16.0 : 14.0);
+    final containerWidth = isDesktop ? 600.0 : (isTablet ? screenSize.width * 0.8 : screenSize.width * 0.9);
+    
+    return Container(
+      width: containerWidth,
+      padding: const EdgeInsets.symmetric(vertical: 16),
+      child: Wrap(
+        spacing: 16,
+        runSpacing: 16,
+        alignment: WrapAlignment.center,
         children: cars.map((car) {
           return GestureDetector(
             onTap: () {
               setState(() {
-                selectedCar =
-                    car['value']; // Change to 'value' for consistent selection
+                selectedCar = car['value'];
               });
-              widget.onCarSelected(car['value']!); // Pass the value, not name
+              widget.onCarSelected(car['value']!);
             },
             child: Container(
-              width: 100,
-              height: 150,
+              width: cardWidth,
+              height: cardHeight,
               decoration: BoxDecoration(
                 border: Border.all(
                   color: selectedCar == car['value'] ? Colors.red : Colors.grey,
@@ -61,14 +72,18 @@ class _CarSelectionState extends State<CarSelection> {
                 children: [
                   Image.asset(
                     car['image']!,
-                    width: 80,
-                    height: 80,
+                    width: imageSize,
+                    height: imageSize,
                     fit: BoxFit.contain,
                   ),
-                  const SizedBox(height: 10),
+                  const SizedBox(height: 8),
                   Text(
                     car['name']!,
-                    style: const TextStyle(fontSize: 16),
+                    style: TextStyle(
+                      fontSize: fontSize,
+                      fontWeight: FontWeight.bold,
+                    ),
+                    textAlign: TextAlign.center,
                   ),
                 ],
               ),
