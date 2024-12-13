@@ -17,40 +17,63 @@ class DropdownContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.of(context).size;
+    final isDesktop = screenSize.width > 900;
+    final isTablet = screenSize.width > 600 && screenSize.width <= 900;
+    final containerWidth = isDesktop
+        ? 600.0
+        : (isTablet ? screenSize.width * 0.8 : screenSize.width * 0.9);
+
+    // تأكد من أن القيمة المحددة موجودة في القائمة
+    final effectiveValue =
+        (selectedValue?.isEmpty ?? true) || !items.contains(selectedValue)
+            ? null
+            : selectedValue;
 
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 10),
-      width: screenSize.width * 0.8, // Use relative width
+      height: 50,
+      width: containerWidth,
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(6),
         border: Border.all(color: Colors.grey, width: 2),
       ),
-      child: DropdownButton<String>(
-        isExpanded: true,
-        hint: Text(
-          hintText,
-          textAlign: TextAlign.right,
-          style:
-              const TextStyle(color: Colors.grey, fontWeight: FontWeight.bold),
-        ),
-        icon: const Icon(Icons.arrow_drop_down, color: Colors.black),
-        style:
-            const TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
-        underline: Container(),
-        onChanged: onChanged,
-        items: items.map<DropdownMenuItem<String>>((String value) {
-          return DropdownMenuItem<String>(
-            value: value,
-            child: Align(
-              alignment: Alignment.centerRight,
-              child: Text(
-                value,
-                textDirection: TextDirection.rtl,
+      child: DropdownButtonHideUnderline(
+        child: ButtonTheme(
+          alignedDropdown: true,
+          child: DropdownButton<String>(
+            value: effectiveValue,
+            isExpanded: true,
+            alignment: AlignmentDirectional.centerEnd,
+            hint: Text(
+              hintText,
+              textAlign: TextAlign.right,
+              style: const TextStyle(
+                color: Colors.grey,
+                fontWeight: FontWeight.bold,
               ),
             ),
-          );
-        }).toList(),
+            icon: const Icon(Icons.arrow_drop_down, color: Colors.black),
+            style: const TextStyle(
+              color: Colors.black,
+              fontWeight: FontWeight.bold,
+            ),
+            menuMaxHeight: 300,
+            items: items.map<DropdownMenuItem<String>>((String value) {
+              return DropdownMenuItem<String>(
+                value: value,
+                child: Container(
+                  alignment: Alignment.centerRight,
+                  child: Text(
+                    value,
+                    textAlign: TextAlign.right,
+                    textDirection: TextDirection.rtl,
+                  ),
+                ),
+              );
+            }).toList(),
+            onChanged: onChanged,
+          ),
+        ),
       ),
     );
   }

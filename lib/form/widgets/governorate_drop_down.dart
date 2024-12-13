@@ -2,11 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:almahaba/form/widgets/dropdown_container.dart';
 
 class GovernorateDropdown extends StatefulWidget {
-  final String? selectedGovernorate; // المحافظة المحددة حاليًا
-  final String? selectedRegion; // المنطقة المحددة حاليًا
-  final ValueChanged<String?>? onChangeRegion; // دالة لاستدعاء تغيير المنطقة
-  final ValueChanged<String?>?
-      onChangeGovernorate; // دالة لاستدعاء تغيير المحافظة
+  final String? selectedGovernorate;
+  final String? selectedRegion;
+  final ValueChanged<String?>? onChangeRegion;
+  final ValueChanged<String?>? onChangeGovernorate;
 
   const GovernorateDropdown({
     super.key,
@@ -21,18 +20,9 @@ class GovernorateDropdown extends StatefulWidget {
 }
 
 class _GovernorateDropdownState extends State<GovernorateDropdown> {
-  String? selectedRegion; // المنطقة التي تم اختيارها حاليًا
-  String? selectedGovernorate; // المحافظة التي تم اختيارها حاليًا
+  String? selectedRegion;
+  String? selectedGovernorate;
 
-  @override
-  void initState() {
-    super.initState();
-    // تأكد من أن القيم تم تمريرها بشكل صحيح
-    selectedRegion = widget.selectedRegion;
-    selectedGovernorate = widget.selectedGovernorate ?? widget.selectedRegion;
-  }
-
-  /// قائمة المحافظات والمناطق المرتبطة بها
   final Map<String, List<String>> governorates = {
     "القاهرة": [
       "القاهرة",
@@ -285,50 +275,57 @@ class _GovernorateDropdownState extends State<GovernorateDropdown> {
   };
 
   @override
+  void initState() {
+    super.initState();
+    selectedRegion = widget.selectedRegion;
+    selectedGovernorate = widget.selectedGovernorate;
+  }
+
+  @override
+  void didUpdateWidget(GovernorateDropdown oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (widget.selectedRegion != selectedRegion) {
+      setState(() {
+        selectedRegion = widget.selectedRegion;
+      });
+    }
+    if (widget.selectedGovernorate != selectedGovernorate) {
+      setState(() {
+        selectedGovernorate = widget.selectedGovernorate;
+      });
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        // القائمة المنسدلة للمحافظة
         DropdownContainer(
-          items: governorates.keys.toList(), // أسماء المحافظات
-          hintText: 'اختر المحافظة', // النص الإرشادي
-          selectedValue: selectedRegion ?? '', // إذا كانت null يعرض نص فارغ
+          items: governorates.keys.toList(),
+          hintText: 'اختر المنطقة',
+          selectedValue: selectedRegion ?? '',
           onChanged: (String? newValue) {
             setState(() {
-              selectedRegion = newValue; // تحديث المحافظة المختارة
-              selectedGovernorate = newValue; // تعيين نفس القيمة للمنطقة
+              selectedRegion = newValue;
+              selectedGovernorate = null;
             });
-
-            if (newValue != null && governorates.containsKey(newValue)) {
-              widget.onChangeRegion?.call(newValue);
-              widget.onChangeGovernorate
-                  ?.call(null); // تعيين null للمنطقة لتحديثها
-            } else {
-              widget.onChangeRegion?.call(null);
-              widget.onChangeGovernorate?.call(null);
-            }
+            widget.onChangeRegion?.call(newValue);
           },
         ),
-        SizedBox(height: 8), // مسافة بين العناصر
-        // القائمة المنسدلة للمنطقة
+        const SizedBox(height: 16),
         if (selectedRegion != null && governorates[selectedRegion] != null)
           DropdownContainer(
-            items: governorates[
-                selectedRegion]!, // الأماكن التابعة للمحافظة المحددة
-            hintText: 'اختر المكان',
-            selectedValue: selectedGovernorate ?? '', // قيمة المنطقة المختارة
+            items: governorates[selectedRegion]!,
+            hintText: 'اختر المحافظة',
+            selectedValue: selectedGovernorate ?? '',
             onChanged: (String? newValue) {
-              if (newValue != null &&
-                  governorates[selectedRegion]!.contains(newValue)) {
-                setState(() {
-                  selectedGovernorate = newValue; // تحديث المنطقة المختارة
-                });
-                widget.onChangeGovernorate
-                    ?.call(newValue); // استدعاء دالة التغيير
-              }
+              setState(() {
+                selectedGovernorate = newValue;
+              });
+              widget.onChangeGovernorate?.call(newValue);
             },
           ),
-      ],
+     ],
     );
   }
 }
