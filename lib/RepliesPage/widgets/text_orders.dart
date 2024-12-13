@@ -5,27 +5,64 @@ class TextOrders extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Column(
-      // Align column content to the right
-      children: [
-        Text(
-          'الردود',
-          style: TextStyle(
-            fontSize: 24,
-            fontWeight: FontWeight.bold,
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        // Calculate responsive dimensions
+        double screenWidth = MediaQuery.of(context).size.width;
+        double titleSize = screenWidth > 900 
+            ? 28.0 
+            : screenWidth > 600 
+                ? 24.0 
+                : 20.0;
+        double subtitleSize = screenWidth > 900 
+            ? 18.0 
+            : screenWidth > 600 
+                ? 16.0 
+                : 14.0;
+        double verticalSpacing = screenWidth > 900 
+            ? 20.0 
+            : screenWidth > 600 
+                ? 16.0 
+                : 12.0;
+        
+        return Container(
+          width: double.infinity,
+          padding: EdgeInsets.symmetric(
+            horizontal: screenWidth * 0.03,
+            vertical: verticalSpacing,
           ),
-          textAlign: TextAlign.right, // Align text to the right
-        ),
-        SizedBox(height: 8),
-        Text(
-          'استعراض جميع الردود المتعلقة بالطلب.',
-          style: TextStyle(
-            fontSize: 16,
-            color: Colors.grey,
+          child: Directionality(
+            textDirection: TextDirection.rtl,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Text(
+                  'الردود',
+                  style: TextStyle(
+                    fontSize: titleSize,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black,
+                    height: 1.2,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+                SizedBox(height: verticalSpacing),
+                Text(
+                  'استعراض جميع الردود المتعلقة بالطلب',
+                  style: TextStyle(
+                    fontSize: subtitleSize,
+                    color: Colors.grey[700],
+                    height: 1.3,
+                  ),
+                  textAlign: TextAlign.center,
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ],
+            ),
           ),
-          textAlign: TextAlign.right, // Align text to the right
-        ),
-      ],
+        );
+      },
     );
   }
 }

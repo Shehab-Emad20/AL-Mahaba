@@ -24,119 +24,153 @@ class PageOrders extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(left: 16.0),
-      child: Container(
-        width: 350,
-        height: 360,
-        decoration: BoxDecoration(
-          color: Colors.white, // Set background color to white
-          borderRadius:
-              BorderRadius.circular(12), // Optional: add rounded corners
-        ),
-        padding: const EdgeInsets.all(16), // Add padding inside the container
-        child: Column(
-          crossAxisAlignment:
-              CrossAxisAlignment.end, // Align all content to the right
-          children: [
-            // Car Type
-            const Text(
-              'مطلوب سيارة ${'غير محدد'}',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-            ),
-            const SizedBox(height: 8),
-            // Trip Type
-            Text(
-              'نوع الرحلة: ${'غير محدد'}',
-              style: TextStyle(fontSize: 16, color: Colors.grey[700]),
-            ),
-            const Divider(thickness: 1, height: 24), // Separator
-
-            // From Location
-            const Text(
-              'من: ${'غير محدد'} (${'غير محدد'})',
-              style: TextStyle(fontSize: 14),
-            ),
-            const SizedBox(height: 8),
-            // To Location
-            const Text(
-              'إلى: ${'غير محدد'} (${'غير محدد'})',
-              style: TextStyle(fontSize: 14),
-            ),
-            const Divider(thickness: 1, height: 24), // Separator
-
-            // Date Information
-            const Row(
-              mainAxisAlignment: MainAxisAlignment.end,
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        // Calculate responsive dimensions
+        double minHeight = 360;
+        double maxHeight = constraints.maxHeight * 0.8;
+        double containerHeight = minHeight > maxHeight ? minHeight : maxHeight;
+        
+        return Container(
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(12),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.grey.withOpacity(0.1),
+                spreadRadius: 1,
+                blurRadius: 5,
+                offset: const Offset(0, 2),
+              ),
+            ],
+          ),
+          child: Padding(
+            padding: EdgeInsets.all(constraints.maxWidth * 0.04),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.end,
               children: [
-                Icon(Icons.calendar_today, color: Colors.grey),
-                SizedBox(width: 8),
+                // Car Type
                 Text(
-                  'غير محدد',
-                  style: TextStyle(fontSize: 14),
+                  'مطلوب سيارة ${'غير محدد'}',
+                  style: TextStyle(
+                    fontSize: constraints.maxWidth > 600 ? 18 : 16,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
-              ],
-            ),
-            const SizedBox(height: 8),
-
-            // Time Information
-            const Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                Icon(Icons.access_time, color: Colors.grey),
-                SizedBox(width: 8),
+                const SizedBox(height: 8),
+                
+                // Trip Type
                 Text(
-                  'غير محدد',
-                  style: TextStyle(fontSize: 14),
+                  'نوع الرحلة: ${'غير محدد'}',
+                  style: TextStyle(
+                    fontSize: constraints.maxWidth > 600 ? 16 : 14,
+                    color: Colors.grey[700],
+                  ),
+                ),
+                const Divider(thickness: 1, height: 24),
+
+                // From Location
+                Text(
+                  'من: ${'غير محدد'} (${'غير محدد'})',
+                  style: TextStyle(
+                    fontSize: constraints.maxWidth > 600 ? 14 : 12,
+                  ),
+                ),
+                const SizedBox(height: 8),
+                
+                // To Location
+                Text(
+                  'إلى: ${'غير محدد'} (${'غير محدد'})',
+                  style: TextStyle(
+                    fontSize: constraints.maxWidth > 600 ? 14 : 12,
+                  ),
+                ),
+                const Divider(thickness: 1, height: 24),
+
+                // Date and Time Information
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    const Icon(Icons.calendar_today, color: Colors.grey),
+                    const SizedBox(width: 8),
+                    Text(
+                      'غير محدد',
+                      style: TextStyle(
+                        fontSize: constraints.maxWidth > 600 ? 14 : 12,
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 8),
+
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    const Icon(Icons.access_time, color: Colors.grey),
+                    const SizedBox(width: 8),
+                    Text(
+                      'غير محدد',
+                      style: TextStyle(
+                        fontSize: constraints.maxWidth > 600 ? 14 : 12,
+                      ),
+                    ),
+                  ],
+                ),
+
+                const SizedBox(height: 16),
+                
+                // Buttons
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Expanded(
+                      child: OutlinedButton(
+                        onPressed: () => deleteOrder(context),
+                        style: OutlinedButton.styleFrom(
+                          backgroundColor: Colors.red,
+                          side: const BorderSide(color: Colors.red),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          padding: const EdgeInsets.symmetric(vertical: 12),
+                        ),
+                        child: Text(
+                          'مسح',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: constraints.maxWidth > 600 ? 14 : 12,
+                          ),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(width: 8),
+                    Expanded(
+                      child: ElevatedButton(
+                        onPressed: () => navigateToRepliesPage(context),
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.blue,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          padding: const EdgeInsets.symmetric(vertical: 12),
+                        ),
+                        child: Text(
+                          '(0)ردود',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: constraints.maxWidth > 600 ? 14 : 12,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ],
             ),
-
-            // Row with "ردود" (Replies) and "مسح" (Delete) buttons
-            const SizedBox(height: 16), // Add space between content and buttons
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                // "مسح" Button (Delete action) placed first
-                OutlinedButton(
-                  onPressed: () {
-                    deleteOrder(context); // Delete the order
-                  },
-                  style: OutlinedButton.styleFrom(
-                    backgroundColor: Colors.red, // Button color
-                    side:
-                        const BorderSide(color: Colors.red), // Red border color
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8), // Rounded corners
-                    ),
-                  ),
-                  child: const Text(
-                    'مسح',
-                    style: TextStyle(color: Colors.white),
-                  ),
-                ),
-
-                // "ردود" Button (Navigate to replies page) placed second
-                ElevatedButton(
-                  onPressed: () {
-                    navigateToRepliesPage(context);
-                  },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.blue, // Button color
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8), // Rounded corners
-                    ),
-                  ),
-                  child: const Text(
-                    '(0)ردود',
-                    style: TextStyle(color: Colors.white),
-                  ),
-                ),
-              ],
-            ),
-          ],
-        ),
-      ),
+          ),
+        );
+      },
     );
   }
 }
