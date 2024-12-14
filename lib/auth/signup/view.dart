@@ -120,99 +120,140 @@ class _SignupPageState extends State<SignupPage> {
 
   @override
   Widget build(BuildContext context) {
-    final screenSize = MediaQuery.of(context).size;
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        // Determine device type based on width
+        bool isTablet = constraints.maxWidth > 600;
+        bool isSmallDevice = constraints.maxWidth < 350;
 
-    return Scaffold(
-        backgroundColor: kScaffoldColor,
-        body: Center(
-            child: Container(
-          height: screenSize.height * 0.7, // Responsive height
-          width: screenSize.width * 0.9, // Responsive width
-          decoration: BoxDecoration(
-            color: kwhiteColor,
-            borderRadius: BorderRadius.circular(10),
-          ),
-          child: SingleChildScrollView(
-            padding: EdgeInsets.symmetric(
-              horizontal: screenSize.width * 0.05, // Horizontal padding
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                SizedBox(height: screenSize.height * 0.04), // Dynamic spacing
-                const HeaderText(
-                  title: 'إنشاء حساب',
-                  fontSize: 35,
-                  color: kBlackColor,
-                  fontWeight: FontWeight.bold,
-                ),
-                const SizedBox(height: 10),
-                const HeaderText(
-                  title: 'قم بإنشاء حساب لاستكشاف الخدمات الجديده',
-                  fontSize: 15,
-                  color: kPrimaryColor,
-                ),
-                const SizedBox(height: 20),
+        // Responsive font sizes
+        double headerFontSize = isTablet ? 45 : (isSmallDevice ? 25 : 35);
+        double subHeaderFontSize = isTablet ? 20 : (isSmallDevice ? 12 : 15);
+        double inputFontSize = isTablet ? 18 : (isSmallDevice ? 14 : 16);
 
-                Row(
-                  mainAxisAlignment:
-                      MainAxisAlignment.spaceBetween, // توزيع الحقول بالتساوي
-                  children: [
-                    Expanded(
-                      child: CustomTextFieldSingUp(
-                          controller: _firstNameController,
-                          obscureText: false,
-                          icon: Icons.person,
-                          hint: 'اسمك الأول',
-                          text: 'ِشهاب'),
-                    ),
-                    const SizedBox(width: 10), // إضافة مسافة بين الحقول
-                    Expanded(
-                      child: CustomTextFieldSingUp(
-                          controller: _lastNameController,
-                          obscureText: false,
-                          icon: Icons.person,
-                          hint: 'اسم عائلة',
-                          text: 'عماد'),
+        return Scaffold(
+          backgroundColor: kScaffoldColor,
+          body: Center(
+            child: SingleChildScrollView(
+              child: Container(
+                width: constraints.maxWidth * (isTablet ? 0.7 : 0.9),
+                padding: EdgeInsets.symmetric(
+                  horizontal: constraints.maxWidth * 0.05,
+                  vertical: constraints.maxHeight * 0.03,
+                ),
+                decoration: BoxDecoration(
+                  color: kwhiteColor,
+                  borderRadius: BorderRadius.circular(15),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.3),
+                      spreadRadius: 2,
+                      blurRadius: 5,
+                      offset: const Offset(0, 3),
                     ),
                   ],
                 ),
-                const SizedBox(height: 10),
-                CustomTextFieldSingUp(
-                  controller: _emailController,
-                  obscureText: false,
-                  icon: Icons.email,
-                  hint: 'بريدك الإلكتروني',
-                  text: 'shehbzanti25@gmail.com',
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    HeaderText(
+                      title: 'إنشاء حساب',
+                      fontSize: headerFontSize,
+                      color: kBlackColor,
+                      fontWeight: FontWeight.bold,
+                    ),
+                    SizedBox(height: constraints.maxHeight * 0.02),
+                    HeaderText(
+                      title: 'قم بإنشاء حساب لاستكشاف الخدمات الجديده',
+                      fontSize: subHeaderFontSize,
+                      color: kPrimaryColor,
+                    ),
+                    SizedBox(height: constraints.maxHeight * 0.03),
+
+                    // First and Last Name Row
+                    LayoutBuilder(
+                      builder: (context, nameConstraints) {
+                        return Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Expanded(
+                              child: CustomTextFieldSingUp(
+                                controller: _firstNameController,
+                                obscureText: false,
+                                icon: Icons.person,
+                                hint: 'اسمك الأول',
+                                text: 'ِشهاب',
+                                fontSize: inputFontSize,
+                              ),
+                            ),
+                            SizedBox(width: constraints.maxWidth * 0.02),
+                            Expanded(
+                              child: CustomTextFieldSingUp(
+                                controller: _lastNameController,
+                                obscureText: false,
+                                icon: Icons.person,
+                                hint: 'اسم عائلة',
+                                text: 'عماد',
+                                fontSize: inputFontSize,
+                              ),
+                            ),
+                          ],
+                        );
+                      },
+                    ),
+                    SizedBox(height: constraints.maxHeight * 0.02),
+
+                    // Email TextField
+                    CustomTextFieldSingUp(
+                      controller: _emailController,
+                      obscureText: false,
+                      icon: Icons.email,
+                      hint: 'بريدك الإلكتروني',
+                      text: 'shehbzanti25@gmail.com',
+                      fontSize: inputFontSize,
+                    ),
+                    SizedBox(height: constraints.maxHeight * 0.02),
+
+                    // Password TextField
+                    CustomTextFieldSingUp(
+                      controller: _passwordController,
+                      obscureText: true,
+                      icon: Icons.lock,
+                      hint: 'كلمة المرور',
+                      text: 'shehab2014',
+                      fontSize: inputFontSize,
+                    ),
+                    SizedBox(height: constraints.maxHeight * 0.02),
+
+                    // Confirm Password TextField
+                    CustomTextFieldSingUp(
+                      controller: _confirmPasswordController,
+                      obscureText: true,
+                      icon: Icons.lock,
+                      hint: 'تاكيد كلمة المرور',
+                      text: "shehab2014",
+                      fontSize: inputFontSize,
+                    ),
+                    SizedBox(height: constraints.maxHeight * 0.03),
+
+                    // Signup Button
+                    CutomButtonSinupLogin(
+                      isLoading: _isLoading,
+                      onPressed: _signup,
+                      width: constraints.maxWidth * (isTablet ? 0.6 : 0.8),
+                    ),
+                    SizedBox(height: constraints.maxHeight * 0.02),
+
+                    // Create Login Page Link
+                    const CreateLoginPage()
+                  ],
                 ),
-                const SizedBox(height: 10),
-
-                // حقل كلمة المرور باستخدام CustomTextFieldlogin
-                CustomTextFieldSingUp(
-                    controller: _passwordController,
-                    obscureText: true,
-                    icon: Icons.lock,
-                    hint: 'كلمة المرور',
-                    text: 'shehab2014'),
-                const SizedBox(height: 10),
-                CustomTextFieldSingUp(
-                    controller: _confirmPasswordController,
-                    obscureText: true,
-                    icon: Icons.lock,
-                    hint: 'تاكيد كلمة المرور',
-                    text: "shehab2014"),
-                const SizedBox(height: 20),
-
-                CutomButtonSinupLogin(
-                  isLoading: _isLoading,
-                  onPressed: _signup,
-                ),
-                const SizedBox(height: 20),
-
-                const CreateLoginPage()
-              ],
+              ),
             ),
           ),
-        )));
+        );
+      },
+    );
   }
 }

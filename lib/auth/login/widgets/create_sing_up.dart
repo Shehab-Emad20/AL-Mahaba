@@ -7,33 +7,44 @@ class CreateSignUp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Align(
-      alignment: Alignment.centerRight, // محاذاة النص لليمين
-      child: RichText(
-        text: TextSpan(
-          text: 'ليس لديك حساب؟ ',
-          style: const TextStyle(color: Colors.black, fontSize: 16),
-          children: [
-            TextSpan(
-              text: 'إنشاء حساب',
-              style: const TextStyle(
-                color: Colors.blue,
-                fontSize: 16,
-                fontWeight: FontWeight.bold,
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        // Responsive font sizes
+        double fontSize = constraints.maxWidth > 600 ? 20 : 
+                          constraints.maxWidth < 350 ? 14 : 16;
+
+        return Align(
+          alignment: Alignment.centerRight,
+          child: RichText(
+            text: TextSpan(
+              text: 'ليس لديك حساب؟ ',
+              style: TextStyle(
+                color: Colors.black, 
+                fontSize: fontSize,
               ),
-              recognizer: TapGestureRecognizer()
-                ..onTap = () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const SignupPage(),
-                    ),
-                  );
-                },
+              children: [
+                TextSpan(
+                  text: 'إنشاء حساب',
+                  style: TextStyle(
+                    color: Colors.blue,
+                    fontSize: fontSize,
+                    fontWeight: FontWeight.bold,
+                  ),
+                  recognizer: TapGestureRecognizer()
+                    ..onTap = () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const SignupPage(),
+                        ),
+                      );
+                    },
+                ),
+              ],
             ),
-          ],
-        ),
-      ),
+          ),
+        );
+      },
     );
   }
 }

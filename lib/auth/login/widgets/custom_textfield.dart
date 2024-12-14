@@ -8,6 +8,7 @@ class CustomTextFieldlogin extends StatelessWidget {
   final IconData icon;
   final String hint;
   final String text;
+  final double? fontSize;
 
   const CustomTextFieldlogin({
     super.key,
@@ -17,6 +18,7 @@ class CustomTextFieldlogin extends StatelessWidget {
     this.label = '',
     this.hint = '', // Optional hint text
     this.text = '', // Optional hint text
+    this.fontSize,
   });
 
   @override
@@ -27,8 +29,10 @@ class CustomTextFieldlogin extends StatelessWidget {
       controller: controller,
       obscureText: obscureText,
       textAlign: TextAlign.right,
+      style: TextStyle(fontSize: fontSize),
       decoration: InputDecoration(
         hintText: hint,
+        hintStyle: TextStyle(fontSize: fontSize),
         prefixIcon: Icon(icon, color: Colors.red),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),

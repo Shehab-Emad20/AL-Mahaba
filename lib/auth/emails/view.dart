@@ -90,40 +90,65 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
 
   @override
   Widget build(BuildContext context) {
-    final screenSize = MediaQuery.of(context).size;
-    return Scaffold(
-        backgroundColor: kScaffoldColor,
-        body: Center(
-            child: Container(
-          height: screenSize.height * 0.3, // Responsive height
-          width: screenSize.width * 0.9, // Responsive width
-          decoration: BoxDecoration(
-            color: kwhiteColor,
-            borderRadius: BorderRadius.circular(10),
-          ),
-          child: SingleChildScrollView(
-            padding: EdgeInsets.symmetric(
-              horizontal: screenSize.width * 0.05, // Horizontal padding
-            ),
-            child: Column(
-              children: [
-                SizedBox(height: screenSize.height * 0.04), // Dynamic spacing
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        // Determine device type based on width
+        bool isTablet = constraints.maxWidth > 600;
+        bool isSmallDevice = constraints.maxWidth < 350;
 
-                const HeaderText(
-                  title: "أدخل البريد الألكتروني",
-                  fontSize: 24,
+        // Responsive font sizes
+        double headerFontSize = isTablet ? 35 : (isSmallDevice ? 20 : 24);
+        double inputFontSize = isTablet ? 18 : (isSmallDevice ? 14 : 16);
+
+        return Scaffold(
+          backgroundColor: kScaffoldColor,
+          body: Center(
+            child: SingleChildScrollView(
+              child: Container(
+                width: constraints.maxWidth * (isTablet ? 0.7 : 0.9),
+                padding: EdgeInsets.symmetric(
+                  horizontal: constraints.maxWidth * 0.05,
+                  vertical: constraints.maxHeight * 0.03,
                 ),
-                const SizedBox(height: 16),
-                CustomTextFeildEmailForForgot(
-                    emailController: _emailController),
-                const SizedBox(height: 16),
-                CustomButtonSend(
-                  isLoading: _isLoading,
-                  onPressed: _sendEmail,
+                decoration: BoxDecoration(
+                  color: kwhiteColor,
+                  borderRadius: BorderRadius.circular(15),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.3),
+                      spreadRadius: 2,
+                      blurRadius: 5,
+                      offset: const Offset(0, 3),
+                    ),
+                  ],
                 ),
-              ],
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    SizedBox(height: constraints.maxHeight * 0.02),
+                    HeaderText(
+                      title: "أدخل البريد الألكتروني",
+                      fontSize: headerFontSize,
+                    ),
+                    SizedBox(height: constraints.maxHeight * 0.02),
+                    CustomTextFeildEmailForForgot(
+                      emailController: _emailController,
+                      fontSize: inputFontSize,
+                    ),
+                    SizedBox(height: constraints.maxHeight * 0.02),
+                    CustomButtonSend(
+                      isLoading: _isLoading,
+                      onPressed: _sendEmail,
+                      width: constraints.maxWidth * (isTablet ? 0.6 : 0.8),
+                    ),
+                  ],
+                ),
+              ),
             ),
           ),
-        )));
+        );
+      },
+    );
   }
 }

@@ -10,27 +10,34 @@ class CustomButtonFrogotPassword extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return TextButton(
-        onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => const ForgotPasswordPage(),
-            ),
-          );
-        },
-        child: const Align(
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        // Responsive font size
+        double fontSize = constraints.maxWidth > 600 ? 20 : 
+                          constraints.maxWidth < 350 ? 14 : 18;
+
+        return Align(
           alignment: Alignment.centerRight,
-          child: Padding(
-            padding: EdgeInsets.only(left: 16.0),
+          child: TextButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const ForgotPasswordPage(),
+                ),
+              );
+            },
             child: Text(
               "هل نسيت كلمة المرور؟",
               style: TextStyle(
-                  color: kBlackColor,
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold),
+                color: kBlackColor,
+                fontSize: fontSize,
+                fontWeight: FontWeight.bold,
+              ),
             ),
           ),
-        ));
+        );
+      },
+    );
   }
 }

@@ -3,29 +3,45 @@ import 'package:flutter/material.dart';
 class CustomTextFeildEmailForCheck extends StatelessWidget {
   const CustomTextFeildEmailForCheck({
     super.key,
-    required TextEditingController emailController,
-  }) : _emailController = emailController;
+    required this.emailController,
+    this.fontSize,
+  });
 
-  final TextEditingController _emailController;
+  final TextEditingController emailController;
+  final double? fontSize;
 
   @override
   Widget build(BuildContext context) {
-    return TextField(
-      controller: _emailController,
-      decoration: InputDecoration(
-        hintText: "إدخل الرمز",
-        prefixIcon: const Icon(Icons.email,
-            color: Colors.red), // إضافة أيقونة البريد الإلكتروني
-        enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(10), // تحديد الزوايا
-          borderSide: const BorderSide(
-              color: Colors.grey,
-              width: 1.5), // تحديد لون الحدود وحجمها عند عدم التركيز
-        ),
-        focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(10), // تحديد الزوايا
-        ),
-      ),
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        return TextField(
+          controller: emailController,
+          style: TextStyle(fontSize: fontSize),
+          decoration: InputDecoration(
+            hintText: "إدخل الرمز",
+            hintStyle: TextStyle(fontSize: fontSize),
+            prefixIcon: const Icon(Icons.verified_user, color: Colors.red),
+            enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(10),
+              borderSide: const BorderSide(
+                color: Colors.grey,
+                width: 1.5,
+              ),
+            ),
+            focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(10),
+              borderSide: const BorderSide(
+                color: Colors.red,
+                width: 1.5,
+              ),
+            ),
+            contentPadding: EdgeInsets.symmetric(
+              horizontal: constraints.maxWidth * 0.05,
+              vertical: constraints.maxHeight * 0.02,
+            ),
+          ),
+        );
+      },
     );
   }
 }

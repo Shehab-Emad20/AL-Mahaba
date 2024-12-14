@@ -7,6 +7,8 @@ class CustomTextFieldSingUp extends StatelessWidget {
   final IconData icon;
   final String hint;
   final text;
+  final double? fontSize;
+
   const CustomTextFieldSingUp({
     super.key,
     required this.controller,
@@ -14,7 +16,7 @@ class CustomTextFieldSingUp extends StatelessWidget {
     required this.icon,
     this.hint = '',
     this.text,
-    // نص تلميح اختياري
+    this.fontSize,
   });
 
   @override
@@ -23,12 +25,14 @@ class CustomTextFieldSingUp extends StatelessWidget {
     return TextField(
       controller: controller,
       obscureText: obscureText,
-      textAlign: TextAlign.right, // محاذاة النص إلى اليمين
+      textAlign: TextAlign.right,
+      style: TextStyle(fontSize: fontSize),
       decoration: InputDecoration(
-        hintText: hint, // نص التلميح
-        prefixIcon: Icon(icon, color: Colors.red), // الأيقونة في البداية
-        filled: true, // ملء خلفية الحقل
-        fillColor: Colors.white, // تغيير لون خلفية الحقل إلى الأبيض
+        hintText: hint,
+        hintStyle: TextStyle(fontSize: fontSize),
+        prefixIcon: Icon(icon, color: Colors.red),
+        filled: true,
+        fillColor: Colors.white,
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),
           borderSide: const BorderSide(color: Colors.grey, width: 1.5),

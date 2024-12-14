@@ -89,73 +89,96 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    final screenSize = MediaQuery.of(context).size;
-    return Scaffold(
-      backgroundColor: kScaffoldColor,
-      body: Center(
-        child: Container(
-          height: screenSize.height * 0.7, // Responsive height
-          width: screenSize.width * 0.9, // Responsive width
-          decoration: BoxDecoration(
-            color: kwhiteColor,
-            borderRadius: BorderRadius.circular(10),
-          ),
-          child: SingleChildScrollView(
-            padding: EdgeInsets.symmetric(
-              horizontal: screenSize.width * 0.05, // Horizontal padding
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        // Determine device type based on width
+        bool isTablet = constraints.maxWidth > 600;
+        bool isSmallDevice = constraints.maxWidth < 350;
+
+        // Responsive font sizes
+        double headerFontSize = isTablet ? 45 : (isSmallDevice ? 25 : 35);
+        double subHeaderFontSize = isTablet ? 20 : (isSmallDevice ? 12 : 15);
+        double inputFontSize = isTablet ? 18 : (isSmallDevice ? 14 : 16);
+
+        return Scaffold(
+          backgroundColor: kScaffoldColor,
+          body: Center(
+            child: SingleChildScrollView(
+              child: Container(
+                width: constraints.maxWidth * (isTablet ? 0.7 : 0.9),
+                padding: EdgeInsets.symmetric(
+                  horizontal: constraints.maxWidth * 0.05,
+                  vertical: constraints.maxHeight * 0.03,
+                ),
+                decoration: BoxDecoration(
+                  color: kwhiteColor,
+                  borderRadius: BorderRadius.circular(15),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.3),
+                      spreadRadius: 2,
+                      blurRadius: 5,
+                      offset: const Offset(0, 3),
+                    ),
+                  ],
+                ),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    HeaderText(
+                      title: 'تسجيل الدخول',
+                      fontSize: headerFontSize,
+                      color: kBlackColor,
+                      fontWeight: FontWeight.bold,
+                    ),
+                    SizedBox(height: constraints.maxHeight * 0.02),
+                    HeaderText(
+                      title: 'سجل دخولك لاستكشاف خدمات جديدة',
+                      fontSize: subHeaderFontSize,
+                      color: kPrimaryColor,
+                    ),
+                    SizedBox(height: constraints.maxHeight * 0.03),
+
+                    // Email TextField
+                    CustomTextFieldlogin(
+                      controller: _emailController,
+                      hint: 'البريد الإلكتروني',
+                      obscureText: false,
+                      icon: Icons.email,
+                      text: 'shehabzanati25@gmail.com',
+                      fontSize: inputFontSize,
+                    ),
+                    SizedBox(height: constraints.maxHeight * 0.02),
+
+                    // Password TextField
+                    CustomTextFieldlogin(
+                      controller: _passwordController,
+                      hint: 'كلمة المرور',
+                      obscureText: true,
+                      icon: Icons.lock,
+                      text: 'shehab2014',
+                      fontSize: inputFontSize,
+                    ),
+                    SizedBox(height: constraints.maxHeight * 0.02),
+
+                    const CustomButtonFrogotPassword(),
+                    SizedBox(height: constraints.maxHeight * 0.02),
+
+                    LoginButton(
+                      isLoading: _isLoading,
+                      onPressed: _login,
+                      width: constraints.maxWidth * (isTablet ? 0.6 : 0.8),
+                    ),
+                    SizedBox(height: constraints.maxHeight * 0.02),
+                    const CreateSignUp()
+                  ],
+                ),
+              ),
             ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                SizedBox(height: screenSize.height * 0.04), // Dynamic spacing
-                const HeaderText(
-                  title: 'تسجيل الدخول',
-                  fontSize: 35,
-                  color: kBlackColor,
-                  fontWeight: FontWeight.bold,
-                ),
-                const SizedBox(height: 10),
-                const HeaderText(
-                  title: 'سجل دخولك لاستكشاف خدمات جديدة',
-                  fontSize: 15,
-                  color: kPrimaryColor,
-                ),
-                const SizedBox(height: 20),
-
-                // حقل البريد الإلكتروني مع أيقونة
-                CustomTextFieldlogin(
-                    controller: _emailController,
-                    hint: 'البريد الإلكتروني',
-                    obscureText: false,
-                    icon: Icons.email,
-                    text: 'shehabzanati25@gmail.com'),
-                const SizedBox(height: 20),
-
-                // حقل كلمة المرور مع أيقونة
-                CustomTextFieldlogin(
-                    controller: _passwordController,
-                    hint: 'كلمة المرور',
-                    obscureText: true,
-                    icon: Icons.lock,
-                    text: 'shehab2014'),
-                const SizedBox(height: 20),
-
-                // رابط هل نسيت كلمة المرور؟
-                const CustomButtonFrogotPassword(), // This is now above the login button
-
-                // زر تسجيل الدخول
-                const SizedBox(height: 20),
-                LoginButton(
-                  isLoading: _isLoading,
-                  onPressed: _login,
-                ),
-                const SizedBox(height: 20),
-                const CreateSignUp()
-              ],
-            ),
           ),
-        ),
-      ),
+        );
+      },
     );
   }
 }
