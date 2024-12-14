@@ -2,15 +2,21 @@
 import 'package:flutter/material.dart';
 
 class MoveAddressTextField extends StatefulWidget {
-  final String? initialAddress; // خاصية لتمرير العنوان الأولي
-  final ValueChanged<String>? onChanged; // خاصية لتمرير التغيير
-  final String hintText; // خاصية النص الإرشادي
+  final String? initialAddress;
+  final ValueChanged<String>? onChanged;
+  final String hintText;
+  final IconData? prefixIcon;
+  final bool isRequired;
+  final bool showLocationIcon;
 
   const MoveAddressTextField({
     Key? key,
     this.initialAddress,
     this.onChanged,
     required this.hintText,
+    this.prefixIcon,
+    this.isRequired = false,
+    this.showLocationIcon = true,
   }) : super(key: key);
 
   @override
@@ -19,11 +25,11 @@ class MoveAddressTextField extends StatefulWidget {
 
 class _MoveAddressTextFieldState extends State<MoveAddressTextField> {
   late TextEditingController _controller;
+  bool _isFocused = false;
 
   @override
   void initState() {
     super.initState();
-    // تهيئة الـ Controller بالنص المبدئي إذا كان موجودًا
     _controller = TextEditingController(text: widget.initialAddress ?? '');
   }
 
@@ -33,47 +39,129 @@ class _MoveAddressTextFieldState extends State<MoveAddressTextField> {
     super.dispose();
   }
 
+  ResponsiveConfig _calculateResponsiveConfig(BuildContext context) {
+    final mediaQuery = MediaQuery.of(context);
+    final screenWidth = mediaQuery.size.width;
+    final screenHeight = mediaQuery.size.height;
+    final orientation = mediaQuery.orientation;
+
+    bool isTablet = (screenWidth > 600 && screenWidth <= 1200) ||
+        (orientation == Orientation.landscape && screenWidth > 900);
+
+    return ResponsiveConfig(
+      containerWidth: isTablet ? screenWidth * 0.8 : screenWidth * 0.95,
+      fieldHeight: isTablet ? 60.0 : 50.0,
+      fontSize: isTablet ? 16.0 : 14.0,
+      horizontalPadding: isTablet ? 20.0 : 15.0,
+      iconSize: isTablet ? 24.0 : 20.0,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
-    final screenSize = MediaQuery.of(context).size;
-    final isDesktop = screenSize.width > 900;
-    final isTablet = screenSize.width > 600 && screenSize.width <= 900;
+    final config = _calculateResponsiveConfig(context);
 
-    // حساب الأحجام المتجاوبة
-    final containerWidth = isDesktop
-        ? 600.0
-        : (isTablet ? screenSize.width * 0.8 : screenSize.width * 0.9);
-    final fieldHeight = isDesktop ? 60.0 : (isTablet ? 50.0 : 45.0);
-    final fontSize = isDesktop ? 16.0 : (isTablet ? 14.0 : 12.0);
-    final horizontalPadding = isDesktop ? 20.0 : (isTablet ? 16.0 : 12.0);
-
-    return Container(
-      height: fieldHeight,
-      width: containerWidth,
-      decoration: BoxDecoration(
-        border: Border.all(color: Colors.grey, width: 2),
-        borderRadius: BorderRadius.circular(8),
-        color: Colors.white,
-      ),
-      child: TextField(
-        controller: _controller,
-        textAlign: TextAlign.right,
-        style: TextStyle(fontSize: fontSize),
-        decoration: InputDecoration(
-          hintText: widget.hintText, // النص الإرشادي المتغير
-          hintStyle: TextStyle(
-            color: Colors.grey,
-            fontWeight: FontWeight.bold,
-            fontSize: fontSize,
+    return Focus(
+      onFocusChange: (focused) {
+        setState(() {
+          _isFocused = focused;
+        });
+      },
+      child: Container(
+        width: config.containerWidth,
+        height: config.fieldHeight,
+        decoration: BoxDecoration(
+          border: Border.all(
+            color: _isFocused ? Colors.red.shade300 : Colors.grey.shade300,
+            width: _isFocused ? 2.0 : 1.5,
           ),
-          contentPadding: EdgeInsets.symmetric(
-            horizontal: horizontalPadding,
-            vertical: 12,
-          ),
-          border: InputBorder.none,
+          borderRadius: BorderRadius.circular(12),
+          color: Colors.white,
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey.withOpacity(0.2),
+              spreadRadius: 1,
+              blurRadius: 5,
+              offset: const Offset(0, 3),
+            ),
+          ],
         ),
-        onChanged: widget.onChanged,
+        child: TextField(
+          controller: _controller,
+          textAlign: TextAlign.right,
+          style: TextStyle(
+            fontSize: config.fontSize,
+            color: Colors.black87,
+            fontWeight: FontWeight.w500,
+          ),
+          decoration: InputDecoration(
+            hintText:
+                widget.isRequired ? '${widget.hintText} *' : widget.hintText,
+            hintStyle: TextStyle(
+              color: _isFocused ? Colors.red.shade300 : Colors.grey.shade600,
+              fontWeight: FontWeight.w600,
+              fontSize: config.fontSize,
+            ),
+            contentPadding: EdgeInsets.symmetric(
+              horizontal: config.horizontalPadding,
+              vertical: 12,
+            ),
+            border: InputBorder.none,
+            prefixIcon: widget.showLocationIcon
+                ? Icon(
+                    Icons.location_on_outlined,
+                    color:
+                        _isFocused ? Colors.red.shade400 : Colors.grey.shade600,
+                    size: config.iconSize,
+                  )
+                : widget.prefixIcon != null
+                    ? Icon(
+                        widget.prefixIcon,
+                        color: _isFocused
+                            ? Colors.red.shade400
+                            : Colors.grey.shade600,
+                        size: config.iconSize,
+                      )
+                    : null,
+            suffixIcon: _controller.text.isNotEmpty
+                ? IconButton(
+                    icon: Icon(
+                      Icons.clear,
+                      color: _isFocused
+                          ? Colors.red.shade400
+                          : Colors.grey.shade600,
+                      size: config.iconSize,
+                    ),
+                    onPressed: () {
+                      _controller.clear();
+                      widget.onChanged?.call('');
+                    },
+                  )
+                : null,
+          ),
+          onChanged: (value) {
+            setState(() {});
+            widget.onChanged?.call(value);
+          },
+        ),
       ),
     );
   }
+}
+
+// Responsive Configuration Class
+class ResponsiveConfig {
+  final double containerWidth;
+  final double fieldHeight;
+  final double fontSize;
+  final double horizontalPadding;
+  final double iconSize;
+
+  ResponsiveConfig({
+    required this.containerWidth,
+    required this.fieldHeight,
+    required this.fontSize,
+    required this.horizontalPadding,
+    required this.iconSize,
+  });
 }

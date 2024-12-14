@@ -299,6 +299,7 @@ class _GovernorateDropdownState extends State<GovernorateDropdown> {
   @override
   Widget build(BuildContext context) {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         DropdownContainer(
           items: governorates.keys.toList(),
@@ -312,20 +313,28 @@ class _GovernorateDropdownState extends State<GovernorateDropdown> {
             widget.onChangeRegion?.call(newValue);
           },
         ),
-        const SizedBox(height: 16),
-        if (selectedRegion != null && governorates[selectedRegion] != null)
-          DropdownContainer(
-            items: governorates[selectedRegion]!,
-            hintText: 'اختر المحافظة',
-            selectedValue: selectedGovernorate ?? '',
-            onChanged: (String? newValue) {
-              setState(() {
-                selectedGovernorate = newValue;
-              });
-              widget.onChangeGovernorate?.call(newValue);
-            },
-          ),
-     ],
+        const SizedBox(height: 20), // Increased spacing
+        AnimatedSwitcher(
+          duration: const Duration(milliseconds: 300),
+          transitionBuilder: (Widget child, Animation<double> animation) {
+            return ScaleTransition(scale: animation, child: child);
+          },
+          child: selectedRegion != null && governorates[selectedRegion] != null
+              ? DropdownContainer(
+                  key: UniqueKey(), // Add a unique key for animation
+                  items: governorates[selectedRegion]!,
+                  hintText: 'اختر المحافظة',
+                  selectedValue: selectedGovernorate ?? '',
+                  onChanged: (String? newValue) {
+                    setState(() {
+                      selectedGovernorate = newValue;
+                    });
+                    widget.onChangeGovernorate?.call(newValue);
+                  },
+                )
+              : const SizedBox.shrink(),
+        ),
+      ],
     );
   }
 }

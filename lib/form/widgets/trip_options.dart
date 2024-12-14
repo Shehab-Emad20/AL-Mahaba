@@ -23,54 +23,80 @@ class _TripOptionsState extends State<TripOptions> {
     {'value': 'goandreturn', 'label': 'ذهاب وعودة في يوم آخر'},
   ];
 
+  ResponsiveConfig _calculateResponsiveConfig(BuildContext context) {
+    final mediaQuery = MediaQuery.of(context);
+    final screenWidth = mediaQuery.size.width;
+    final screenHeight = mediaQuery.size.height;
+    final orientation = mediaQuery.orientation;
+
+    bool isIPhone12 = 
+      (screenWidth == 390 && screenHeight == 844) || 
+      (screenWidth == 375 && screenHeight == 812);
+    
+    bool isTablet = 
+      (screenWidth > 600 && screenWidth <= 1200) ||
+      (orientation == Orientation.landscape && screenWidth > 900);
+
+    if (isIPhone12) {
+      return ResponsiveConfig(
+        containerWidth: screenWidth * 0.9,
+        optionHeight: 50.0,
+        fontSize: 14.0,
+        iconSize: 20.0,
+      );
+    }
+
+    if (isTablet) {
+      return ResponsiveConfig(
+        containerWidth: screenWidth * 0.8,
+        optionHeight: 60.0,
+        fontSize: 16.0,
+        iconSize: 24.0,
+      );
+    }
+
+    return ResponsiveConfig(
+      containerWidth: screenWidth * 0.95,
+      optionHeight: 45.0,
+      fontSize: 12.0,
+      iconSize: 18.0,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
-    final screenSize = MediaQuery.of(context).size;
-    final isDesktop = screenSize.width > 900;
-    final isTablet = screenSize.width > 600 && screenSize.width <= 900;
-
-    // حساب الأحجام المتجاوبة
-    final containerWidth = isDesktop
-        ? 600.0
-        : (isTablet ? screenSize.width * 0.8 : screenSize.width * 0.9);
-    final optionHeight = isDesktop ? 60.0 : (isTablet ? 50.0 : 45.0);
-    final fontSize = isDesktop ? 16.0 : (isTablet ? 14.0 : 12.0);
-    final iconSize = isDesktop ? 24.0 : (isTablet ? 20.0 : 18.0);
+    final config = _calculateResponsiveConfig(context);
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.end,
       children: [
-        Container(
-          width: containerWidth,
-          decoration: BoxDecoration(
-            border: Border.all(color: Colors.grey, width: 2),
-            borderRadius: BorderRadius.circular(8),
-          ),
-          child: Column(
-            children: [
-              ...options.map((Map<String, String> option) {
-                return _buildOption(
-                  option['label']!,
-                  option['value']!,
-                  optionHeight,
-                  fontSize,
-                  iconSize,
-                );
-              }).toList(),
-            ],
-          ),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.end,
+          children: [
+            ...options.map((Map<String, String> option) {
+              return _buildOption(
+                option['label']!,
+                option['value']!,
+                config.optionHeight,
+                config.fontSize,
+                config.iconSize,
+              );
+            }).toList(),
+          ],
         ),
 
         // إظهار الحقول إذا تم اختيار "ذهاب وعودة في يوم آخر"
         if (_selectedOption == 'goandreturn') ...[
           const SizedBox(height: 8),
-          const Center(
+          Align(
+            alignment: Alignment.centerRight,
             child: DateTextField(
               onChanged: null,
             ), // حقل التاريخ في المركز
           ),
           const SizedBox(height: 8),
-          const Center(
+          Align(
+            alignment: Alignment.centerRight,
             child: TimeTextField(), // حقل الوقت في المركز
           ),
         ],
@@ -96,17 +122,10 @@ class _TripOptionsState extends State<TripOptions> {
       },
       child: Container(
         height: height,
-        padding: EdgeInsets.symmetric(horizontal: 16),
+        padding: const EdgeInsets.symmetric(horizontal: 16),
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          mainAxisAlignment: MainAxisAlignment.end,
           children: [
-            Icon(
-              _selectedOption == value
-                  ? Icons.radio_button_checked
-                  : Icons.radio_button_unchecked,
-              color: _selectedOption == value ? Colors.red : Colors.grey,
-              size: iconSize,
-            ),
             Text(
               title,
               style: TextStyle(
@@ -115,9 +134,32 @@ class _TripOptionsState extends State<TripOptions> {
                 color: _selectedOption == value ? Colors.red : Colors.black,
               ),
             ),
+            const SizedBox(width: 8),
+            Icon(
+              _selectedOption == value
+                  ? Icons.radio_button_checked
+                  : Icons.radio_button_unchecked,
+              color: _selectedOption == value ? Colors.red : Colors.grey,
+              size: iconSize,
+            ),
           ],
         ),
       ),
     );
   }
+}
+
+// Responsive Configuration Class
+class ResponsiveConfig {
+  final double containerWidth;
+  final double optionHeight;
+  final double fontSize;
+  final double iconSize;
+
+  ResponsiveConfig({
+    required this.containerWidth,
+    required this.optionHeight,
+    required this.fontSize,
+    required this.iconSize,
+  });
 }
