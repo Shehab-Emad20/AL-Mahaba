@@ -1,7 +1,6 @@
 import 'package:almahaba/tripsummary/orders_model.dart';
 import 'package:almahaba/tripsummary/widgets/custom_button_drive.dart';
 import 'package:almahaba/tripsummary/widgets/order_components/car_info.dart';
-import 'package:almahaba/tripsummary/widgets/order_components/location_info.dart';
 import 'package:almahaba/tripsummary/widgets/order_components/time_info.dart';
 import 'package:flutter/material.dart';
 

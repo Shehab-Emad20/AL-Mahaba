@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class WhatsAppTextfeild extends StatefulWidget {
   final TextEditingController controller;
   final Function(String) onChanged;
+  final bool isRequired;
 
   const WhatsAppTextfeild({
     super.key,
     required this.controller,
     required this.onChanged,
+    this.isRequired = false,
   });
 
   @override
@@ -17,56 +20,96 @@ class WhatsAppTextfeild extends StatefulWidget {
 class _WhatsAppTextfeildState extends State<WhatsAppTextfeild> {
   bool _isTextFieldFocused = false;
 
+  double _getResponsiveWidth(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    return screenWidth > 600 ? screenWidth * 0.8 : screenWidth * 0.9;
+  }
+
+  double _getResponsiveHeight(BuildContext context) {
+    return MediaQuery.of(context).size.width > 600 ? 60.0 : 55.0;
+  }
+
   @override
   Widget build(BuildContext context) {
-    final screenWidth = MediaQuery.of(context).size.width;
-    
-    // تحسين الأحجام لتكون أكثر تناسقاً
-    final containerWidth = screenWidth * 0.9;  // زيادة العرض قليلاً
-    final containerHeight = 55.0;  // ارتفاع ثابت للحفاظ على التناسق
-    final labelFontSize = 14.0;    // حجم ثابت للـ label
-    final textFontSize = 16.0;     // حجم ثابت للنص المدخل
-    
-    return Container(
-      height: containerHeight,
-      width: containerWidth,
-      decoration: BoxDecoration(
-        border: Border.all(
-          color: Colors.grey.shade400,
-          width: 1.0,
+    return Material(
+      color: Colors.transparent,
+      child: Container(
+        height: _getResponsiveHeight(context),
+        width: _getResponsiveWidth(context),
+        decoration: BoxDecoration(
+          border: Border.all(
+            color: _isTextFieldFocused 
+              ? Colors.red.shade300 
+              : Colors.grey.shade400,
+            width: _isTextFieldFocused ? 2.0 : 1.5,
+          ),
+          borderRadius: BorderRadius.circular(12),
+          color: Colors.white,
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey.withOpacity(0.1),
+              spreadRadius: 1,
+              blurRadius: 3,
+              offset: const Offset(0, 2),
+            ),
+          ],
         ),
-        borderRadius: BorderRadius.circular(8),
-      ),
-      child: Focus(
-        onFocusChange: (hasFocus) {
-          setState(() {
-            _isTextFieldFocused = hasFocus;
-          });
-        },
-        child: TextField(
-          controller: widget.controller,
-          textAlign: TextAlign.right,  // تغيير محاذاة النص إلى اليمين
-          textDirection: TextDirection.rtl,
-          keyboardType: TextInputType.phone,
-          style: TextStyle(
-            fontSize: textFontSize,
-            height: 1.2,  // تحسين ارتفاع النص
-          ),
-          decoration: InputDecoration(
-            hintText: _isTextFieldFocused ? '' : 'رقم الواتس',
-            hintStyle: TextStyle(
-              color: Colors.grey.shade600,
-              fontSize: labelFontSize,
-              fontWeight: FontWeight.w500,
+        child: Focus(
+          onFocusChange: (hasFocus) {
+            setState(() {
+              _isTextFieldFocused = hasFocus;
+            });
+          },
+          child: TextField(
+            controller: widget.controller,
+            textAlign: TextAlign.right,
+            textDirection: TextDirection.rtl,
+            keyboardType: TextInputType.phone,
+            inputFormatters: [
+              FilteringTextInputFormatter.digitsOnly,
+              LengthLimitingTextInputFormatter(10), // Limit to 10 digits
+            ],
+            style: TextStyle(
+              fontSize: 16.0,
+              color: Colors.black87,
+              height: 1.2,
             ),
-            hintTextDirection: TextDirection.rtl,
-            contentPadding: const EdgeInsets.symmetric(
-              horizontal: 16,
-              vertical: 12,
+            decoration: InputDecoration(
+              hintText: widget.isRequired 
+                ? 'رقم الواتس *' 
+                : 'رقم الواتس',
+              hintStyle: TextStyle(
+                color: _isTextFieldFocused 
+                  ? Colors.red.shade300 
+                  : Colors.grey.shade600,
+                fontSize: 14.0,
+                fontWeight: FontWeight.w500,
+              ),
+              suffixIcon: widget.controller.text.isNotEmpty
+                ? IconButton(
+                    icon: Icon(
+                      Icons.clear,
+                      color: _isTextFieldFocused 
+                        ? Colors.red.shade400 
+                        : Colors.grey.shade600,
+                    ),
+                    onPressed: () {
+                      widget.controller.clear();
+                      widget.onChanged('');
+                    },
+                  )
+                : null,
+              contentPadding: const EdgeInsets.symmetric(
+                horizontal: 16,
+                vertical: 12,
+              ),
+              border: InputBorder.none,
             ),
-            border: InputBorder.none,
+            onChanged: (value) {
+              setState(() {});
+              widget.onChanged(value);
+            },
           ),
-          onChanged: widget.onChanged,
         ),
       ),
     );

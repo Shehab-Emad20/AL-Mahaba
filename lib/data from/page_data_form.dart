@@ -68,58 +68,65 @@ class UserFormPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('إدخال بيانات الرحلة'),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              const LabelWithAsterisk(text: 'الاسم', simble: '*'),
-              const SizedBox(height: 8),
-              NemaTextfeild(
-                controller: _nameController,
-                labelText: 'أكتب أسمك',
-                onChanged: (value) {
-                  // Handle change
-                },
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        // Determine the max width for the form
+        double maxWidth =
+            constraints.maxWidth > 600 ? 600 : constraints.maxWidth * 0.95;
+
+        return Scaffold(
+          backgroundColor: Colors.white,
+          body: Center(
+            child: SingleChildScrollView(
+              child: Container(
+                width: maxWidth,
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    const LabelWithAsterisk(text: 'الاسم', simble: '*'),
+                    const SizedBox(height: 8),
+                    NemaTextfeild(
+                      controller: _nameController,
+                      labelText: 'أكتب أسمك',
+                      onChanged: (value) {},
+                    ),
+                    const SizedBox(height: 16),
+                    const LabelWithAsterisk(text: 'العمر', simble: '*'),
+                    const SizedBox(height: 8),
+                    AgeTextfeild(
+                      controller: _ageController,
+                      onChanged: (value) {},
+                    ),
+                    const SizedBox(height: 16),
+                    const LabelWithAsterisk(text: 'رقم الهاتف', simble: '*'),
+                    const SizedBox(height: 8),
+                    PhoneTextfeild(
+                      controller: _phoneController,
+                      onChanged: (value) {},
+                    ),
+                    const SizedBox(height: 16),
+                    const LabelWithAsterisk(text: 'رقم الواتس', simble: '*'),
+                    const SizedBox(height: 8),
+                    WhatsAppTextfeild(
+                      controller: _whatsController,
+                      onChanged: (value) {},
+                    ),
+                    const SizedBox(height: 24),
+                    CustomButttonSumaary(
+                      onPressed: () {
+                        _submitForm(context);
+                      },
+                      buttonText: 'أرسال',
+                    ),
+                  ],
+                ),
               ),
-              const SizedBox(height: 16),
-              const LabelWithAsterisk(text: 'العمر', simble: '*'),
-              const SizedBox(height: 16),
-              AgeTextfeild(
-                controller: _ageController,
-                onChanged: (value) {
-                  // Handle change
-                },
-              ),
-              const SizedBox(height: 16),
-              const LabelWithAsterisk(text: 'رقم الهاتف', simble: '*'),
-              const SizedBox(height: 16),
-              PhoneTextfeild(
-                controller: _whatsController,
-                onChanged: (value) {},
-              ),
-              const SizedBox(height: 16),
-              const LabelWithAsterisk(text: 'رقم الواتس', simble: '*'),
-              const SizedBox(height: 16),
-              WhatsAppTextfeild(
-                controller: _whatsController,
-                onChanged: (value) {},
-              ),
-              const SizedBox(height: 16),
-              CustomButttonSumaary(
-                onPressed: () {
-                  _submitForm(context);
-                },
-                buttonText: 'أرسال',
-              ),
-            ],
+            ),
           ),
-        ),
-      ),
+        );
+      },
     );
   }
 }
