@@ -1,23 +1,57 @@
 import 'package:flutter/material.dart';
 
 class ImageOrders extends StatelessWidget {
-  const ImageOrders({super.key});
+  final String imagePath;
+  final double? height;
+  final BorderRadius? borderRadius;
+
+  const ImageOrders({
+    super.key,
+    this.imagePath = 'assets/images/feed.png',
+    this.height,
+    this.borderRadius,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: double.infinity,
-      height: 250,
-      decoration: const BoxDecoration(
-        image: DecorationImage(
-          image: AssetImage('assets/images/feed.png'), // Your second image
-          fit: BoxFit.cover,
-        ),
-        borderRadius: BorderRadius.only(
-          bottomLeft: Radius.circular(12),
-          bottomRight: Radius.circular(12),
-        ),
-      ),
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        // Calculate responsive height
+        final imageHeight = height ?? 
+          (constraints.maxWidth > 600 ? 300.0 : 250.0);
+        
+        return Container(
+          width: double.infinity,
+          height: imageHeight,
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage(imagePath),
+              fit: BoxFit.cover,
+            ),
+            borderRadius: borderRadius ?? const BorderRadius.only(
+              bottomLeft: Radius.circular(12),
+              bottomRight: Radius.circular(12),
+            ),
+          ),
+          // Add a gradient overlay for better text visibility if needed
+          child: Container(
+            decoration: BoxDecoration(
+              borderRadius: borderRadius ?? const BorderRadius.only(
+                bottomLeft: Radius.circular(12),
+                bottomRight: Radius.circular(12),
+              ),
+              gradient: LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                colors: [
+                  Colors.transparent,
+                  Colors.black.withOpacity(0.3),
+                ],
+              ),
+            ),
+          ),
+        );
+      },
     );
   }
 }
