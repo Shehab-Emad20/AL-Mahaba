@@ -1,10 +1,10 @@
 import 'package:almahaba/tripsummary/api_service_show_data.dart';
-import 'package:almahaba/tripsummary/models/orders_model.dart';
-import 'package:almahaba/tripsummary/widgets/orders_list.dart';
+import 'package:almahaba/tripsummary/orders_model.dart';
+import 'package:almahaba/tripsummary/widgets/responsive_order_widget.dart';
 import 'package:flutter/material.dart';
 
 class TripSummary extends StatefulWidget {
-  TripSummary({super.key});
+  const TripSummary({super.key});
 
   @override
   _TripSummaryState createState() => _TripSummaryState();
@@ -12,6 +12,8 @@ class TripSummary extends StatefulWidget {
 
 class _TripSummaryState extends State<TripSummary> {
   final ApiServiceShowData _apiService = ApiServiceShowData();
+  List<MyOrderModel> ordersModelList = [];
+  bool isLoading = true;
 
   @override
   void initState() {
@@ -19,56 +21,93 @@ class _TripSummaryState extends State<TripSummary> {
     fetchOrder();
   }
 
-  List<MyOrderModel> ordersModelList = [];
-
   Future<void> fetchOrder() async {
+    setState(() => isLoading = true);
     try {
       var data = await _apiService.fetchOrders();
       setState(() {
         ordersModelList = data;
+        isLoading = false;
       });
     } catch (e) {
-      print('Error: $e');
+      setState(() => isLoading = false);
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('حدث خطأ: ${e.toString()}'),
+            backgroundColor: Colors.red,
+          ),
+        );
+      }
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    return ordersModelList.isEmpty
-        ? Center(
-            child: InkWell(
-              onTap: () {
-                fetchOrder();
-              },
-              child: Text(
-                'لا توجد بيانات للعرض',
-                style: TextStyle(fontSize: 18, color: Colors.grey[700]),
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        return Directionality(
+          textDirection: TextDirection.rtl,
+          child: Container(
+            constraints: BoxConstraints(
+              maxWidth: constraints.maxWidth,
+              minHeight: constraints.maxHeight,
+            ),
+            child: _buildContent(),
+          ),
+        );
+      },
+    );
+  }
+
+  Widget _buildContent() {
+    if (isLoading) {
+      return const Center(
+        child: CircularProgressIndicator(),
+      );
+    }
+
+    if (ordersModelList.isEmpty) {
+      return Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Icon(
+              Icons.info_outline,
+              size: 48,
+              color: Colors.grey,
+            ),
+            const SizedBox(height: 16),
+            Text(
+              'لا توجد بيانات للعرض',
+              style: TextStyle(
+                fontSize: 18,
+                color: Colors.grey[700],
               ),
             ),
-          )
-        : Padding(
-            padding: const EdgeInsets.all(
-                16.0), // This will apply padding outside the Container
-            child: Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(12),
-                color: Colors.white,
-              ),
-              child: Directionality(
-                textDirection: TextDirection.rtl,
-                child: Padding(
-                  // Add separate padding here for the inner content
-                  padding: const EdgeInsets.only(
-                      bottom: 16.0), // Padding below the list
-                  child: RefreshIndicator(
-                    onRefresh: () async {
-                      fetchOrder();
-                    },
-                    child: OrdersList(orderData: ordersModelList),
-                  ),
+            const SizedBox(height: 16),
+            ElevatedButton(
+              onPressed: fetchOrder,
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.red,
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 24,
+                  vertical: 12,
                 ),
               ),
+              child: const Text(
+                'تحديث البيانات',
+                style: TextStyle(fontSize: 16),
+              ),
             ),
-          );
+          ],
+        ),
+      );
+    }
+
+    return RefreshIndicator(
+      onRefresh: fetchOrder,
+      child: ResponsiveOrdersList(orderData: ordersModelList),
+    );
   }
 }

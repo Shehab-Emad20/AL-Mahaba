@@ -7,17 +7,23 @@ class BodySplach extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Get screen width to make responsive sizes
+    final screenWidth = MediaQuery.of(context).size.width;
+    
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Image.asset(
           'assets/images/logo.png',
-          width: 50, // تحديد حجم الصورة
+          width: screenWidth * 0.12, // Responsive image size
         ),
-        const SizedBox(width: 10), // مسافة بين النص والصورة
-        const Text(
+        SizedBox(width: screenWidth * 0.02), // Responsive spacing
+        Text(
           'AL-MAHABA',
-          style: TextStyle(fontSize: 40, color: Colors.white),
+          style: TextStyle(
+            fontSize: screenWidth * 0.08, // Responsive text size
+            color: Colors.white,
+          ),
         ),
       ],
     );

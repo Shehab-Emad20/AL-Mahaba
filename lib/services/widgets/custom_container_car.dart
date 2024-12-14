@@ -5,7 +5,7 @@ class CustomContainer extends StatelessWidget {
   final String subtitle;
   final IconData iconLeft;
   final IconData iconRight;
-  final VoidCallback onTap; // حدث الضغط للتنقل
+  final VoidCallback onTap;
 
   const CustomContainer({
     super.key,
@@ -13,26 +13,42 @@ class CustomContainer extends StatelessWidget {
     required this.subtitle,
     required this.iconLeft,
     required this.iconRight,
-    required this.onTap, // إضافة خاصية onTap
+    required this.onTap,
   });
 
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    
+    // Responsive sizes
+    final containerPadding = screenWidth * 0.04;
+    final iconSize = screenWidth * 0.07;
+    final titleSize = screenWidth * 0.045;
+    final subtitleSize = screenWidth * 0.035;
+    
     return GestureDetector(
-      onTap: onTap, // استدعاء التنقل عند الضغط
+      onTap: onTap,
       child: Container(
-        padding: const EdgeInsets.all(16),
+        padding: EdgeInsets.all(containerPadding),
         decoration: BoxDecoration(
-          color: Colors.blueGrey.shade50, // تغيير اللون حسب الرغبة
+          color: Colors.blueGrey.shade50,
           borderRadius: BorderRadius.circular(12),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.1),
+              blurRadius: 4,
+              offset: const Offset(0, 2),
+            ),
+          ],
         ),
         child: Row(
           children: [
             Icon(
               iconLeft,
-              size: 30,
+              size: iconSize,
               color: Colors.black,
             ),
+            SizedBox(width: screenWidth * 0.03),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.end,
@@ -40,26 +56,28 @@ class CustomContainer extends StatelessWidget {
                   Text(
                     title,
                     textAlign: TextAlign.right,
-                    style: const TextStyle(
-                      fontSize: 18,
+                    style: TextStyle(
+                      fontSize: titleSize,
                       fontWeight: FontWeight.bold,
                       color: Colors.black,
                     ),
                   ),
+                  SizedBox(height: screenWidth * 0.01),
                   Text(
                     subtitle,
                     textAlign: TextAlign.right,
-                    style: const TextStyle(
-                      fontSize: 14,
+                    style: TextStyle(
+                      fontSize: subtitleSize,
                       color: Colors.black54,
                     ),
                   ),
                 ],
               ),
             ),
+            SizedBox(width: screenWidth * 0.03),
             Icon(
               iconRight,
-              size: 30,
+              size: iconSize,
               color: Colors.black,
             ),
           ],

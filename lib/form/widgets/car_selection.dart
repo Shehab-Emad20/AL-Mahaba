@@ -27,13 +27,15 @@ class _CarSelectionState extends State<CarSelection> {
     final screenSize = MediaQuery.of(context).size;
     final isDesktop = screenSize.width > 900;
     final isTablet = screenSize.width > 600 && screenSize.width <= 900;
-    
+
     final cardWidth = isDesktop ? 120.0 : (isTablet ? 100.0 : 90.0);
     final cardHeight = isDesktop ? 180.0 : (isTablet ? 150.0 : 130.0);
     final imageSize = isDesktop ? 100.0 : (isTablet ? 80.0 : 70.0);
     final fontSize = isDesktop ? 18.0 : (isTablet ? 16.0 : 14.0);
-    final containerWidth = isDesktop ? 600.0 : (isTablet ? screenSize.width * 0.8 : screenSize.width * 0.9);
-    
+    final containerWidth = isDesktop
+        ? 600.0
+        : (isTablet ? screenSize.width * 0.8 : screenSize.width * 0.9);
+
     return Container(
       width: containerWidth,
       padding: const EdgeInsets.symmetric(vertical: 16),

@@ -1,4 +1,4 @@
-import 'package:almahaba/tripsummary/models/orders_model.dart';
+import 'package:almahaba/tripsummary/orders_model.dart';
 
 import 'package:almahaba/utils/end_points.dart';
 import 'package:dio/dio.dart';

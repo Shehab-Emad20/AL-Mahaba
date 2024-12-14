@@ -9,39 +9,67 @@ class CustomBodySubmitQuote extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(vertical: 60.0, horizontal: 8.0),
-      decoration: BoxDecoration(
-        color: Colors.white, // يمكن تغيير اللون حسب الحاجة
-        borderRadius:
-            BorderRadius.circular(10.0), // لإضافة حواف دائرية إذا رغبت
-      ),
-      child: const Column(
-        children: [
-          LabelWithAsterisk(text: 'أسم السائق', simble: '*'),
-          CustomDriverTextField(
-            hintText: 'اسم السائق',
-          ),
-          LabelWithAsterisk(text: 'رقم السائق', simble: '*'),
-          CustomNumberTextField(
-            hintText: 'ادخل رقم السائق',
-          ),
-          LabelWithAsterisk(text: 'أسم السياره', simble: '*'),
-          CustomDriverTextField(
-            hintText: 'أكتب أسم السيارة',
-          ),
-          LabelWithAsterisk(text: 'الموديل', simble: '*'),
-          CustomDriverTextField(
-            hintText: 'أكتب أسم الموديل',
-          ),
-          LabelWithAsterisk(text: ' الصوره', simble: '*'),
-          FileUploadField(),
-          LabelWithAsterisk(text: 'السعر', simble: '*'),
-          CustomNumberTextField(
-            hintText: "السعر",
-          ),
-          
-        ],
+    // Get screen size for responsive design
+    final screenSize = MediaQuery.of(context).size;
+    final isTablet = screenSize.width > 600;
+
+    return SingleChildScrollView(
+      child: Container(
+        padding: EdgeInsets.symmetric(
+          vertical: screenSize.height * 0.05,
+          horizontal: screenSize.width * 0.04,
+        ),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(10.0),
+        ),
+        child: LayoutBuilder(builder: (context, constraints) {
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              // Wrap form fields in containers with responsive width
+              Container(
+                width: isTablet
+                    ? constraints.maxWidth * 0.7
+                    : constraints.maxWidth,
+                margin: EdgeInsets.symmetric(
+                    horizontal: isTablet ? constraints.maxWidth * 0.15 : 0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const LabelWithAsterisk(text: 'أسم السائق', simble: '*'),
+                    const CustomDriverTextField(
+                      hintText: 'اسم السائق',
+                    ),
+                    SizedBox(height: screenSize.height * 0.02),
+                    const LabelWithAsterisk(text: 'رقم السائق', simble: '*'),
+                    const CustomNumberTextField(
+                      hintText: 'ادخل رقم السائق',
+                    ),
+                    SizedBox(height: screenSize.height * 0.02),
+                    const LabelWithAsterisk(text: 'أسم السياره', simble: '*'),
+                    const CustomDriverTextField(
+                      hintText: 'أكتب أسم السيارة',
+                    ),
+                    SizedBox(height: screenSize.height * 0.02),
+                    const LabelWithAsterisk(text: 'الموديل', simble: '*'),
+                    const CustomDriverTextField(
+                      hintText: 'أكتب أسم الموديل',
+                    ),
+                    SizedBox(height: screenSize.height * 0.02),
+                    const LabelWithAsterisk(text: ' الصوره', simble: '*'),
+                    const FileUploadField(),
+                    SizedBox(height: screenSize.height * 0.02),
+                    const LabelWithAsterisk(text: 'السعر', simble: '*'),
+                    const CustomNumberTextField(
+                      hintText: "السعر",
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          );
+        }),
       ),
     );
   }

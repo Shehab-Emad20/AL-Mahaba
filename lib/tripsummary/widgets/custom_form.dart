@@ -1,4 +1,3 @@
-import 'package:almahaba/tripsummary/models_show_order.dart';
 import 'package:almahaba/tripsummary/view.dart';
 import 'package:almahaba/utils/constants.dart';
 import 'package:almahaba/home/widgets/custom_app_bar.dart';
@@ -14,16 +13,16 @@ class CustomForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
       backgroundColor: kScaffoldColor,
-      appBar: const CustomAppBar(),
-      endDrawer: const DrawerWidget(),
+      appBar: CustomAppBar(),
+      endDrawer: DrawerWidget(),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          const SizedBox(height: 16), // مسافة بين العناصر
-          const CustomButtonAdd(),
-          const AvailableTripsContainer(), // الزر الخاص بك
+          SizedBox(height: 16), // مسافة بين العناصر
+          CustomButtonAdd(),
+          AvailableTripsContainer(), // الزر الخاص بك
           Expanded(child: TripSummary()),
         ],
       ),

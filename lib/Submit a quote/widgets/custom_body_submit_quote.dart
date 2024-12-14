@@ -60,7 +60,6 @@ class CustomBodySubmitQuote extends StatelessWidget {
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.red, // Add red background color
-                      foregroundColor: Colors.white, // Add white text color
                       padding: EdgeInsets.symmetric(
                         horizontal: ResponsiveHelper.isMobilePhone(context)
                             ? 24.0

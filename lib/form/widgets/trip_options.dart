@@ -25,33 +25,41 @@ class _TripOptionsState extends State<TripOptions> {
 
   @override
   Widget build(BuildContext context) {
+    final screenSize = MediaQuery.of(context).size;
+    final isDesktop = screenSize.width > 900;
+    final isTablet = screenSize.width > 600 && screenSize.width <= 900;
+
+    // حساب الأحجام المتجاوبة
+    final containerWidth = isDesktop
+        ? 600.0
+        : (isTablet ? screenSize.width * 0.8 : screenSize.width * 0.9);
+    final optionHeight = isDesktop ? 60.0 : (isTablet ? 50.0 : 45.0);
+    final fontSize = isDesktop ? 16.0 : (isTablet ? 14.0 : 12.0);
+    final iconSize = isDesktop ? 24.0 : (isTablet ? 20.0 : 18.0);
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.end,
       children: [
-        // خيارات الرحلة
-        ...options.map((Map<String, String> option) {
-          return Padding(
-            padding: const EdgeInsets.only(bottom: 8.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                Text(option['label']!),
-                Radio<String>(
-                  value: option['value']!,
-                  groupValue: _selectedOption,
-                  onChanged: (String? value) {
-                    setState(() {
-                      _selectedOption = value;
-                    });
-                    if (widget.onChanged != null) {
-                      widget.onChanged!(value);
-                    }
-                  },
-                ),
-              ],
-            ),
-          );
-        }),
+        Container(
+          width: containerWidth,
+          decoration: BoxDecoration(
+            border: Border.all(color: Colors.grey, width: 2),
+            borderRadius: BorderRadius.circular(8),
+          ),
+          child: Column(
+            children: [
+              ...options.map((Map<String, String> option) {
+                return _buildOption(
+                  option['label']!,
+                  option['value']!,
+                  optionHeight,
+                  fontSize,
+                  iconSize,
+                );
+              }).toList(),
+            ],
+          ),
+        ),
 
         // إظهار الحقول إذا تم اختيار "ذهاب وعودة في يوم آخر"
         if (_selectedOption == 'goandreturn') ...[
@@ -67,6 +75,49 @@ class _TripOptionsState extends State<TripOptions> {
           ),
         ],
       ],
+    );
+  }
+
+  Widget _buildOption(
+    String title,
+    String value,
+    double height,
+    double fontSize,
+    double iconSize,
+  ) {
+    return InkWell(
+      onTap: () {
+        setState(() {
+          _selectedOption = value;
+        });
+        if (widget.onChanged != null) {
+          widget.onChanged!(value);
+        }
+      },
+      child: Container(
+        height: height,
+        padding: EdgeInsets.symmetric(horizontal: 16),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Icon(
+              _selectedOption == value
+                  ? Icons.radio_button_checked
+                  : Icons.radio_button_unchecked,
+              color: _selectedOption == value ? Colors.red : Colors.grey,
+              size: iconSize,
+            ),
+            Text(
+              title,
+              style: TextStyle(
+                fontSize: fontSize,
+                fontWeight: FontWeight.bold,
+                color: _selectedOption == value ? Colors.red : Colors.black,
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

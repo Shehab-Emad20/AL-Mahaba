@@ -7,12 +7,20 @@ class ResponsiveImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final imageHeight = screenWidth * 0.4;
+    // Adjust image height based on screen width
+    final imageHeight = screenWidth > 600 
+        ? screenWidth * 0.35  // Slightly smaller on tablets
+        : screenWidth * 0.4;  // Original size on phones
+
     return Padding(
-      padding: const EdgeInsets.only(top: 48.0),
+      padding: EdgeInsets.only(
+        top: screenWidth * 0.08,
+        bottom: screenWidth * 0.04,
+      ),
       child: Image.asset(
         'assets/images/info.png',
         height: imageHeight,
+        fit: BoxFit.contain,
       ),
     );
   }
